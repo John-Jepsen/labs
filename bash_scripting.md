@@ -1,3 +1,16 @@
+```
+________                    ___      ___                         ___               
+`MMMMMMMb.                  `MM      `MM                         `MM 68b           
+ MM    `Mb                   MM       MM                          MM Y89           
+ MM     MM    ___     ____   MM  __   MM    ___   ___  __     ____MM ___    ___    
+ MM    .M9  6MMMMb   6MMMMb\ MM 6MMb  MM  6MMMMb  `MM 6MMb   6MMMMMM `MM  6MMMMb   
+ MMMMMMM(  8M'  `Mb MM'    ` MMM9 `Mb MM 8M'  `Mb  MMM9 `Mb 6M'  `MM  MM 8M'  `Mb  
+ MM    `Mb     ,oMM YM.      MM'   MM MM     ,oMM  MM'   MM MM    MM  MM     ,oMM  
+ MM     MM ,6MM9'MM  YMMMMb  MM    MM MM ,6MM9'MM  MM    MM MM    MM  MM ,6MM9'MM  
+ MM     MM MM'   MM      `Mb MM    MM MM MM'   MM  MM    MM MM    MM  MM MM'   MM  
+ MM    .M9 MM.  ,MM L    ,MM MM    MM MM MM.  ,MM  MM    MM YM.  ,MM  MM MM.  ,MM  
+_MMMMMMM9' `YMMM9'YbMYMMMM9 _MM_  _MM_MM_`YMMM9'Yb_MM_  _MM_ YMMMMMM__MM_`YMMM9'Yb.
+```
 ## Adventure Quest: The Bash Scripting Journey
 
 ### Introduction
