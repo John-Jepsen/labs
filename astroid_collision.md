@@ -52,22 +52,6 @@ class CodingAstrophysicist:
             else:
                 stack.append(asteroid)
         return stack
-
-def final_state_of_asteroids(asteroids):
-    astrophysicist = CodingAstrophysicist(asteroids)
-    return astrophysicist.analyze_collisions()
-
-# Example missions
-missions = [
-    [5, 10, -5],
-    [8, -8],
-    [10, 2, -5]
-]
-
-# The Astrophysicist undertakes the missions
-for i, mission in enumerate(missions):
-    result = final_state_of_asteroids(mission)
-    print(f"Mission {i}: Final state of asteroids: {result}")
 ```
 
 ---
@@ -77,39 +61,9 @@ for i, mission in enumerate(missions):
 With the array of asteroids analyzed, the Astrophysicist simulates the cosmic collisions, resolving each encounter with logic and precision.
 
 ```python
-class CodingAstrophysicist:
-    def __init__(self, asteroids):
-        self.asteroids = asteroids
-
-    def analyze_collisions(self):
-        stack = []
-        for asteroid in self.asteroids:
-            while stack and asteroid < 0 < stack[-1]:
-                if stack[-1] < -asteroid:
-                    stack.pop()
-                    continue
-                elif stack[-1] == -asteroid:
-                    stack.pop()
-                break
-            else:
-                stack.append(asteroid)
-        return stack
-
 def final_state_of_asteroids(asteroids):
     astrophysicist = CodingAstrophysicist(asteroids)
     return astrophysicist.analyze_collisions()
-
-# Example missions
-missions = [
-    [5, 10, -5],
-    [8, -8],
-    [10, 2, -5]
-]
-
-# The Astrophysicist undertakes the missions
-for i, mission in enumerate(missions):
-    result = final_state_of_asteroids(mission)
-    print(f"Mission {i}: Final state of asteroids: {result}")
 ```
 
 ---
@@ -119,28 +73,6 @@ for i, mission in enumerate(missions):
 The mission concludes with the Astrophysicist reporting the final state of the asteroids after all collisions.
 
 ```python
-class CodingAstrophysicist:
-    def __init__(self, asteroids):
-        self.asteroids = asteroids
-
-    def analyze_collisions(self):
-        stack = []
-        for asteroid in self.asteroids:
-            while stack and asteroid < 0 < stack[-1]:
-                if stack[-1] < -asteroid:
-                    stack.pop()
-                    continue
-                elif stack[-1] == -asteroid:
-                    stack.pop()
-                break
-            else:
-                stack.append(asteroid)
-        return stack
-
-def final_state_of_asteroids(asteroids):
-    astrophysicist = CodingAstrophysicist(asteroids)
-    return astrophysicist.analyze_collisions()
-
 # Example missions
 missions = [
     [5, 10, -5],
