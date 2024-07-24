@@ -36,7 +36,7 @@ A fork bomb is a type of denial-of-service attack where a process continually re
 
 ### Chapter 2: The Controlled Environment
 
-In the village of Controltown, the villagers need to test the fork bomb without crashing their systems. Your task is to set up a controlled environment using VirtualBox or similar virtualization software to safely test the fork bomb.
+In the village of Controltown, the villagers need to test the fork bomb without crashing their systems. Your task is to set up a controlled environment using VirtualBox or similar virtualization software to safely test the fork bomb. The Controltown Sys Admin has pointed out that depending on the computer you are using. You should select the appropriate Virtual Machine.
 
 **Setting Up a Controlled Environment:**
 
@@ -58,6 +58,118 @@ In the village of Controltown, the villagers need to test the fork bomb without 
      - Follow similar steps as for VirtualBox to set up a new VM with a Linux distribution.
    - **Snapshot the VM:**
      - Take a snapshot before running the fork bomb for easy recovery.
+
+## Setting Up Virtual Machines on Macs with Intel Chips and Macs with Apple Chips
+
+### Macs with Intel Chips
+
+#### Using VirtualBox
+
+1. **Download and Install VirtualBox:**
+
+   - Go to the [VirtualBox official website](https://www.virtualbox.org/).
+   - Download the latest version of VirtualBox for macOS.
+   - Open the downloaded .dmg file and follow the instructions to install VirtualBox.
+
+2. **Create a New Virtual Machine:**
+
+   - Open VirtualBox.
+   - Click on the "New" button.
+   - Enter a name for your VM and select the type (Linux) and version (e.g., Ubuntu 64-bit).
+   - Allocate memory (RAM) for the VM. A minimum of 2GB is recommended.
+   - Create a virtual hard disk. Choose "Create a virtual hard disk now" and follow the prompts to allocate disk space (at least 10GB).
+
+3. **Install the Operating System:**
+
+   - Start the VM and point it to the ISO file of your chosen operating system.
+   - Follow the on-screen instructions to install the operating system.
+
+4. **Taking a Snapshot:**
+   - Before running any potentially harmful scripts, take a snapshot of your VM.
+   - Click on your VM in the VirtualBox Manager.
+   - Go to the "Snapshots" tab and click "Take Snapshot".
+   - Name your snapshot and save it.
+
+#### Using VMware Fusion
+
+1. **Download and Install VMware Fusion:**
+
+   - Go to the [VMware Fusion official website](https://www.vmware.com/products/fusion.html).
+   - Download and install the latest version of VMware Fusion for macOS.
+
+2. **Create a New Virtual Machine:**
+
+   - Open VMware Fusion.
+   - Click on "File" > "New".
+   - Choose "Create a new virtual machine".
+   - Select the installation method (e.g., from an ISO image).
+   - Follow the prompts to configure your VM and allocate resources.
+
+3. **Install the Operating System:**
+
+   - Start the VM and point it to the ISO file of your chosen operating system.
+   - Follow the on-screen instructions to install the operating system.
+
+4. **Taking a Snapshot:**
+   - Before running any potentially harmful scripts, take a snapshot of your VM.
+   - Go to "Virtual Machine" > "Snapshots" > "Take Snapshot".
+   - Name your snapshot and save it.
+
+### Macs with Apple Silicon (M1/M2)
+
+#### Using UTM
+
+1. **Download and Install UTM:**
+
+   - Go to the [UTM official website](https://mac.getutm.app/).
+   - Download and install the latest version of UTM for macOS.
+
+2. **Create a New Virtual Machine:**
+
+   - Open UTM.
+   - Click on the "+" button to create a new VM.
+   - Choose the operating system (e.g., Linux).
+   - Configure the VM by allocating memory, CPU cores, and disk space.
+
+3. **Install the Operating System:**
+
+   - Start the VM and point it to the ISO file of your chosen operating system.
+   - Follow the on-screen instructions to install the operating system.
+
+4. **Taking a Snapshot:**
+   - UTM does not have a built-in snapshot feature. It is recommended to create backups of your VM manually by copying the VM files.
+
+#### Using Parallels Desktop
+
+1. **Download and Install Parallels Desktop:**
+
+   - Go to the [Parallels Desktop official website](https://www.parallels.com/products/desktop/).
+   - Download and install the latest version of Parallels Desktop for macOS.
+
+2. **Create a New Virtual Machine:**
+
+   - Open Parallels Desktop.
+   - Click on "File" > "New".
+   - Choose the installation method (e.g., from an ISO image).
+   - Follow the prompts to configure your VM and allocate resources.
+
+3. **Install the Operating System:**
+
+   - Start the VM and point it to the ISO file of your chosen operating system.
+   - Follow the on-screen instructions to install the operating system.
+
+4. **Taking a Snapshot:**
+   - Before running any potentially harmful scripts, take a snapshot of your VM.
+   - Go to "Actions" > "Take Snapshot".
+   - Name your snapshot and save it.
+
+---
+
+### Tips for Both Intel and Apple Silicon Macs
+
+- **Resource Allocation:** Be mindful of the resources allocated to your VMs. Ensure your host system has enough resources to run smoothly.
+- **Backups:** Regularly back up your VMs to prevent data loss.
+- **Testing Environment:** Use VMs as a safe environment to test scripts and software without risking your main system.
 
 ---
 
