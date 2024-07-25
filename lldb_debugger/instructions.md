@@ -14,6 +14,8 @@ In the tranquil town of Bashlandia, an evil entity known as the Compiler wreaked
 
 # Step 1: Install LLDB
 
+LLDB is a powerful debugger that helps you find and fix bugs in your programs by allowing you to control the execution of your code. You compile your program with debug information using gcc -g, then load it into LLDB with lldb your_program. You can set breakpoints at specific lines or functions to pause execution (breakpoint set --name main), run your program (run), and step through your code line by line (next or step). LLDB lets you inspect the values of variables (print variable_name) and see the call stack to understand the flow of execution. This way, you can identify where things go wrong and make necessary corrections.
+
 #### On macOS:
 
 LLDB comes standard with terminal.app or xcode .
