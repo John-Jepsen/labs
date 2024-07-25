@@ -15,6 +15,7 @@
 
 ```
 In the tranquil town of Bashlandia, an evil entity known as the Compiler wreaked havoc, causing programs to crash and citizens to despair. Just when hope seemed lost, a hero named Debuggerman emerged, wielding the powerful tools of GDB. With unwavering determination, Debuggerman set breakpoints, stepped through code, and inspected variables with precision. Each bug revealed and squashed brought newfound stability to Bashlandia's digital realm. Through tireless effort and expertise, Debuggerman vanquished the Compiler, restoring peace and functionality to the town, proving that even the toughest code could be conquered with the right tools and a sharp mind.
+
 ```
 
 #### Step 1: Install GDB
