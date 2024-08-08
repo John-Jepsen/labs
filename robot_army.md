@@ -1,237 +1,224 @@
-### SQL Window Functions
+## Basic Queries
 
-To analyze the performance of different robots over time, Alex, Casey, and Jamie used SQL window functions to calculate the moving average of the robots' activity scores.
+Lets Start with the basics
 
-#### SQL Query:
+1. **Select all records from the table:**
+
+   ```sql
+   SELECT * FROM robot_activity;
+   ```
+
+2. **Select all unique robot IDs:**
+
+   ```sql
+   SELECT DISTINCT robot_id FROM robot_activity;
+   ```
+
+3. **Count the number of activities recorded:**
+
+   ```sql
+   SELECT COUNT(*) AS activity_count FROM robot_activity;
+   ```
+
+4. **Find the highest activity score recorded:**
+
+   ```sql
+   SELECT MAX(activity_score) AS highest_activity_score FROM robot_activity;
+   ```
+
+5. **Find the average activity score:**
+
+   ```sql
+   SELECT AVG(activity_score) AS average_activity_score FROM robot_activity;
+   ```
+
+6. **Select activities with a score greater than 80:**
+
+   ```sql
+   SELECT * FROM robot_activity WHERE activity_score > 80;
+   ```
+
+7. **Select all activities for a specific robot (e.g., robot ID 2):**
+
+   ```sql
+   SELECT * FROM robot_activity WHERE robot_id = 2;
+   ```
+
+8. **Count the number of activities for each robot:**
+
+   ```sql
+   SELECT robot_id, COUNT(*) AS activity_count
+   FROM robot_activity
+   GROUP BY robot_id;
+   ```
+
+9. **Find the earliest activity timestamp:**
+
+   ```sql
+   SELECT MIN(timestamp) AS earliest_activity FROM robot_activity;
+   ```
+
+10. **Select all activities ordered by their score in descending order:**
+    ```sql
+    SELECT * FROM robot_activity ORDER BY activity_score DESC;
+    ```
+
+## Intermediate Queries
+
+### 1. SQL Window Functions
+
+**Definition:** Window functions perform calculations across a set of table rows that are somehow related to the current row. Unlike regular aggregate functions, window functions do not cause rows to become grouped into a single output row. The rows retain their separate identities.
+
+**Example Instruction:**
 
 ```sql
 SELECT
-    id,
-    name,
-    type,
-    activity_score,
-    AVG(activity_score) OVER (PARTITION BY type ORDER BY timestamp ROWS BETWEEN 2 PRECEDING AND CURRENT ROW) AS moving_avg_score
-FROM robot_activity;
+  robot_id,
+  activity_score,
+  AVG(activity_score) OVER (PARTITION BY robot_id) AS avg_activity_score
+FROM
+  robot_activity;
 ```
 
-#### Explanation:
+**Explanation:** This query calculates the average activity score for each robot, without collapsing the rows.
 
-- **Window Functions**: The hackers used window functions to calculate the moving average of activity scores for each robot type.
+### 2. CTE (Common Table Expressions)
 
----
+**Definition:** A Common Table Expression (CTE) is a temporary result set that you can reference within a `SELECT`, `INSERT`, `UPDATE`, or `DELETE` statement. It is defined using the `WITH` keyword.
 
-### CTE (Common Table Expressions)
-
-The hackers needed to find the hierarchical structure of the robot command center. They used a recursive CTE to query the hierarchy.
-
-#### SQL Query:
+**Example Instruction:**
 
 ```sql
-WITH RECURSIVE robot_hierarchy AS (
-    SELECT id, name, manager_id, 1 AS level
-    FROM robots
-    WHERE manager_id IS NULL
-    UNION ALL
-    SELECT r.id, r.name, r.manager_id, rh.level + 1
-    FROM robots r
-    JOIN robot_hierarchy rh ON r.manager_id = rh.id
+WITH recent_activities AS (
+  SELECT * FROM robot_activity WHERE timestamp > '2024-01-01'
 )
-SELECT * FROM robot_hierarchy;
+SELECT * FROM recent_activity WHERE activity_score > 50;
 ```
 
-#### Explanation:
+**Explanation:** This CTE first selects activities recorded after January 1, 2024, and then the outer query filters those activities to find ones with an activity score greater than 50.
 
-- **CTE**: They used a recursive CTE to find and display the hierarchical structure of the robots.
+### 3. Indexing
 
----
+**Definition:** An index is a database object that improves the speed of data retrieval operations on a table at the cost of additional writes and storage space. Indexes are used to quickly locate data without having to search every row in a table.
 
-### Indexing
-
-To speed up their queries against the robot database, Alex, Casey, and Jamie decided to create an index on the `status` column of the `robots` table.
-
-#### SQL Query:
+**Example Instruction:**
 
 ```sql
-CREATE INDEX idx_status ON robots (status);
+CREATE INDEX idx_robot_id ON robot_activity(robot_id);
 ```
 
-#### Explanation:
+**Explanation:** This creates an index on the `robot_id` column of the `robot_activity` table, which can speed up queries that filter or sort by `robot_id`.
 
-- **Indexing**: They created an index to improve query performance on the `status` column.
+### 4. Normalization
 
----
+**Definition:** Normalization is the process of organizing data in a database to reduce redundancy and improve data integrity. It involves dividing large tables into smaller ones and defining relationships between them.
 
-### Normalization
-
-The hackers needed to normalize their database to eliminate redundancy. They decomposed a table into two tables to achieve the 3NF (Third Normal Form).
-
-#### SQL Queries:
+**Example Instruction:**
 
 ```sql
--- Original table
-CREATE TABLE robot_data (
-    id INT PRIMARY KEY,
-    name VARCHAR(50),
-    type VARCHAR(50),
-    status VARCHAR(20),
-    mission_name VARCHAR(100)
-);
-
--- Decomposed tables
+-- Assuming normalization from a non-normalized table
 CREATE TABLE robots (
-    id INT PRIMARY KEY,
-    name VARCHAR(50),
-    type VARCHAR(50),
-    status VARCHAR(20)
+  id INTEGER PRIMARY KEY,
+  name TEXT
 );
 
-CREATE TABLE missions (
-    id INT PRIMARY KEY,
-    robot_id INT,
-    mission_name VARCHAR(100),
-    FOREIGN KEY (robot_id) REFERENCES robots(id)
+CREATE TABLE robot_activity (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  robot_id INTEGER,
+  activity_score INTEGER,
+  timestamp TEXT,
+  FOREIGN KEY (robot_id) REFERENCES robots(id)
 );
 ```
 
-#### Explanation:
+**Explanation:** This schema is an example of normalization. The `robots` table stores unique robot information, while `robot_activity` references `robots` via a foreign key.
 
-- **Normalization**: They decomposed a table into two tables to eliminate redundancy and achieve 3NF.
+### 5. ETL Process
 
----
+**Definition:** ETL stands for Extract, Transform, Load. It refers to the process of extracting data from various sources, transforming it into a format suitable for analysis, and loading it into a target database.
 
-### ETL Process
-
-To integrate data from multiple sources, Alex, Casey, and Jamie designed an ETL (Extract, Transform, Load) process to load robot activity data into their data warehouse.
-
-```python
-import pandas as pd
-from sqlalchemy import create_engine
-
-# Extract
-robot_activity = pd.read_csv('robot_activity.csv')
-
-# Transform
-robot_activity['timestamp'] = pd.to_datetime(robot_activity['timestamp'])
-
-# Load
-engine = create_engine('sqlite:///data_warehouse.db')
-robot_activity.to_sql('robot_activity', con=engine, if_exists='replace', index=False)
-```
-
-#### Explanation:
-
-- **ETL Process**: They extracted data from a CSV file, transformed it by converting timestamps, and loaded it into a data warehouse.
-
----
-
-### Partitioning
-
-To manage large volumes of robot log data, the hackers partitioned the `robot_logs` table by date.
-
-#### SQL Query:
+**Example Instruction:**
 
 ```sql
-CREATE TABLE robot_logs (
-    id INT,
-    log_date DATE,
-    log_details TEXT
-)
-PARTITION BY RANGE (YEAR(log_date)) (
-    PARTITION p0 VALUES LESS THAN (2022),
-    PARTITION p1 VALUES LESS THAN (2023),
-    PARTITION p2 VALUES LESS THAN (2024)
-);
+-- Example of transforming and loading data using SQL
+INSERT INTO robot_activity (robot_id, activity_score, timestamp)
+SELECT robot_id, new_activity_score, new_timestamp
+FROM staging_table;
 ```
 
-#### Explanation:
+**Explanation:** This query inserts transformed data from a staging table into the `robot_activity` table.
 
-- **Partitioning**: They partitioned the `robot_logs` table by date to manage large volumes of log data efficiently.
+### 6. Partitioning
 
----
+**Definition:** Partitioning divides a database into pieces that can be managed and accessed separately. It can improve performance and manageability.
 
-### Materialized Views
-
-To speed up complex queries on robot activity data, Alex, Casey, and Jamie created a materialized view that pre-aggregates the data.
-
-#### SQL Query:
+**Example Instruction:**
 
 ```sql
-CREATE MATERIALIZED VIEW robot_activity_summary AS
-SELECT type, COUNT(*) AS activity_count, AVG(activity_score) AS avg_score
-FROM robot_activity
-GROUP BY type;
+-- Example of range partitioning
+CREATE TABLE robot_activity_partition (
+  id INTEGER,
+  robot_id INTEGER,
+  activity_score INTEGER,
+  timestamp TEXT
+) PARTITION BY RANGE (timestamp);
+
+CREATE TABLE robot_activity_2023 PARTITION OF robot_activity_partition FOR VALUES FROM ('2023-01-01') TO ('2024-01-01');
+CREATE TABLE robot_activity_2024 PARTITION OF robot_activity_partition FOR VALUES FROM ('2024-01-01') TO ('2025-01-01');
 ```
 
-#### Explanation:
+**Explanation:** This example partitions the `robot_activity` table by year, creating separate partitions for activities in 2023 and 2024.
 
-- **Materialized Views**: They created a materialized view to pre-aggregate robot activity data for faster query performance.
+### 7. Data Deduplication
 
----
+**Definition:** Data deduplication is the process of identifying and removing duplicate records from a dataset to ensure data quality.
 
-### Data Deduplication
-
-The hackers needed to remove duplicate entries from the robot activity log. They used a SQL query to identify and delete duplicate rows.
-
-#### SQL Query:
+**Example Instruction:**
 
 ```sql
 DELETE FROM robot_activity
 WHERE id NOT IN (
-    SELECT MIN(id)
-    FROM robot_activity
-    GROUP BY name, type, timestamp
+  SELECT MIN(id)
+  FROM robot_activity
+  GROUP BY robot_id, timestamp
 );
 ```
 
-#### Explanation:
+**Explanation:** This query deletes duplicate rows in the `robot_activity` table, keeping only the row with the minimum `id` for each `robot_id` and `timestamp`.
 
-- **Data Deduplication**: They identified and deleted duplicate rows from the robot activity log to ensure data quality.
+### 8. Data Encryption
 
----
+**Definition:** Data encryption transforms data into a secure format that can only be read by someone with the decryption key. It ensures the confidentiality and security of data.
 
-### Data Encryption
-
-To secure sensitive information about their operations, Alex, Casey, and Jamie used SQL to encrypt the `status` column in the `robots` table.
-
-#### SQL Query:
+**Example Instruction:**
 
 ```sql
-UPDATE robots
-SET status = ENCRYPT(status, 'secret_key');
+-- Example of encrypting data in SQL
+-- Requires specific database functions and extensions (pseudo-code)
+UPDATE robot_activity
+SET activity_score = ENCRYPT(activity_score, 'encryption_key');
 ```
 
-#### Explanation:
+**Explanation:** This query encrypts the `activity_score` column values. The actual encryption method depends on the database system in use.
 
-- **Data Encryption**: They encrypted the `status` column to secure sensitive information.
+### 9. Time Series Analysis
 
----
+**Definition:** Time series analysis involves analyzing time-ordered data points to extract meaningful statistics and identify trends over time.
 
-### Time Series Analysis
-
-To predict the future movements of the robot army, the hackers performed a time series analysis on the robot activity data.
-
-#### SQL Query:
+**Example Instruction:**
 
 ```sql
 SELECT
-    DATE_TRUNC('day', timestamp) AS day,
-    COUNT(*) AS activity_count
-FROM robot_activity
-GROUP BY day
-ORDER BY day;
+  timestamp,
+  activity_score,
+  LAG(activity_score, 1) OVER (ORDER BY timestamp) AS previous_score,
+  LEAD(activity_score, 1) OVER (ORDER BY timestamp) AS next_score
+FROM
+  robot_activity;
 ```
 
-#### Explanation:
+**Explanation:** This query performs time series analysis by calculating the previous and next activity scores for each row based on the `timestamp`.
 
-- **Time Series Analysis**: They performed a time series analysis to predict future movements by aggregating robot activity data by day.
+---
 
-I have created a SQLite database with tens of thousands of records for your exercise. You can download it using the link below:
-
-[Download the robot_army.db](robot_army.db)
-
-This database contains two tables:
-
-- **robots**: Contains 10,000 records with columns `id`, `name`, `type`, `status`, and `activity_score`.
-- **robot_activity**: Contains 100,000 records with columns `id`, `robot_id`, `activity_score`, and `timestamp`.
-
-You can use this database to perform various SQL exercises and test data engineering techniques as described in the previous examples.
+These instructions and definitions should provide a solid foundation for understanding and teaching these database concepts.
