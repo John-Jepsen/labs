@@ -1,0 +1,28 @@
+markdown_extensions:
+  - admonition
+  - codehilite
+  - footnotes
+  - meta
+  - toc
+  - pymdownx.arithmatex
+  - pymdownx.superfences
+  - pymdownx.tabbed
+  - pymdownx.tasklist
+plugins:
+  - search
+  - minify
+site_name: Collaborative Documentation
+site_url: https://John-Jepsen.github.io/labs/
+theme:
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - search.highlight
+    - search.suggest
+  name: material
+  palette:
+    accent: indigo
+    primary: indigo
+    scheme: default

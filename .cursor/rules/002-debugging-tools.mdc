@@ -1,0 +1,30 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+# Debugging Tools Guide
+
+## GDB Usage
+- Use GDB for debugging in Linux environments
+- Compile with `gcc -g -o program program.c` to include debug symbols
+- Set breakpoints with `break function_name` or `break line_number`
+- Examine variables with `print variable_name`
+- Step through code with `next` (over functions) or `step` (into functions)
+- Continue execution with `continue`
+- See [main.c](mdc:labs/gdb_debugger/main.c) for a practical example
+
+## LLDB Usage
+- Use LLDB for debugging in macOS environments
+- Compile with `gcc -g -o program program.c` to include debug symbols
+- Set breakpoints with `breakpoint set --name function_name` or `breakpoint set --file file.c --line line_number`
+- Examine variables with `print variable_name` or `p variable_name`
+- Step through code with `next` (over functions) or `step` (into functions)
+- Continue execution with `continue`
+- See [main.c](mdc:labs/lldb_debugger/main.c) for a practical example
+
+## Common Debugging Patterns
+- Always check for pointer-related bugs (using & correctly with scanf)
+- Look for off-by-one errors in loops and array indexing
+- Verify memory allocation and deallocation
+- Check function return values for error conditions

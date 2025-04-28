@@ -1,0 +1,80 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Markdown Content Guidance
+
+## Writing Style
+
+- Use clear, concise language
+- Write in instructional tone (use imperative statements)
+- Maintain consistent voice throughout
+- Avoid overly technical jargon without explanation
+- Define acronyms and specialized terms on first use
+- Use present tense for instructions and descriptions
+- Balance technical accuracy with readability
+
+## Content Depth
+
+- Provide enough detail for implementation without overwhelming
+- Include rationale for important decisions and approaches
+- Balance theory explanation with practical implementation
+- Provide both "what" and "why" for key concepts
+- Include necessary context for conceptual understanding
+- Ensure instructions are comprehensive enough for independent completion
+
+## Code Examples
+
+- Include complete, functional code examples
+- Provide sample input and expected output
+- Use realistic but simplified examples
+- Highlight important parts of code with comments
+- Break complex code into understandable chunks
+- Include error handling in examples where appropriate
+- Use consistent variable naming and coding style
+
+## Command Guidance
+
+- Provide exact commands needed for implementation
+- Show expected output or success indicators
+- Include version information where relevant
+- Format commands consistently using tables or code blocks
+- Explain parameters and options for complex commands
+- Provide verification steps after important commands
+
+## Visual Elements
+
+- Use diagrams for complex workflows or architectures
+- Include screenshots for UI-related steps
+- Label visual elements clearly
+- Use consistent styling for visual elements
+- Ensure diagrams illustrate concepts without redundancy
+- Balance text explanation with visual representation
+
+## Troubleshooting & Verification
+
+- Include common error messages and solutions
+- Provide validation steps for important stages
+- Explain how to verify successful implementation
+- Include debugging tips for complex implementations
+- Address edge cases and potential issues
+- Offer alternative approaches when appropriate
+
+## Learning Progression
+
+- Structure content to build on previous knowledge
+- Move from basic to advanced concepts in logical order
+- Connect new concepts to previously introduced material
+- Provide small wins early in implementation process
+- Gradually increase complexity of tasks
+- Include checkpoints to verify understanding
+
+## Resources & References
+
+- Include links to official documentation
+- Cite sources for borrowed concepts or approaches
+- Suggest additional learning resources
+- Provide references to related projects or examples
+- Include version information for libraries and tools
+- Note any prerequisites or assumed knowledge

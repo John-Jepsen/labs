@@ -1,0 +1,92 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Markdown Project Documentation Structure
+
+## Document Layout
+
+- **Bold Title as H1 at the top**
+- Clear **Objective** section explaining purpose and goals
+- Visual elements or diagrams to illustrate concepts
+- Key Goals listed as bullet points
+- Use horizontal rules (---) to separate major sections
+- Step-by-step instructions organized as numbered stages
+- Code blocks for commands and implementations
+
+## Formatting Standards
+
+- Use H1 (#) for document title
+- Use H2 (##) for major sections
+- Use H3 (###) for subsections
+- **Bold text** for important concepts and section headers
+- *Italic text* for emphasis or special notes
+- Bullet points for lists and key points
+- Table format for structured data and comparisons
+- Code blocks with syntax highlighting where appropriate
+
+## Section Organization
+
+### Introduction & Objectives
+- Start with clear title and objective
+- Explain why this project/concept is important
+- List key learning goals or outcomes
+- Include relevant diagrams or illustrations
+
+### Environment Setup
+- Requirements section explaining prerequisites
+- Command blocks for installation steps
+- Environment verification commands
+- Common issues and solutions
+
+### Implementation Steps
+- Numbered sequential stages
+- Each step should have:
+  - Clear heading
+  - Requirements or dependencies
+  - Command blocks or code examples
+  - Expected output or verification methods
+
+### Code Structure
+- Use code blocks with appropriate language tags
+- Include placeholder comments to indicate where code should be added
+- Present both example code and expected output
+- Format commands in tables or code blocks for clarity
+
+### Best Practices & Troubleshooting
+- Include a best practices section
+- Common issues and debugging tips
+- Optimization suggestions
+- Learning resources or next steps
+
+## Tables & Diagrams
+
+- Use tables for comparing options or displaying structured data
+- Include header rows in tables
+- Align table content for readability
+- Use diagrams to illustrate architecture or workflows
+- Include captions or explanations for visual elements
+
+## Command Formatting
+
+```
+| Command to run | 
+| :---- |
+```
+
+## Code Block Style
+
+```python
+# Import necessary modules
+# Initialize variables
+# Define functions
+# Execute logic
+```
+
+## Conclusion Section
+
+- Summarize key concepts
+- Highlight important takeaways
+- Suggest next steps or extensions
+- Provide references or resources for further learning

@@ -1,0 +1,50 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+# Algorithm Implementation Patterns
+
+## Sorting Algorithms
+- **Quick Sort**: Use the divide and conquer approach with a pivot element
+- **Merge Sort**: Implement using recursion with merge step
+- **Heap Sort**: Build a max heap first, then extract elements
+- **Counting Sort**: Use for integer data with limited range
+- **Radix Sort**: Sort by individual digits/characters
+- **Bucket Sort**: Distribute elements into buckets, then sort buckets
+
+## Graph Algorithms
+- **Breadth-First Search (BFS)**: Use a queue for level-order traversal
+- **Depth-First Search (DFS)**: Use recursion or a stack for traversal
+- **Dijkstra's Algorithm**: Use a priority queue for shortest paths
+- **Bellman-Ford**: Check for negative cycles
+- **Floyd-Warshall**: Use dynamic programming for all pairs shortest paths
+- **Prim's Algorithm**: Use a priority queue for minimum spanning trees
+- **Kruskal's Algorithm**: Use a disjoint set data structure
+- **Topological Sort**: Use DFS with finishing times or Khan's algorithm
+
+## Dynamic Programming
+- **Memoization**: Cache results of expensive function calls
+- **Tabulation**: Build up a table of results iteratively
+- **Knapsack Problem**: Use 2D array to track optimal values
+- **Longest Common Subsequence**: Use 2D array for subproblems
+- **Longest Increasing Subsequence**: Track best endings for each length
+
+## String Algorithms
+- **KMP Pattern Matching**: Precompute a prefix table
+- **Smith-Waterman**: Use for local sequence alignment
+
+## Data Structures
+- **Arrays and Linked Lists**: For sequential storage
+- **Stacks and Queues**: For LIFO and FIFO operations
+- **Hash Tables**: For O(1) lookup
+- **Trees**: For hierarchical data
+- **Graphs**: For complex relationships
+- **Disjoint Set (Union-Find)**: For grouping elements
+- **Bloom Filter**: For space-efficient probabilistic set membership
+
+## Implementation Best Practices
+- Begin with the simplest correct solution
+- Analyze time and space complexity
+- Look for edge cases (empty input, single element, etc.)
+- Consider the tradeoff between readability and efficiency

@@ -1,0 +1,36 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Rule Generator
+
+This rule enables the creation and updating of additional Cursor rules from conversations.
+
+## Rule Creation Guidelines
+
+When generating a new rule:
+- Always begin the file with proper frontmatter
+- Include a clear description
+- Use appropriate globs for file patterns
+- Format the rule content to be readable and concise
+
+## Rule Structure
+
+```
+---
+description: <Clear, concise description of what this rule does>
+globs: <File patterns this rule applies to>
+---
+
+# <Rule Title>
+
+<Rule content goes here>
+```
+
+## Common Rule Types
+
+- **Always Applied**: These rules are always included
+- **Auto Attached**: Included when files matching a glob pattern are referenced
+- **Agent Requested**: Available to the AI, which decides whether to include based on the description
+- **Manual**: Only included when explicitly mentioned using @ruleName

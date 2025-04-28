@@ -1,0 +1,114 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Chat History Saver
+
+This rule ensures that all chat conversations with Cursor are automatically saved to a dedicated history folder. Chat histories include timestamps, user queries, and assistant responses for future reference and documentation.
+
+## Implementation Details
+
+- Type "save_chat" in the chat to manually save the current conversation
+- Every new chat session will be saved as a Markdown file in the `.chat_history` folder
+- File names include date and time of the conversation start
+- Chat content includes complete prompts and responses
+- Each interaction is timestamped for easy reference
+- Files are organized chronologically
+
+## Benefits
+
+- Maintains a searchable archive of all conversations
+- Prevents loss of valuable problem-solving insights
+- Allows review of past approaches to similar problems
+- Enables tracking of project evolution through conversations
+- Provides documentation of decision-making processes
+
+## Privacy Note
+
+Be mindful that chat histories may contain sensitive information or credentials. Review chat history files before sharing repositories with others.
+
+```javascript
+// Implementation to save chat history
+cursor.registerAction({
+  name: "save-chat-history",
+  description: "Save chat conversation to history folder",
+  handler: async (context) => {
+    const fs = require('fs');
+    const path = require('path');
+    
+    try {
+      const conversation = context.conversation;
+      const workspacePath = context.workspacePath || process.cwd();
+      
+      // Create chat history directory if it doesn't exist
+      const historyDir = path.join(workspacePath, '.chat_history');
+      if (!fs.existsSync(historyDir)) {
+        fs.mkdirSync(historyDir, { recursive: true });
+      }
+      
+      // Generate filename with timestamp
+      const now = new Date();
+      const timestamp = now.toISOString().replace(/[:.]/g, '-');
+      const filename = `chat_${timestamp}.md`;
+      const filePath = path.join(historyDir, filename);
+      
+      // Format the conversation
+      let content = `# Chat Session: ${now.toLocaleString()}\n\n`;
+      
+      if (conversation && conversation.messages) {
+        for (const message of conversation.messages) {
+          const role = message.role === 'user' ? '## User' : '## Assistant';
+          const time = message.timestamp ? new Date(message.timestamp).toLocaleString() : now.toLocaleString();
+          
+          content += `${role} (${time}):\n\n${message.content}\n\n---\n\n`;
+        }
+      } else {
+        content += "No conversation data available.\n\n";
+      }
+      
+      // Write to file
+      fs.writeFileSync(filePath, content);
+      console.log(`Chat history saved to ${filePath}`);
+      return { success: true, filePath };
+    } catch (error) {
+      console.error("Error saving chat history:", error);
+      return { success: false, error: error.message };
+    }
+  }
+});
+
+// Manual trigger when user types "save_chat"
+cursor.onMessage(async (message, context) => {
+  if (message.content.trim().toLowerCase() === "save_chat") {
+    console.log("Manual chat save triggered");
+    try {
+      const result = await cursor.executeAction("save-chat-history", context);
+      if (result.success) {
+        return {
+          type: "text",
+          content: `✅ Chat history saved to: ${result.filePath}`
+        };
+      } else {
+        return {
+          type: "text",
+          content: `❌ Failed to save chat history: ${result.error}`
+        };
+      }
+    } catch (error) {
+      console.error("Error executing save action:", error);
+      return {
+        type: "text",
+        content: "❌ Error saving chat history: " + error.message
+      };
+    }
+  }
+  return null; // Let other handlers process the message
+});
+
+// Register for chat end events (automatic save)
+cursor.onChatEnd(async (context) => {
+  console.log("Chat ended, saving history");
+  await cursor.executeAction("save-chat-history", context);
+});
+```

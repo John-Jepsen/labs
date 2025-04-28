@@ -1,0 +1,54 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Bash Scripting Guidelines
+
+## Basic Syntax
+- Begin scripts with `#!/bin/bash` shebang
+- Use `chmod +x script.sh` to make scripts executable
+- Run scripts with `./script.sh` or `bash script.sh`
+- Use meaningful variable names with `UPPERCASE` for constants
+- Define variables without spaces: `variable=value`
+- Access variables with `$variable` or `${variable}`
+
+## Conditional Constructs
+- Use `if`, `elif`, `else`, and `fi` for conditionals
+- Test expressions with `[ condition ]` or `[[ condition ]]`
+- Compare strings with `==` and `!=`
+- Compare numbers with `-eq`, `-ne`, `-lt`, `-le`, `-gt`, `-ge`
+- Check file conditions with `-e` (exists), `-f` (regular file), `-d` (directory)
+- Combine conditions with `&&` (AND) and `||` (OR)
+
+## Loops
+- Use `for` loops for iteration: `for var in list; do commands; done`
+- Use `while` loops for condition-based iteration: `while condition; do commands; done`
+- Use `until` loops for negated conditions: `until condition; do commands; done`
+- Use `break` to exit a loop and `continue` to skip to the next iteration
+
+## Functions
+- Define functions with `function_name() { commands; }`
+- Call functions with `function_name arg1 arg2`
+- Access arguments with `$1`, `$2`, etc., or `$@` for all arguments
+- Return values with `return` or by echoing and capturing output
+
+## Error Handling
+- Check exit codes with `$?`
+- Use `set -e` to exit on any error
+- Use `trap` to catch signals and cleanup
+- Redirect errors with `2>` or `2>&1`
+
+## Security Considerations
+- Validate all inputs
+- Quote variables to prevent word splitting and globbing
+- Avoid using `eval` when possible
+- Be careful with wildcard expansion
+- Know the risks of fork bombs and resource exhaustion
+
+## Best Practices
+- Include comments to explain complex sections
+- Use consistent indentation (typically 2 or 4 spaces)
+- Break long commands with backslashes for readability
+- Prefer built-in commands over external programs for performance
+- Use shellcheck to find common errors

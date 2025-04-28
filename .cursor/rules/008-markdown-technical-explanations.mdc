@@ -1,0 +1,18 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Technical Explanation Guidelines
+
+## Concept Introduction
+
+- Start with a high-level overview before diving into details
+- Define new concepts with clear, concise language
+- Relate new concepts to familiar ones when possible
+- Use analogies to explain complex or abstract ideas
+- Provide real-world applications of theoretical concepts
+- Include visual representations for complex concepts
+- Address "why" before "how" for better conceptual understanding
+
+// ... existing code ...

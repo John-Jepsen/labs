@@ -1,0 +1,42 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Project Organization and Contribution Guidelines
+
+## Repository Structure
+- Lab exercises are organized as individual Markdown files
+- Related labs are grouped by topic (sorting, graph algorithms, etc.)
+- Debugging labs have their own directories with code examples
+- Each lab has clear instructions and explanations
+
+## Coding Standards
+- Write clear, well-commented code
+- Follow language-specific conventions
+- Maintain consistent indentation and formatting
+- Prioritize readability over clever solutions
+- Include appropriate error handling
+
+## Contribution Workflow
+- Fork the repository for personal contributions
+- Create a new branch for each feature or fix
+- Commit changes with descriptive messages
+- Open pull requests for review
+- Respond to feedback and make necessary changes
+
+## Teamwork Recommendations
+- Use pair programming for complex problems
+- Form study groups to discuss approaches
+- Conduct peer reviews of completed exercises
+- Share insights and alternative solutions
+- Document learning experiences and challenges
+
+## Learning Approach
+- Start with simpler algorithms and progress to more complex ones
+- Implement solutions from scratch before optimizing
+- Test thoroughly with various inputs, including edge cases
+- Analyze time and space complexity of your implementations
+- Explore multiple approaches to the same problem
+
+See [README.md](mdc:labs/README.md) for more information on getting started with the labs.
