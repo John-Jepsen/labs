@@ -1,0 +1,2875 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://John-Jepsen.github.io/labs/agentic/03_tool_using_agent/">
+      
+      
+        <link rel="prev" href="../02_planning_agent/">
+      
+      
+        <link rel="next" href="../04_memory_augmented_agent/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.12">
+    
+    
+      
+        <title>Tool-Using Agent: Extending Agent Capabilities - Collaborative Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.2afb09e1.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#tool-using-agent-extending-agent-capabilities" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Collaborative Documentation" class="md-header__button md-logo" aria-label="Collaborative Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Collaborative Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Tool-Using Agent: Extending Agent Capabilities
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../01_reactive_agent/" class="md-tabs__link">
+          
+  
+  
+  Agentic
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../computer_vision/01_image_loading_and_manipulation/" class="md-tabs__link">
+          
+  
+  
+  Computer vision
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../ds_algo/algos/01_breadth_first_search/" class="md-tabs__link">
+          
+  
+  
+  Ds algo
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../prompt_emgineering/advanced_prompt_engineering_guide/" class="md-tabs__link">
+          
+  
+  
+  Prompt emgineering
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../quantum/part0_orientation/" class="md-tabs__link">
+          
+  
+  
+  Quantum
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Collaborative Documentation" class="md-nav__button md-logo" aria-label="Collaborative Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Collaborative Documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Agentic
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            Agentic
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_reactive_agent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Reactive Agent: Learning Through Implementation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_planning_agent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Planning Agent: Goal-Directed Problem Solving
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Tool-Using Agent: Extending Agent Capabilities
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Tool-Using Agent: Extending Agent Capabilities
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#objective" class="md-nav__link">
+    <span class="md-ellipsis">
+      Objective
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#environment-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      Environment Setup
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Environment Setup">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#verifying-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      Verifying Setup
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#core-concept-tool-using-agents" class="md-nav__link">
+    <span class="md-ellipsis">
+      Core Concept: Tool-Using Agents
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Core Concept: Tool-Using Agents">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#real-world-examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      Real-world Examples
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#modular-code-implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Modular Code Implementation
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Modular Code Implementation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-tool-definitions" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Tool Definitions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-agent-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Agent Design
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-test-harness" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Test Harness
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#live-coding-collaboration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Live Coding Collaboration
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Live Coding Collaboration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#session-structure-60-75-minutes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Session Structure (60-75 minutes)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reflection-checkpoints" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reflection Checkpoints
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Reflection Checkpoints">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#checkpoint-1-after-tool-implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Checkpoint 1: After Tool Implementation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#checkpoint-2-after-agent-testing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Checkpoint 2: After Agent Testing
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#debugging-and-extension-challenges" class="md-nav__link">
+    <span class="md-ellipsis">
+      Debugging and Extension Challenges
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Debugging and Extension Challenges">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#common-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      Common Issues
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#extension-ideas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Extension Ideas
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#agent-evaluation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Agent Evaluation
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Agent Evaluation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#effectiveness-metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      Effectiveness Metrics
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#efficiency-metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      Efficiency Metrics
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#alignment-metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      Alignment Metrics
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#evaluation-exercise" class="md-nav__link">
+    <span class="md-ellipsis">
+      Evaluation Exercise
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#discussion-questions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Discussion Questions
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#next-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      Next Steps
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_memory_augmented_agent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Memory-Augmented Agent: Persistent Context Across Interactions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05_multi_agent_collaboration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Multi-Agent Collaboration: Coordinated Problem Solving
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06_self_reflective_agent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Self-Reflective Agent: Learning From Experience
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Computer vision
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Computer vision
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../computer_vision/01_image_loading_and_manipulation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Image Loading and Manipulation Lab
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../computer_vision/02_filtering_and_convolution/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Filtering and Convolution Lab
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../computer_vision/03_edge_detection/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Edge Detection Lab
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../computer_vision/04_contour_detection_and_shapes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Contour Detection and Shape Analysis Lab
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../computer_vision/05_face_detection/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Face Detection Lab
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../computer_vision/06_image_segmentation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Image Segmentation Lab
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../computer_vision/computer_vision_labs_2024-07-06/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Computer Vision Labs - Chat Session
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Ds algo
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Ds algo
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Algos
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            Algos
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ds_algo/algos/01_breadth_first_search/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Breadth-First Search (BFS) Algorithm
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ds_algo/algos/02_depth_first_search/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Depth-First Search (DFS) Algorithm
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ds_algo/algos/03_binary_search/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Binary Search Algorithm
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ds_algo/algos/04_uniform_cost_search/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Uniform Cost Search (UCS) Algorithm
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ds_algo/algos/05_a_star_search/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    A* Search Algorithm
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ds_algo/algos/06_iterative_deepening_dfs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Iterative Deepening Depth-First Search (IDDFS) Algorithm
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ds_algo/algos/ds_algo_prompt/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Documentation Request Template
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Data structures
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            Data structures
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ds_algo/data_structures/01_arrays_and_lists/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Arrays and Lists: Fundamental Sequential Data Structures
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ds_algo/data_structures/02_stacks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Stacks: Last-In-First-Out (LIFO) Data Structures
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ds_algo/data_structures/03_queues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Queues: First-In-First-Out (FIFO) Data Structures
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ds_algo/data_structures/04_linked_lists/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Linked Lists: Node-Based Sequential Data Structures
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ds_algo/data_structures/05_hash_tables/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Hash Tables: Efficient Key-Value Data Structures
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ds_algo/data_structures/06_trees/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Trees: Hierarchical Data Structures
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Prompt emgineering
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Prompt emgineering
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../prompt_emgineering/advanced_prompt_engineering_guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Advanced Prompt Engineering Guide
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../prompt_emgineering/documentation_request/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Documentation Request Template
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../prompt_emgineering/guide_prompt_chaining/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Prompt Engineering Guide: Prompt Chaining
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../prompt_emgineering/guide_role_persona_prompting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Prompt Engineering Guide: Role and Persona Control
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../prompt_emgineering/guide_structured_prompting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Prompt Engineering Guide: Structured Prompting
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../prompt_emgineering/intermediate_prompt_engineering_guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Intermediate Prompt Engineering Guide
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../prompt_emgineering/prompt_engineering_guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Prompt Engineering Guide for AI Models
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../prompt_emgineering/prompt_engineering_guide_easy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Prompt Engineering Guide for AI Models
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../prompt_emgineering/prompt_engineering_prompt_chaining/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Prompt Engineering: Chained and Multi-Prompt Setup
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../prompt_emgineering/prompt_engineering_role_persona/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Prompt Engineering: Role and Persona Control
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../prompt_emgineering/prompt_engineering_structured_prompting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Prompt Engineering: Structured Prompting
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Quantum
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Quantum
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../quantum/part0_orientation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Part 0: Orientation — Road-map &amp; Dev Setup
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../quantum/part1_bits_vs_qubits/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Part 1: Bits vs Qubits — Booleans on Steroids
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../quantum/part2_linear_algebra/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Part 2: Linear Algebra Survival Kit
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../quantum/part3_single_qubit_operations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Part 3: Single-Qubit Operations
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../quantum/part4_measurement_probability/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Part 4: Measurement &amp; Probability
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../quantum/part5_multi_qubit_magic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Part 5: Multi-Qubit Magic
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../quantum/part6_algorithms_primer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Part 6: Algorithms Primer
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../quantum/part7_noise_error_reality/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Part 7: Noise, Error &amp; Reality Checks
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../quantum/part8_toolchain_ecosystem/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Part 8: Toolchain &amp; Ecosystem
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../quantum/part9_ship_something/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Part 9: Ship Something
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#objective" class="md-nav__link">
+    <span class="md-ellipsis">
+      Objective
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#environment-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      Environment Setup
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Environment Setup">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#verifying-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      Verifying Setup
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#core-concept-tool-using-agents" class="md-nav__link">
+    <span class="md-ellipsis">
+      Core Concept: Tool-Using Agents
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Core Concept: Tool-Using Agents">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#real-world-examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      Real-world Examples
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#modular-code-implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Modular Code Implementation
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Modular Code Implementation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-tool-definitions" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Tool Definitions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-agent-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Agent Design
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-test-harness" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Test Harness
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#live-coding-collaboration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Live Coding Collaboration
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Live Coding Collaboration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#session-structure-60-75-minutes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Session Structure (60-75 minutes)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reflection-checkpoints" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reflection Checkpoints
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Reflection Checkpoints">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#checkpoint-1-after-tool-implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Checkpoint 1: After Tool Implementation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#checkpoint-2-after-agent-testing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Checkpoint 2: After Agent Testing
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#debugging-and-extension-challenges" class="md-nav__link">
+    <span class="md-ellipsis">
+      Debugging and Extension Challenges
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Debugging and Extension Challenges">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#common-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      Common Issues
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#extension-ideas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Extension Ideas
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#agent-evaluation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Agent Evaluation
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Agent Evaluation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#effectiveness-metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      Effectiveness Metrics
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#efficiency-metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      Efficiency Metrics
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#alignment-metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      Alignment Metrics
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#evaluation-exercise" class="md-nav__link">
+    <span class="md-ellipsis">
+      Evaluation Exercise
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#discussion-questions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Discussion Questions
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#next-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      Next Steps
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="tool-using-agent-extending-agent-capabilities">Tool-Using Agent: Extending Agent Capabilities</h1>
+<h2 id="objective">Objective</h2>
+<p>Build an agent that can use external tools like web search and calculators to solve problems beyond its built-in knowledge, demonstrating how agent capabilities can be extended through tool integration.</p>
+<hr />
+<h2 id="environment-setup">Environment Setup</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Setup Steps</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">1. Create and activate a virtual environment (if not already done)</td>
+</tr>
+<tr>
+<td style="text-align: left;">2. Install dependencies (including tool-specific ones)</td>
+</tr>
+<tr>
+<td style="text-align: left;">3. Configure API access</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code><span class="c1"># Create a virtual environment (if not already created)</span>
+python<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>agentic-env
+<span class="nb">source</span><span class="w"> </span>agentic-env/bin/activate<span class="w">  </span><span class="c1"># On Windows: agentic-env\Scripts\activate</span>
+
+<span class="c1"># Install dependencies</span>
+pip<span class="w"> </span>install<span class="w"> </span>openai<span class="w"> </span>langchain<span class="w"> </span>pydantic<span class="w"> </span>python-dotenv<span class="w"> </span>wikipedia<span class="w"> </span>duckduckgo-search
+
+<span class="c1"># Create a .env file for your API key (if not already done)</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;OPENAI_API_KEY=your_api_key_here&quot;</span><span class="w"> </span>&gt;<span class="w"> </span>.env
+</code></pre></div>
+<h3 id="verifying-setup">Verifying Setup</h3>
+<p>Run the following test code to ensure your environment is ready:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dotenv</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_dotenv</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">langchain.llms</span><span class="w"> </span><span class="kn">import</span> <span class="n">OpenAI</span>
+
+<span class="c1"># Load environment variables</span>
+<span class="n">load_dotenv</span><span class="p">()</span>
+
+<span class="c1"># Test API connection</span>
+<span class="n">llm</span> <span class="o">=</span> <span class="n">OpenAI</span><span class="p">(</span><span class="n">temperature</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">llm</span><span class="o">.</span><span class="n">invoke</span><span class="p">(</span><span class="s2">&quot;Hello!&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;LLM Response: </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div>
+<hr />
+<h2 id="core-concept-tool-using-agents">Core Concept: Tool-Using Agents</h2>
+<p>Tool-using agents expand capabilities through:</p>
+<ol>
+<li><strong>Tool recognition</strong> - Identifying when external tools are needed</li>
+<li><strong>Tool selection</strong> - Choosing the appropriate tool for a task</li>
+<li><strong>Tool usage</strong> - Properly formatting inputs and interpreting outputs</li>
+<li><strong>Result integration</strong> - Incorporating tool outputs into responses</li>
+</ol>
+<p>Key characteristics:</p>
+<ul>
+<li><strong>Extensible</strong> - Can be enhanced with new tools</li>
+<li><strong>Specialized</strong> - Uses purpose-built tools for specific tasks</li>
+<li><strong>Resource-aware</strong> - Leverages external systems for efficiency</li>
+<li><strong>Capability-augmented</strong> - Overcomes built-in limitations</li>
+</ul>
+<h3 id="real-world-examples">Real-world Examples</h3>
+<ul>
+<li>Virtual assistants using weather APIs</li>
+<li>Programming assistants using code execution</li>
+<li>Research agents using search engines</li>
+<li>Math tutors using calculation tools</li>
+</ul>
+<hr />
+<h2 id="modular-code-implementation">Modular Code Implementation</h2>
+<h3 id="1-tool-definitions">1. Tool Definitions</h3>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Callable</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dotenv</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_dotenv</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">langchain.llms</span><span class="w"> </span><span class="kn">import</span> <span class="n">OpenAI</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">langchain.prompts</span><span class="w"> </span><span class="kn">import</span> <span class="n">PromptTemplate</span>
+
+<span class="c1"># Tool definition (simplified for learning purposes)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Tool</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A tool that can be used by an agent to perform specific tasks.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">description</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize a tool with a name, description, and function.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="n">description</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">func</span> <span class="o">=</span> <span class="n">func</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">use</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_str</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Use the tool with the given input.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="n">input_str</span><span class="p">)</span>
+
+<span class="c1"># Example tool implementations</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">calculator_tool</span><span class="p">(</span><span class="n">expression</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Evaluates a mathematical expression and returns the result.&quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># Using eval is generally unsafe, but this is a simplified example</span>
+        <span class="c1"># In production, use a proper mathematical expression parser</span>
+        <span class="n">cleaned_expression</span> <span class="o">=</span> <span class="n">expression</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">cleaned_expression</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;__builtins__&quot;</span><span class="p">:</span> <span class="p">{}},</span> <span class="p">{</span><span class="s2">&quot;math&quot;</span><span class="p">:</span> <span class="n">math</span><span class="p">})</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Calculator result: </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Calculator error: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">wikipedia_search</span><span class="p">(</span><span class="n">query</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Searches Wikipedia for information about the query.&quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">wikipedia</span>
+        <span class="c1"># Search for the query</span>
+        <span class="n">search_results</span> <span class="o">=</span> <span class="n">wikipedia</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="n">results</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">search_results</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;No Wikipedia results found.&quot;</span>
+
+        <span class="c1"># Get the summary of the first result</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">page</span> <span class="o">=</span> <span class="n">wikipedia</span><span class="o">.</span><span class="n">page</span><span class="p">(</span><span class="n">search_results</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="n">summary</span> <span class="o">=</span> <span class="n">wikipedia</span><span class="o">.</span><span class="n">summary</span><span class="p">(</span><span class="n">search_results</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">sentences</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+            <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Wikipedia: </span><span class="si">{</span><span class="n">summary</span><span class="si">}</span><span class="se">\n</span><span class="s2">URL: </span><span class="si">{</span><span class="n">page</span><span class="o">.</span><span class="n">url</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="k">except</span> <span class="n">wikipedia</span><span class="o">.</span><span class="n">DisambiguationError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="c1"># If there&#39;s a disambiguation, get the first option</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">page</span> <span class="o">=</span> <span class="n">wikipedia</span><span class="o">.</span><span class="n">page</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">options</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+                <span class="n">summary</span> <span class="o">=</span> <span class="n">wikipedia</span><span class="o">.</span><span class="n">summary</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">options</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">sentences</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+                <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Wikipedia: </span><span class="si">{</span><span class="n">summary</span><span class="si">}</span><span class="se">\n</span><span class="s2">URL: </span><span class="si">{</span><span class="n">page</span><span class="o">.</span><span class="n">url</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Multiple Wikipedia matches found: </span><span class="si">{</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">options</span><span class="p">[:</span><span class="mi">5</span><span class="p">])</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Wikipedia search error: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+
+<span class="c1"># YOUR GROUP TASK: Implement at least one additional tool</span>
+<span class="c1"># Examples: Weather API, Unit converter, News search, etc.</span>
+</code></pre></div>
+<h3 id="2-agent-design">2. Agent Design</h3>
+<div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">ToolUsingAgent</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;An agent that can use tools to complete tasks.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">llm</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize the tool-using agent with an optional language model.&quot;&quot;&quot;</span>
+        <span class="n">load_dotenv</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">llm</span> <span class="o">=</span> <span class="n">llm</span> <span class="ow">or</span> <span class="n">OpenAI</span><span class="p">(</span><span class="n">temperature</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+
+        <span class="c1"># Initialize tools</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tools</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">Tool</span><span class="p">(</span><span class="s2">&quot;calculator&quot;</span><span class="p">,</span> <span class="s2">&quot;Use this tool to perform mathematical calculations&quot;</span><span class="p">,</span> <span class="n">calculator_tool</span><span class="p">),</span>
+            <span class="n">Tool</span><span class="p">(</span><span class="s2">&quot;wikipedia&quot;</span><span class="p">,</span> <span class="s2">&quot;Use this tool to search for information on Wikipedia&quot;</span><span class="p">,</span> <span class="n">wikipedia_search</span><span class="p">),</span>
+            <span class="c1"># Add your custom tool here</span>
+        <span class="p">]</span>
+
+        <span class="c1"># Build tool descriptions for the prompt</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tool_descriptions</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span>
+            <span class="sa">f</span><span class="s2">&quot;- </span><span class="si">{</span><span class="n">tool</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">tool</span><span class="o">.</span><span class="n">description</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">tool</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tools</span>
+        <span class="p">])</span>
+
+        <span class="c1"># Map tool names to tools for easy lookup</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tool_map</span> <span class="o">=</span> <span class="p">{</span><span class="n">tool</span><span class="o">.</span><span class="n">name</span><span class="p">:</span> <span class="n">tool</span> <span class="k">for</span> <span class="n">tool</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tools</span><span class="p">}</span>
+
+        <span class="c1"># Define the main prompt template</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">prompt_template</span> <span class="o">=</span> <span class="n">PromptTemplate</span><span class="p">(</span>
+            <span class="n">input_variables</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;input&quot;</span><span class="p">,</span> <span class="s2">&quot;tools&quot;</span><span class="p">,</span> <span class="s2">&quot;tool_history&quot;</span><span class="p">],</span>
+            <span class="n">template</span><span class="o">=</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">            You are a helpful assistant that can use tools to answer questions.</span>
+
+<span class="s2">            Available tools:</span>
+<span class="s2">            </span><span class="si">{tools}</span>
+
+<span class="s2">            Previous tool usage (if any):</span>
+<span class="s2">            </span><span class="si">{tool_history}</span>
+
+<span class="s2">            To use a tool, respond with a JSON object with the following structure:</span>
+<span class="s2">            {{</span>
+<span class="s2">                &quot;reasoning&quot;: &quot;Your step-by-step reasoning about what tool to use and why&quot;,</span>
+<span class="s2">                &quot;tool&quot;: &quot;the_tool_name&quot;,</span>
+<span class="s2">                &quot;tool_input&quot;: &quot;the input to pass to the tool&quot;</span>
+<span class="s2">            }}</span>
+
+<span class="s2">            If you can answer without using a tool, or after you&#39;ve received a tool result,</span>
+<span class="s2">            respond with a JSON object with this structure:</span>
+<span class="s2">            {{</span>
+<span class="s2">                &quot;reasoning&quot;: &quot;Your reasoning process&quot;,</span>
+<span class="s2">                &quot;final_answer&quot;: &quot;Your comprehensive answer to the question&quot;</span>
+<span class="s2">            }}</span>
+
+<span class="s2">            User question: </span><span class="si">{input}</span>
+
+<span class="s2">            Think carefully about whether you need to use a tool and which one is most appropriate.</span>
+<span class="s2">            &quot;&quot;&quot;</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_parse_response</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">response</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Parse the JSON response from the LLM.&quot;&quot;&quot;</span>
+        <span class="c1"># YOUR CODE: Parse the JSON response</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c1"># Try to parse the entire response as JSON</span>
+            <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">json</span><span class="o">.</span><span class="n">JSONDecodeError</span><span class="p">:</span>
+            <span class="c1"># If that fails, try to extract JSON from the response</span>
+            <span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
+            <span class="n">json_match</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;```json\n(.*?)```&#39;</span><span class="p">,</span> <span class="n">response</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">DOTALL</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">json_match</span><span class="p">:</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">json_match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+                <span class="k">except</span><span class="p">:</span>
+                    <span class="c1"># If JSON extraction fails, create a default response</span>
+                    <span class="k">return</span> <span class="p">{</span>
+                        <span class="s2">&quot;reasoning&quot;</span><span class="p">:</span> <span class="s2">&quot;Failed to parse response&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;final_answer&quot;</span><span class="p">:</span> <span class="s2">&quot;I encountered an error while processing your request.&quot;</span>
+                    <span class="p">}</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># If no JSON found, create a default response</span>
+                <span class="k">return</span> <span class="p">{</span>
+                    <span class="s2">&quot;reasoning&quot;</span><span class="p">:</span> <span class="s2">&quot;Failed to parse response&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;final_answer&quot;</span><span class="p">:</span> <span class="s2">&quot;I encountered an error while processing your request.&quot;</span>
+                <span class="p">}</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">max_turns</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">3</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Process the input using tools as needed and generate a response.&quot;&quot;&quot;</span>
+        <span class="c1"># YOUR CODE: Implement the main agent loop</span>
+        <span class="n">tool_history</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">turns</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="k">while</span> <span class="n">turns</span> <span class="o">&lt;</span> <span class="n">max_turns</span><span class="p">:</span>
+            <span class="c1"># Format the prompt with the input and tool history</span>
+            <span class="n">prompt</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">prompt_template</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="nb">input</span><span class="o">=</span><span class="n">input_text</span><span class="p">,</span>
+                <span class="n">tools</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">tool_descriptions</span><span class="p">,</span>
+                <span class="n">tool_history</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tool_history</span><span class="p">)</span> <span class="k">if</span> <span class="n">tool_history</span> <span class="k">else</span> <span class="s2">&quot;None&quot;</span>
+            <span class="p">)</span>
+
+            <span class="c1"># Get a response from the LLM</span>
+            <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">llm</span><span class="o">.</span><span class="n">invoke</span><span class="p">(</span><span class="n">prompt</span><span class="p">)</span>
+            <span class="n">parsed_response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parse_response</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+
+            <span class="c1"># Check if the response contains a final answer</span>
+            <span class="k">if</span> <span class="s2">&quot;final_answer&quot;</span> <span class="ow">in</span> <span class="n">parsed_response</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">parsed_response</span><span class="p">[</span><span class="s2">&quot;final_answer&quot;</span><span class="p">]</span>
+
+            <span class="c1"># Check if the response requests a tool</span>
+            <span class="k">if</span> <span class="s2">&quot;tool&quot;</span> <span class="ow">in</span> <span class="n">parsed_response</span> <span class="ow">and</span> <span class="s2">&quot;tool_input&quot;</span> <span class="ow">in</span> <span class="n">parsed_response</span><span class="p">:</span>
+                <span class="n">tool_name</span> <span class="o">=</span> <span class="n">parsed_response</span><span class="p">[</span><span class="s2">&quot;tool&quot;</span><span class="p">]</span>
+                <span class="n">tool_input</span> <span class="o">=</span> <span class="n">parsed_response</span><span class="p">[</span><span class="s2">&quot;tool_input&quot;</span><span class="p">]</span>
+
+                <span class="c1"># Check if the requested tool exists</span>
+                <span class="k">if</span> <span class="n">tool_name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tool_map</span><span class="p">:</span>
+                    <span class="c1"># Use the tool</span>
+                    <span class="n">tool_result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tool_map</span><span class="p">[</span><span class="n">tool_name</span><span class="p">]</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="n">tool_input</span><span class="p">)</span>
+
+                    <span class="c1"># Add the tool usage to the history</span>
+                    <span class="n">tool_history</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Tool: </span><span class="si">{</span><span class="n">tool_name</span><span class="si">}</span><span class="se">\n</span><span class="s2">Input: </span><span class="si">{</span><span class="n">tool_input</span><span class="si">}</span><span class="se">\n</span><span class="s2">Result: </span><span class="si">{</span><span class="n">tool_result</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+                    <span class="c1"># Continue to the next turn</span>
+                    <span class="n">turns</span> <span class="o">+=</span> <span class="mi">1</span>
+                    <span class="k">continue</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="c1"># If the tool doesn&#39;t exist, add an error to the history</span>
+                    <span class="n">tool_history</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error: Tool &#39;</span><span class="si">{</span><span class="n">tool_name</span><span class="si">}</span><span class="s2">&#39; not found&quot;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># If the response is invalid, add an error to the history</span>
+                <span class="n">tool_history</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;Error: Invalid response format&quot;</span><span class="p">)</span>
+
+            <span class="n">turns</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="c1"># If we&#39;ve reached the maximum number of turns without a final answer</span>
+        <span class="k">return</span> <span class="s2">&quot;I wasn&#39;t able to provide a complete answer within the allowed number of tool uses.&quot;</span>
+</code></pre></div>
+<h3 id="3-test-harness">3. Test Harness</h3>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">test_tool_using_agent</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Test the tool-using agent with various queries and analyze its tool usage.&quot;&quot;&quot;</span>
+    <span class="n">agent</span> <span class="o">=</span> <span class="n">ToolUsingAgent</span><span class="p">()</span>
+
+    <span class="n">test_queries</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s2">&quot;What is the square root of 144?&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Tell me about the Python programming language.&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;If I have 5 apples and give away 2, then buy 3 more, how many do I have?&quot;</span><span class="p">,</span>
+        <span class="c1"># Add your own test queries here</span>
+    <span class="p">]</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Testing Tool-Using Agent ===&quot;</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">query</span> <span class="ow">in</span> <span class="n">test_queries</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Query: </span><span class="si">{</span><span class="n">query</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">agent</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Response: </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="c1"># GROUP DISCUSSION POINT: Did the agent select the appropriate tool?</span>
+        <span class="c1"># Could it have answered without using a tool? Was the tool usage effective?</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">test_tool_using_agent</span><span class="p">()</span>
+</code></pre></div>
+<hr />
+<h2 id="live-coding-collaboration">Live Coding Collaboration</h2>
+<h3 id="session-structure-60-75-minutes">Session Structure (60-75 minutes)</h3>
+<ol>
+<li>
+<p><strong>Setup &amp; Tool Exploration</strong> (15 min)</p>
+</li>
+<li>
+<p>Configure environment</p>
+</li>
+<li>Understand available tools</li>
+<li>
+<p>Plan custom tool implementation</p>
+</li>
+<li>
+<p><strong>Implementation Phase</strong> (25 min)</p>
+</li>
+<li>
+<p>Complete the agent's response parsing and run methods</p>
+</li>
+<li>Implement at least one custom tool</li>
+<li>
+<p>Enhance the main agent prompt</p>
+</li>
+<li>
+<p><strong>Testing &amp; Analysis</strong> (20 min)</p>
+</li>
+<li>
+<p>Test with varied queries requiring different tools</p>
+</li>
+<li>Analyze tool selection accuracy</li>
+<li>
+<p>Evaluate response quality with and without tools</p>
+</li>
+<li>
+<p><strong>Extension &amp; Refinement</strong> (15 min)</p>
+</li>
+<li>Implement more sophisticated tool selection logic</li>
+<li>Add error handling for tool failures</li>
+<li>Create specialized prompts for tool result processing</li>
+</ol>
+<hr />
+<h2 id="reflection-checkpoints">Reflection Checkpoints</h2>
+<h3 id="checkpoint-1-after-tool-implementation">Checkpoint 1: After Tool Implementation</h3>
+<ul>
+<li>How does each tool extend the agent's capabilities?</li>
+<li>What are the limitations of each tool?</li>
+<li>How might users misuse or misunderstand the tools?</li>
+<li>What additional tools would be most valuable to add?</li>
+</ul>
+<h3 id="checkpoint-2-after-agent-testing">Checkpoint 2: After Agent Testing</h3>
+<ul>
+<li>When does the agent correctly identify the need for a tool?</li>
+<li>When does it fail to use a tool when one would be helpful?</li>
+<li>How well does it interpret and incorporate tool outputs?</li>
+<li>What patterns emerge in successful vs. unsuccessful tool usage?</li>
+</ul>
+<hr />
+<h2 id="debugging-and-extension-challenges">Debugging and Extension Challenges</h2>
+<h3 id="common-issues">Common Issues</h3>
+<ul>
+<li>JSON parsing errors from malformed LLM responses</li>
+<li>Tool selection errors (choosing wrong tool or using unnecessarily)</li>
+<li>Tool input formatting problems</li>
+<li>Failure to properly incorporate tool results into final answers</li>
+</ul>
+<h3 id="extension-ideas">Extension Ideas</h3>
+<ol>
+<li>
+<p><strong>Tool Chain Execution</strong></p>
+</li>
+<li>
+<p>Allow the agent to use multiple tools in sequence</p>
+</li>
+<li>
+<p>Implement a framework for passing outputs between tools</p>
+</li>
+<li>
+<p><strong>Dynamic Tool Discovery</strong></p>
+</li>
+<li>
+<p>Add the ability to register new tools at runtime</p>
+</li>
+<li>
+<p>Implement a tool recommendation system</p>
+</li>
+<li>
+<p><strong>Tool Result Validation</strong></p>
+</li>
+<li>
+<p>Add checks to validate tool outputs</p>
+</li>
+<li>
+<p>Implement fallback strategies for tool failures</p>
+</li>
+<li>
+<p><strong>Specialized Tool Prompt</strong></p>
+</li>
+<li>Create custom prompts for specific tools</li>
+<li>Optimize tool result interpretation</li>
+</ol>
+<hr />
+<h2 id="agent-evaluation">Agent Evaluation</h2>
+<h3 id="effectiveness-metrics">Effectiveness Metrics</h3>
+<ul>
+<li>Appropriate tool selection rate</li>
+<li>Tool usage success rate</li>
+<li>Answer accuracy with tools vs. without</li>
+<li>Problem-solving versatility</li>
+</ul>
+<h3 id="efficiency-metrics">Efficiency Metrics</h3>
+<ul>
+<li>Number of tool calls needed</li>
+<li>Response time (including tool execution)</li>
+<li>Token usage</li>
+<li>Success rate within turn limit</li>
+</ul>
+<h3 id="alignment-metrics">Alignment Metrics</h3>
+<ul>
+<li>Transparency about tool usage</li>
+<li>Accurate representation of tool capabilities</li>
+<li>Proper attribution of information sources</li>
+<li>Error handling quality</li>
+</ul>
+<h3 id="evaluation-exercise">Evaluation Exercise</h3>
+<p>Create a test suite of 5-10 queries specifically designed to test boundary cases in tool selection. Record when the agent:</p>
+<ol>
+<li>Uses a tool correctly when needed</li>
+<li>Correctly answers without tools when possible</li>
+<li>Uses a tool unnecessarily</li>
+<li>Fails to use a tool when one would help</li>
+</ol>
+<hr />
+<h2 id="discussion-questions">Discussion Questions</h2>
+<ol>
+<li>How does tool usage parallel how humans use external resources?</li>
+<li>What cognitive biases might affect an agent's tool selection?</li>
+<li>How might you design an agent that learns which tools are most effective for different tasks?</li>
+<li>What are the ethical considerations when using external tools (e.g., search, calculators)?</li>
+<li>How would you design a system for the agent to request new tools when needed?</li>
+<li>What are the security implications of allowing agents to use external tools?</li>
+</ol>
+<hr />
+<h2 id="next-steps">Next Steps</h2>
+<ul>
+<li>Explore how memory can help agents learn which tools work best</li>
+<li>Investigate how planning can improve multi-step tool usage</li>
+<li>Consider how multiple agents might share and coordinate tool usage</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "search.highlight", "search.suggest"], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.c8b220af.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,2580 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://John-Jepsen.github.io/labs/quantum/part2_linear_algebra/">
+      
+      
+        <link rel="prev" href="../part1_bits_vs_qubits/">
+      
+      
+        <link rel="next" href="../part3_single_qubit_operations/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.12">
+    
+    
+      
+        <title>Part 2: Linear Algebra Survival Kit - Collaborative Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.2afb09e1.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#part-2-linear-algebra-survival-kit" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Collaborative Documentation" class="md-header__button md-logo" aria-label="Collaborative Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Collaborative Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Part 2: Linear Algebra Survival Kit
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../agentic/01_reactive_agent/" class="md-tabs__link">
+          
+  
+  
+  Agentic
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../computer_vision/01_image_loading_and_manipulation/" class="md-tabs__link">
+          
+  
+  
+  Computer vision
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../ds_algo/algos/01_breadth_first_search/" class="md-tabs__link">
+          
+  
+  
+  Ds algo
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../prompt_emgineering/advanced_prompt_engineering_guide/" class="md-tabs__link">
+          
+  
+  
+  Prompt emgineering
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../part0_orientation/" class="md-tabs__link">
+          
+  
+  
+  Quantum
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Collaborative Documentation" class="md-nav__button md-logo" aria-label="Collaborative Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Collaborative Documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Agentic
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            Agentic
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agentic/01_reactive_agent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Reactive Agent: Learning Through Implementation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agentic/02_planning_agent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Planning Agent: Goal-Directed Problem Solving
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agentic/03_tool_using_agent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Tool-Using Agent: Extending Agent Capabilities
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agentic/04_memory_augmented_agent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Memory-Augmented Agent: Persistent Context Across Interactions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agentic/05_multi_agent_collaboration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Multi-Agent Collaboration: Coordinated Problem Solving
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agentic/06_self_reflective_agent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Self-Reflective Agent: Learning From Experience
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Computer vision
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Computer vision
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../computer_vision/01_image_loading_and_manipulation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Image Loading and Manipulation Lab
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../computer_vision/02_filtering_and_convolution/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Filtering and Convolution Lab
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../computer_vision/03_edge_detection/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Edge Detection Lab
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../computer_vision/04_contour_detection_and_shapes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Contour Detection and Shape Analysis Lab
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../computer_vision/05_face_detection/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Face Detection Lab
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../computer_vision/06_image_segmentation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Image Segmentation Lab
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../computer_vision/computer_vision_labs_2024-07-06/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Computer Vision Labs - Chat Session
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Ds algo
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Ds algo
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Algos
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            Algos
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ds_algo/algos/01_breadth_first_search/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Breadth-First Search (BFS) Algorithm
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ds_algo/algos/02_depth_first_search/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Depth-First Search (DFS) Algorithm
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ds_algo/algos/03_binary_search/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Binary Search Algorithm
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ds_algo/algos/04_uniform_cost_search/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Uniform Cost Search (UCS) Algorithm
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ds_algo/algos/05_a_star_search/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    A* Search Algorithm
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ds_algo/algos/06_iterative_deepening_dfs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Iterative Deepening Depth-First Search (IDDFS) Algorithm
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ds_algo/algos/ds_algo_prompt/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Documentation Request Template
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Data structures
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            Data structures
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ds_algo/data_structures/01_arrays_and_lists/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Arrays and Lists: Fundamental Sequential Data Structures
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ds_algo/data_structures/02_stacks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Stacks: Last-In-First-Out (LIFO) Data Structures
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ds_algo/data_structures/03_queues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Queues: First-In-First-Out (FIFO) Data Structures
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ds_algo/data_structures/04_linked_lists/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Linked Lists: Node-Based Sequential Data Structures
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ds_algo/data_structures/05_hash_tables/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Hash Tables: Efficient Key-Value Data Structures
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ds_algo/data_structures/06_trees/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Trees: Hierarchical Data Structures
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Prompt emgineering
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Prompt emgineering
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../prompt_emgineering/advanced_prompt_engineering_guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Advanced Prompt Engineering Guide
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../prompt_emgineering/documentation_request/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Documentation Request Template
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../prompt_emgineering/guide_prompt_chaining/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Prompt Engineering Guide: Prompt Chaining
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../prompt_emgineering/guide_role_persona_prompting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Prompt Engineering Guide: Role and Persona Control
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../prompt_emgineering/guide_structured_prompting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Prompt Engineering Guide: Structured Prompting
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../prompt_emgineering/intermediate_prompt_engineering_guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Intermediate Prompt Engineering Guide
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../prompt_emgineering/prompt_engineering_guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Prompt Engineering Guide for AI Models
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../prompt_emgineering/prompt_engineering_guide_easy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Prompt Engineering Guide for AI Models
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../prompt_emgineering/prompt_engineering_prompt_chaining/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Prompt Engineering: Chained and Multi-Prompt Setup
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../prompt_emgineering/prompt_engineering_role_persona/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Prompt Engineering: Role and Persona Control
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../prompt_emgineering/prompt_engineering_structured_prompting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Prompt Engineering: Structured Prompting
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Quantum
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Quantum
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../part0_orientation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Part 0: Orientation — Road-map &amp; Dev Setup
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../part1_bits_vs_qubits/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Part 1: Bits vs Qubits — Booleans on Steroids
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Part 2: Linear Algebra Survival Kit
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Part 2: Linear Algebra Survival Kit
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#objective" class="md-nav__link">
+    <span class="md-ellipsis">
+      Objective
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#core-concepts" class="md-nav__link">
+    <span class="md-ellipsis">
+      Core Concepts
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Core Concepts">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vectors-matrices-and-quantum-states" class="md-nav__link">
+    <span class="md-ellipsis">
+      Vectors, Matrices and Quantum States
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#key-linear-algebra-operations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Key Linear Algebra Operations
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#visual-explanation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Visual Explanation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#environment-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      Environment Setup
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#starter-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      Starter Code
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#collaborative-challenge-implement-the-linear-algebra-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Collaborative Challenge: Implement the Linear Algebra Functions
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#team-roles-for-this-exercise" class="md-nav__link">
+    <span class="md-ellipsis">
+      Team Roles for this Exercise
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#discussion-checkpoints" class="md-nav__link">
+    <span class="md-ellipsis">
+      Discussion Checkpoints
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Discussion Checkpoints">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#checkpoint-1-after-state-vectors" class="md-nav__link">
+    <span class="md-ellipsis">
+      Checkpoint 1: After State Vectors
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#checkpoint-2-after-gate-operations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Checkpoint 2: After Gate Operations
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#checkpoint-3-after-measurement" class="md-nav__link">
+    <span class="md-ellipsis">
+      Checkpoint 3: After Measurement
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#debugging-walkthrough" class="md-nav__link">
+    <span class="md-ellipsis">
+      Debugging Walkthrough
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#extension-challenge-quantum-circuits-with-linear-algebra" class="md-nav__link">
+    <span class="md-ellipsis">
+      Extension Challenge: Quantum Circuits with Linear Algebra
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-would-break-this" class="md-nav__link">
+    <span class="md-ellipsis">
+      What Would Break This?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#capstone-group-task" class="md-nav__link">
+    <span class="md-ellipsis">
+      Capstone Group Task
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-would-this-work-on-real-hardware" class="md-nav__link">
+    <span class="md-ellipsis">
+      How Would This Work on Real Hardware?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#next-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      Next Steps
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../part3_single_qubit_operations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Part 3: Single-Qubit Operations
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../part4_measurement_probability/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Part 4: Measurement &amp; Probability
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../part5_multi_qubit_magic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Part 5: Multi-Qubit Magic
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../part6_algorithms_primer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Part 6: Algorithms Primer
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../part7_noise_error_reality/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Part 7: Noise, Error &amp; Reality Checks
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../part8_toolchain_ecosystem/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Part 8: Toolchain &amp; Ecosystem
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../part9_ship_something/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Part 9: Ship Something
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#objective" class="md-nav__link">
+    <span class="md-ellipsis">
+      Objective
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#core-concepts" class="md-nav__link">
+    <span class="md-ellipsis">
+      Core Concepts
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Core Concepts">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vectors-matrices-and-quantum-states" class="md-nav__link">
+    <span class="md-ellipsis">
+      Vectors, Matrices and Quantum States
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#key-linear-algebra-operations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Key Linear Algebra Operations
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#visual-explanation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Visual Explanation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#environment-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      Environment Setup
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#starter-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      Starter Code
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#collaborative-challenge-implement-the-linear-algebra-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Collaborative Challenge: Implement the Linear Algebra Functions
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#team-roles-for-this-exercise" class="md-nav__link">
+    <span class="md-ellipsis">
+      Team Roles for this Exercise
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#discussion-checkpoints" class="md-nav__link">
+    <span class="md-ellipsis">
+      Discussion Checkpoints
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Discussion Checkpoints">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#checkpoint-1-after-state-vectors" class="md-nav__link">
+    <span class="md-ellipsis">
+      Checkpoint 1: After State Vectors
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#checkpoint-2-after-gate-operations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Checkpoint 2: After Gate Operations
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#checkpoint-3-after-measurement" class="md-nav__link">
+    <span class="md-ellipsis">
+      Checkpoint 3: After Measurement
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#debugging-walkthrough" class="md-nav__link">
+    <span class="md-ellipsis">
+      Debugging Walkthrough
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#extension-challenge-quantum-circuits-with-linear-algebra" class="md-nav__link">
+    <span class="md-ellipsis">
+      Extension Challenge: Quantum Circuits with Linear Algebra
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-would-break-this" class="md-nav__link">
+    <span class="md-ellipsis">
+      What Would Break This?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#capstone-group-task" class="md-nav__link">
+    <span class="md-ellipsis">
+      Capstone Group Task
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-would-this-work-on-real-hardware" class="md-nav__link">
+    <span class="md-ellipsis">
+      How Would This Work on Real Hardware?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#next-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      Next Steps
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="part-2-linear-algebra-survival-kit">Part 2: Linear Algebra Survival Kit</h1>
+<h2 id="objective">Objective</h2>
+<p>Master the essential linear algebra operations that form the mathematical foundation of quantum computing. By the end of this session, your team will be able to represent quantum states as vectors, understand how quantum operations work as matrices, and apply these concepts to predict the behavior of simple quantum systems.</p>
+<hr />
+<h2 id="core-concepts">Core Concepts</h2>
+<h3 id="vectors-matrices-and-quantum-states">Vectors, Matrices and Quantum States</h3>
+<p>In quantum computing, we represent:</p>
+<ul>
+<li><strong>Quantum states</strong> as vectors (using ket notation |ψ⟩)</li>
+<li><strong>Quantum operations</strong> as matrices (unitary matrices)</li>
+<li><strong>Measurements</strong> as projections of vectors</li>
+</ul>
+<h3 id="key-linear-algebra-operations">Key Linear Algebra Operations</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Operation</th>
+<th style="text-align: left;">Mathematical Form</th>
+<th style="text-align: left;">Quantum Computing Application</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Vector addition</td>
+<td style="text-align: left;">v⃗ + w⃗</td>
+<td style="text-align: left;">Superposition of states</td>
+</tr>
+<tr>
+<td style="text-align: left;">Matrix-vector multiplication</td>
+<td style="text-align: left;">Mv⃗</td>
+<td style="text-align: left;">Applying quantum gates</td>
+</tr>
+<tr>
+<td style="text-align: left;">Matrix multiplication</td>
+<td style="text-align: left;">MN</td>
+<td style="text-align: left;">Combining quantum operations</td>
+</tr>
+<tr>
+<td style="text-align: left;">Inner product</td>
+<td style="text-align: left;">⟨v⃗,w⃗⟩</td>
+<td style="text-align: left;">Calculating measurement probabilities</td>
+</tr>
+<tr>
+<td style="text-align: left;">Tensor product</td>
+<td style="text-align: left;">v⃗ ⊗ w⃗</td>
+<td style="text-align: left;">Combining quantum systems</td>
+</tr>
+</tbody>
+</table>
+<h2 id="visual-explanation">Visual Explanation</h2>
+<p><img alt="Quantum Linear Algebra" src="https://placeholder-for-your-diagram.png" /></p>
+<p>Quantum states live in a complex vector space called Hilbert space. A qubit's state can be visualized as a point on the Bloch sphere, with quantum operations rotating this point.</p>
+<hr />
+<h2 id="environment-setup">Environment Setup</h2>
+<p>Ensure you have the necessary packages installed:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Command to run</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>pip install numpy scipy matplotlib</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="starter-code">Starter Code</h2>
+<p>Create a new Python file called <code>quantum_linear_algebra.py</code> with the following structure:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># TEAM MEMBERS: [List names here]</span>
+<span class="c1"># DATE: [Today&#39;s date]</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">mpl_toolkits.mplot3d</span><span class="w"> </span><span class="kn">import</span> <span class="n">Axes3D</span>
+
+<span class="c1"># Quantum states in computational basis</span>
+<span class="c1"># |0⟩ and |1⟩ as column vectors</span>
+<span class="n">ket_0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span>
+<span class="n">ket_1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span>
+
+<span class="c1"># Common quantum gates as matrices</span>
+<span class="n">I</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span>  <span class="c1"># Identity</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span>  <span class="c1"># Pauli-X (NOT)</span>
+<span class="n">Z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span>  <span class="c1"># Pauli-Z</span>
+<span class="n">H</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span>  <span class="c1"># Hadamard</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">print_state</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;State&quot;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Pretty print a quantum state vector&quot;&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">label</span><span class="si">}</span><span class="s2">:&quot;</span><span class="p">)</span>
+    <span class="c1"># Complex numbers are displayed as (real, imag)</span>
+    <span class="c1"># YOUR CODE HERE: Format and display the state vector</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">apply_gate</span><span class="p">(</span><span class="n">gate</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Apply a quantum gate to a state vector&quot;&quot;&quot;</span>
+    <span class="c1"># YOUR CODE HERE: Implement matrix-vector multiplication</span>
+    <span class="k">pass</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">vector_inner_product</span><span class="p">(</span><span class="n">state1</span><span class="p">,</span> <span class="n">state2</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate the inner product between two state vectors&quot;&quot;&quot;</span>
+    <span class="c1"># YOUR CODE HERE: Implement inner product</span>
+    <span class="c1"># Hint: For complex vectors, we need the complex conjugate</span>
+    <span class="k">pass</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">state_to_bloch</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert a qubit state vector to Bloch sphere coordinates&quot;&quot;&quot;</span>
+    <span class="c1"># A pure state |ψ⟩ = a|0⟩ + b|1⟩ maps to:</span>
+    <span class="c1"># x = 2*Re(a*b*)</span>
+    <span class="c1"># y = 2*Im(a*b*)</span>
+    <span class="c1"># z = |a|^2 - |b|^2</span>
+
+    <span class="c1"># YOUR CODE HERE: Calculate Bloch coordinates</span>
+    <span class="k">pass</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_bloch_vector</span><span class="p">(</span><span class="n">bloch_coords</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Bloch Sphere Representation&quot;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Plot a state on the Bloch sphere&quot;&quot;&quot;</span>
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="s1">&#39;3d&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Draw the Bloch sphere</span>
+    <span class="n">u</span><span class="p">,</span> <span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mgrid</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">:</span><span class="mi">20</span><span class="n">j</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">:</span><span class="mi">10</span><span class="n">j</span><span class="p">]</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
+    <span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot_wireframe</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+
+    <span class="c1"># Draw the axes</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;k-&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># x-axis</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;k-&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># y-axis</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;k-&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># z-axis</span>
+
+    <span class="c1"># Add basis states</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;$|0\rangle$&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.1</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;$|1\rangle$&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Plot the input Bloch vector</span>
+    <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="n">bloch_coords</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="n">x</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">y</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">z</span><span class="p">],</span> <span class="s1">&#39;r-&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">x</span><span class="p">],</span> <span class="p">[</span><span class="n">y</span><span class="p">],</span> <span class="p">[</span><span class="n">z</span><span class="p">],</span> <span class="s1">&#39;ro&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+
+    <span class="c1"># Set labels and title</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;X&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Y&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_zlabel</span><span class="p">(</span><span class="s1">&#39;Z&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+
+    <span class="c1"># Set the limits</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">([</span><span class="o">-</span><span class="mf">1.2</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">])</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="o">-</span><span class="mf">1.2</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">])</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_zlim</span><span class="p">([</span><span class="o">-</span><span class="mf">1.2</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">])</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">fig</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">measure_probability</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate the measurement probabilities for a quantum state&quot;&quot;&quot;</span>
+    <span class="c1"># YOUR CODE HERE: Calculate probability of measuring |0⟩ and |1⟩</span>
+    <span class="k">pass</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">tensor_product_demo</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Demonstrate tensor product to combine quantum systems&quot;&quot;&quot;</span>
+    <span class="c1"># YOUR CODE HERE: Implement and explain tensor products</span>
+    <span class="k">pass</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;QUANTUM STATE VECTORS&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;====================&quot;</span><span class="p">)</span>
+    <span class="n">print_state</span><span class="p">(</span><span class="n">ket_0</span><span class="p">,</span> <span class="s2">&quot;Basis state |0⟩&quot;</span><span class="p">)</span>
+    <span class="n">print_state</span><span class="p">(</span><span class="n">ket_1</span><span class="p">,</span> <span class="s2">&quot;Basis state |1⟩&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Create a superposition state</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">CREATING SUPERPOSITION&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=====================&quot;</span><span class="p">)</span>
+
+    <span class="c1"># YOUR CODE HERE: Create and print a superposition state</span>
+    <span class="c1"># Hint: apply_gate(H, ket_0) creates |+⟩ state</span>
+
+    <span class="c1"># Team Exercise: Create and visualize different states</span>
+    <span class="c1"># 1. Create the |+⟩ state</span>
+    <span class="c1"># YOUR CODE HERE</span>
+
+    <span class="c1"># 2. Create the |-⟩ state</span>
+    <span class="c1"># YOUR CODE HERE</span>
+
+    <span class="c1"># 3. Create the |i⟩ state (hint: involves complex numbers)</span>
+    <span class="c1"># YOUR CODE HERE</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">QUANTUM GATE OPERATIONS&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;======================&quot;</span><span class="p">)</span>
+
+    <span class="c1"># YOUR CODE HERE: Apply different gates and observe results</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">MEASUREMENT PROBABILITIES&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;========================&quot;</span><span class="p">)</span>
+
+    <span class="c1"># YOUR CODE HERE: Calculate measurement probabilities</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">COMBINING QUANTUM SYSTEMS&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;========================&quot;</span><span class="p">)</span>
+    <span class="n">tensor_product_demo</span><span class="p">()</span>
+
+    <span class="c1"># TEAM DISCUSSION POINT:</span>
+    <span class="c1"># How does quantum state representation differ from classical state?</span>
+    <span class="c1"># YOUR DISCUSSION NOTES HERE</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</code></pre></div>
+<h2 id="collaborative-challenge-implement-the-linear-algebra-functions">Collaborative Challenge: Implement the Linear Algebra Functions</h2>
+<p>Working together as a team, your challenge is to:</p>
+<ol>
+<li>Implement all functions marked with <code># YOUR CODE HERE</code></li>
+<li>Create and visualize various quantum states on the Bloch sphere</li>
+<li>Verify your understanding by calculating expected probabilities</li>
+</ol>
+<h2 id="team-roles-for-this-exercise">Team Roles for this Exercise</h2>
+<p>For this lab, consider the following role assignments:</p>
+<ol>
+<li><strong>Matrix Operations Developer</strong>: Implements core matrix functions</li>
+<li><strong>Visualization Specialist</strong>: Focuses on Bloch sphere visualization</li>
+<li><strong>Verification Analyst</strong>: Tests functions with known examples</li>
+<li><strong>Documentation Lead</strong>: Explains the mathematics in comments</li>
+<li><strong>Extension Developer</strong>: Works on additional features or optimizations</li>
+</ol>
+<h2 id="discussion-checkpoints">Discussion Checkpoints</h2>
+<h3 id="checkpoint-1-after-state-vectors">Checkpoint 1: After State Vectors</h3>
+<ul>
+<li>How do quantum state vectors differ from classical states?</li>
+<li>What is the significance of complex numbers in quantum computing?</li>
+</ul>
+<h3 id="checkpoint-2-after-gate-operations">Checkpoint 2: After Gate Operations</h3>
+<ul>
+<li>Why must quantum gates be unitary matrices?</li>
+<li>How does the Hadamard gate create superposition?</li>
+</ul>
+<h3 id="checkpoint-3-after-measurement">Checkpoint 3: After Measurement</h3>
+<ul>
+<li>How do we calculate the probability of measuring a specific outcome?</li>
+<li>Why is quantum measurement probabilistic rather than deterministic?</li>
+</ul>
+<h2 id="debugging-walkthrough">Debugging Walkthrough</h2>
+<p>Common issues and their solutions:</p>
+<ol>
+<li>
+<p><strong>Problem</strong>: Matrices or vectors have incorrect dimensions
+   <strong>Solution</strong>: Double-check that you're using column vectors (shape n×1) not row vectors</p>
+</li>
+<li>
+<p><strong>Problem</strong>: Getting complex numbers when expecting real results
+   <strong>Solution</strong>: For some values like probabilities, you may need to take the absolute square: <code>np.abs(value)**2</code></p>
+</li>
+<li>
+<p><strong>Problem</strong>: Bloch sphere visualization appears distorted
+   <strong>Solution</strong>: Ensure your state vector is normalized, and Bloch coordinates are calculated correctly</p>
+</li>
+</ol>
+<h2 id="extension-challenge-quantum-circuits-with-linear-algebra">Extension Challenge: Quantum Circuits with Linear Algebra</h2>
+<p>Implement a simple quantum circuit simulator using only linear algebra operations:</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">simulate_circuit</span><span class="p">(</span><span class="n">gates</span><span class="p">,</span> <span class="n">initial_state</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Simulate a quantum circuit using linear algebra</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        gates: List of tuples (gate, qubit_indices) for multi-qubit systems</span>
+<span class="sd">        initial_state: Starting state vector, defaults to |0...0⟩</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Final state vector after applying all gates</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># YOUR CODE HERE</span>
+    <span class="k">pass</span>
+</code></pre></div>
+<h2 id="what-would-break-this">What Would Break This?</h2>
+<p>Discuss with your team:</p>
+<ol>
+<li>What happens if your quantum state vector is not normalized?</li>
+<li>Is every 2×2 matrix a valid quantum operation? Why or why not?</li>
+<li>How would errors in matrix multiplication affect quantum simulations?</li>
+</ol>
+<h2 id="capstone-group-task">Capstone Group Task</h2>
+<p>Develop a quantum "memory" game that challenges players to:</p>
+<ol>
+<li>Observe a quantum state's Bloch sphere representation</li>
+<li>Identify which quantum gates (H, X, Z) were applied to the |0⟩ state</li>
+<li>Calculate the correct measurement probabilities</li>
+</ol>
+<p>Each team member should contribute a different puzzle for others to solve.</p>
+<h2 id="how-would-this-work-on-real-hardware">How Would This Work on Real Hardware?</h2>
+<p>In real quantum computers:</p>
+<ol>
+<li>How does the mathematical formalism of state vectors map to physical qubits?</li>
+<li>How do sources of noise and decoherence affect the linear algebra description?</li>
+<li>Why can't we directly measure the quantum state vector of a physical qubit?</li>
+</ol>
+<h2 id="next-steps">Next Steps</h2>
+<p>In the next session, we'll explore single-qubit operations in more detail, focusing on implementing and visualizing various quantum gates.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "search.highlight", "search.suggest"], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.c8b220af.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,2874 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://John-Jepsen.github.io/labs/computer_vision/05_face_detection/">
+      
+      
+        <link rel="prev" href="../04_contour_detection_and_shapes/">
+      
+      
+        <link rel="next" href="../06_image_segmentation/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.12">
+    
+    
+      
+        <title>Face Detection Lab - Collaborative Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.2afb09e1.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#face-detection-lab" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Collaborative Documentation" class="md-header__button md-logo" aria-label="Collaborative Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Collaborative Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Face Detection Lab
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../agentic/01_reactive_agent/" class="md-tabs__link">
+          
+  
+  
+  Agentic
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../01_image_loading_and_manipulation/" class="md-tabs__link">
+          
+  
+  
+  Computer vision
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../ds_algo/algos/01_breadth_first_search/" class="md-tabs__link">
+          
+  
+  
+  Ds algo
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../prompt_emgineering/advanced_prompt_engineering_guide/" class="md-tabs__link">
+          
+  
+  
+  Prompt emgineering
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../quantum/part0_orientation/" class="md-tabs__link">
+          
+  
+  
+  Quantum
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Collaborative Documentation" class="md-nav__button md-logo" aria-label="Collaborative Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Collaborative Documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Agentic
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            Agentic
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agentic/01_reactive_agent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Reactive Agent: Learning Through Implementation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agentic/02_planning_agent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Planning Agent: Goal-Directed Problem Solving
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agentic/03_tool_using_agent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Tool-Using Agent: Extending Agent Capabilities
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agentic/04_memory_augmented_agent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Memory-Augmented Agent: Persistent Context Across Interactions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agentic/05_multi_agent_collaboration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Multi-Agent Collaboration: Coordinated Problem Solving
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agentic/06_self_reflective_agent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Self-Reflective Agent: Learning From Experience
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Computer vision
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Computer vision
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_image_loading_and_manipulation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Image Loading and Manipulation Lab
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_filtering_and_convolution/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Filtering and Convolution Lab
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_edge_detection/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Edge Detection Lab
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_contour_detection_and_shapes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Contour Detection and Shape Analysis Lab
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Face Detection Lab
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Face Detection Lab
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#objective" class="md-nav__link">
+    <span class="md-ellipsis">
+      Objective
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#environment-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      Environment Setup
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Environment Setup">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#installation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Installation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#verification" class="md-nav__link">
+    <span class="md-ellipsis">
+      Verification
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#key-concepts" class="md-nav__link">
+    <span class="md-ellipsis">
+      Key Concepts
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Key Concepts">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-is-face-detection" class="md-nav__link">
+    <span class="md-ellipsis">
+      What is Face Detection?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#main-approaches" class="md-nav__link">
+    <span class="md-ellipsis">
+      Main Approaches
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#applications" class="md-nav__link">
+    <span class="md-ellipsis">
+      Applications
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#starter-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      Starter Code
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#group-implementation-tasks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Group Implementation Tasks
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Group Implementation Tasks">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#task-1-complete-the-missing-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Task 1: Complete the Missing Functions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#task-2-face-detection-experiments" class="md-nav__link">
+    <span class="md-ellipsis">
+      Task 2: Face Detection Experiments
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#task-3-false-positive-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      Task 3: False Positive Analysis
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#peer-review-questions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Peer Review Questions
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting-guide" class="md-nav__link">
+    <span class="md-ellipsis">
+      Troubleshooting Guide
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Troubleshooting Guide">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#common-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      Common Issues
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#debugging-tools" class="md-nav__link">
+    <span class="md-ellipsis">
+      Debugging Tools
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mini-project-face-detection-application" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mini-Project: Face Detection Application
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Mini-Project: Face Detection Application">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#extension-ideas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Extension Ideas
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reflection-questions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reflection Questions
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06_image_segmentation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Image Segmentation Lab
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../computer_vision_labs_2024-07-06/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Computer Vision Labs - Chat Session
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Ds algo
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Ds algo
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Algos
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            Algos
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ds_algo/algos/01_breadth_first_search/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Breadth-First Search (BFS) Algorithm
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ds_algo/algos/02_depth_first_search/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Depth-First Search (DFS) Algorithm
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ds_algo/algos/03_binary_search/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Binary Search Algorithm
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ds_algo/algos/04_uniform_cost_search/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Uniform Cost Search (UCS) Algorithm
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ds_algo/algos/05_a_star_search/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    A* Search Algorithm
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ds_algo/algos/06_iterative_deepening_dfs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Iterative Deepening Depth-First Search (IDDFS) Algorithm
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ds_algo/algos/ds_algo_prompt/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Documentation Request Template
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Data structures
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            Data structures
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ds_algo/data_structures/01_arrays_and_lists/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Arrays and Lists: Fundamental Sequential Data Structures
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ds_algo/data_structures/02_stacks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Stacks: Last-In-First-Out (LIFO) Data Structures
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ds_algo/data_structures/03_queues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Queues: First-In-First-Out (FIFO) Data Structures
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ds_algo/data_structures/04_linked_lists/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Linked Lists: Node-Based Sequential Data Structures
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ds_algo/data_structures/05_hash_tables/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Hash Tables: Efficient Key-Value Data Structures
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ds_algo/data_structures/06_trees/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Trees: Hierarchical Data Structures
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Prompt emgineering
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Prompt emgineering
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../prompt_emgineering/advanced_prompt_engineering_guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Advanced Prompt Engineering Guide
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../prompt_emgineering/documentation_request/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Documentation Request Template
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../prompt_emgineering/guide_prompt_chaining/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Prompt Engineering Guide: Prompt Chaining
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../prompt_emgineering/guide_role_persona_prompting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Prompt Engineering Guide: Role and Persona Control
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../prompt_emgineering/guide_structured_prompting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Prompt Engineering Guide: Structured Prompting
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../prompt_emgineering/intermediate_prompt_engineering_guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Intermediate Prompt Engineering Guide
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../prompt_emgineering/prompt_engineering_guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Prompt Engineering Guide for AI Models
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../prompt_emgineering/prompt_engineering_guide_easy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Prompt Engineering Guide for AI Models
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../prompt_emgineering/prompt_engineering_prompt_chaining/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Prompt Engineering: Chained and Multi-Prompt Setup
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../prompt_emgineering/prompt_engineering_role_persona/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Prompt Engineering: Role and Persona Control
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../prompt_emgineering/prompt_engineering_structured_prompting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Prompt Engineering: Structured Prompting
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Quantum
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Quantum
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../quantum/part0_orientation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Part 0: Orientation — Road-map &amp; Dev Setup
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../quantum/part1_bits_vs_qubits/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Part 1: Bits vs Qubits — Booleans on Steroids
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../quantum/part2_linear_algebra/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Part 2: Linear Algebra Survival Kit
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../quantum/part3_single_qubit_operations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Part 3: Single-Qubit Operations
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../quantum/part4_measurement_probability/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Part 4: Measurement &amp; Probability
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../quantum/part5_multi_qubit_magic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Part 5: Multi-Qubit Magic
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../quantum/part6_algorithms_primer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Part 6: Algorithms Primer
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../quantum/part7_noise_error_reality/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Part 7: Noise, Error &amp; Reality Checks
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../quantum/part8_toolchain_ecosystem/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Part 8: Toolchain &amp; Ecosystem
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../quantum/part9_ship_something/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Part 9: Ship Something
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#objective" class="md-nav__link">
+    <span class="md-ellipsis">
+      Objective
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#environment-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      Environment Setup
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Environment Setup">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#installation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Installation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#verification" class="md-nav__link">
+    <span class="md-ellipsis">
+      Verification
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#key-concepts" class="md-nav__link">
+    <span class="md-ellipsis">
+      Key Concepts
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Key Concepts">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-is-face-detection" class="md-nav__link">
+    <span class="md-ellipsis">
+      What is Face Detection?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#main-approaches" class="md-nav__link">
+    <span class="md-ellipsis">
+      Main Approaches
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#applications" class="md-nav__link">
+    <span class="md-ellipsis">
+      Applications
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#starter-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      Starter Code
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#group-implementation-tasks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Group Implementation Tasks
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Group Implementation Tasks">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#task-1-complete-the-missing-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Task 1: Complete the Missing Functions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#task-2-face-detection-experiments" class="md-nav__link">
+    <span class="md-ellipsis">
+      Task 2: Face Detection Experiments
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#task-3-false-positive-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      Task 3: False Positive Analysis
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#peer-review-questions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Peer Review Questions
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting-guide" class="md-nav__link">
+    <span class="md-ellipsis">
+      Troubleshooting Guide
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Troubleshooting Guide">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#common-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      Common Issues
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#debugging-tools" class="md-nav__link">
+    <span class="md-ellipsis">
+      Debugging Tools
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mini-project-face-detection-application" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mini-Project: Face Detection Application
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Mini-Project: Face Detection Application">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#extension-ideas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Extension Ideas
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reflection-questions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reflection Questions
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="face-detection-lab">Face Detection Lab</h1>
+<h2 id="objective">Objective</h2>
+<p>Learn to detect and analyze human faces in images using both traditional computer vision techniques and deep learning approaches. This lab explores the foundations of face detection, its applications, and limitations.</p>
+<hr />
+<h2 id="environment-setup">Environment Setup</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Dependency</th>
+<th style="text-align: left;">Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Python 3.10+</td>
+<td style="text-align: left;">Programming language</td>
+</tr>
+<tr>
+<td style="text-align: left;">OpenCV</td>
+<td style="text-align: left;">Image processing and computer vision library</td>
+</tr>
+<tr>
+<td style="text-align: left;">NumPy</td>
+<td style="text-align: left;">Numerical operations for arrays</td>
+</tr>
+<tr>
+<td style="text-align: left;">Matplotlib</td>
+<td style="text-align: left;">Visualization of images</td>
+</tr>
+<tr>
+<td style="text-align: left;">dlib (optional)</td>
+<td style="text-align: left;">Additional face detection and facial landmark detection</td>
+</tr>
+</tbody>
+</table>
+<h3 id="installation">Installation</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Create virtual environment (optional)</span>
+python<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>cv_env
+<span class="nb">source</span><span class="w"> </span>cv_env/bin/activate<span class="w">  </span><span class="c1"># On Windows: cv_env\Scripts\activate</span>
+
+<span class="c1"># Install required packages</span>
+pip<span class="w"> </span>install<span class="w"> </span>opencv-python<span class="w"> </span>numpy<span class="w"> </span>matplotlib
+
+<span class="c1"># Optional: Install dlib (may require additional system dependencies)</span>
+<span class="c1"># pip install dlib</span>
+</code></pre></div>
+<h3 id="verification">Verification</h3>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">cv2</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="c1"># Verify versions</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;OpenCV version: </span><span class="si">{</span><span class="n">cv2</span><span class="o">.</span><span class="n">__version__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;NumPy version: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">__version__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div>
+<hr />
+<h2 id="key-concepts">Key Concepts</h2>
+<h3 id="what-is-face-detection">What is Face Detection?</h3>
+<p>Face detection is the computer vision technology that locates and identifies human faces in digital images. It's a specific case of object detection that focuses on finding instances of human faces, regardless of position, scale, orientation, pose, or lighting.</p>
+<p><img alt="Face Detection Example" src="https://example.com/placeholder" /></p>
+<h3 id="main-approaches">Main Approaches</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Method</th>
+<th style="text-align: left;">Description</th>
+<th style="text-align: left;">Strengths</th>
+<th style="text-align: left;">Weaknesses</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Haar Cascades</td>
+<td style="text-align: left;">Uses Haar-like features and cascade classifiers</td>
+<td style="text-align: left;">Fast, low resource usage</td>
+<td style="text-align: left;">Less accurate with varied poses, occlusions</td>
+</tr>
+<tr>
+<td style="text-align: left;">HOG + SVM</td>
+<td style="text-align: left;">Histogram of Oriented Gradients with Support Vector Machines</td>
+<td style="text-align: left;">Better with varied poses</td>
+<td style="text-align: left;">More computationally intensive than Haar</td>
+</tr>
+<tr>
+<td style="text-align: left;">Deep Learning</td>
+<td style="text-align: left;">CNN-based detectors like MTCNN, SSD, YOLO</td>
+<td style="text-align: left;">Most accurate, handles varied conditions</td>
+<td style="text-align: left;">Higher computational requirements</td>
+</tr>
+</tbody>
+</table>
+<h3 id="applications">Applications</h3>
+<ul>
+<li>Security and surveillance systems</li>
+<li>Photography (auto-focus, exposure)</li>
+<li>Biometric authentication</li>
+<li>Emotion analysis</li>
+<li>Demographic studies</li>
+<li>Social media filters and effects</li>
+</ul>
+<hr />
+<h2 id="starter-code">Starter Code</h2>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">cv2</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">load_image</span><span class="p">(</span><span class="n">image_path</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Load an image and convert to RGB for display.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        image_path (str): Path to the image file</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        tuple: (bgr_image, rgb_image)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Load the image</span>
+    <span class="n">img</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">image_path</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">img</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Could not load image from </span><span class="si">{</span><span class="n">image_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Convert to RGB for matplotlib display</span>
+    <span class="n">img_rgb</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_BGR2RGB</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">img</span><span class="p">,</span> <span class="n">img_rgb</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">display_images</span><span class="p">(</span><span class="n">images</span><span class="p">,</span> <span class="n">titles</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="n">rows</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Display multiple images in a grid.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        images (list): List of images to display</span>
+<span class="sd">        titles (list): List of titles for each image</span>
+<span class="sd">        figsize (tuple): Figure size</span>
+<span class="sd">        rows (int): Number of rows in the grid</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">images</span><span class="p">)</span>
+    <span class="n">cols</span> <span class="o">=</span> <span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="n">rows</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">//</span> <span class="n">rows</span>  <span class="c1"># Ceiling division</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">rows</span><span class="p">,</span> <span class="n">cols</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="n">figsize</span><span class="p">)</span>
+
+    <span class="c1"># Make axes a 2D array if it isn&#39;t already</span>
+    <span class="k">if</span> <span class="n">rows</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">cols</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">axes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">axes</span><span class="p">]])</span>
+    <span class="k">elif</span> <span class="n">rows</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">axes</span> <span class="o">=</span> <span class="n">axes</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">cols</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">axes</span> <span class="o">=</span> <span class="n">axes</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="c1"># Flatten both arrays for easy iteration</span>
+    <span class="n">axes_flat</span> <span class="o">=</span> <span class="n">axes</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">title</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">images</span><span class="p">,</span> <span class="n">titles</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">axes_flat</span><span class="p">):</span>
+            <span class="n">axes_flat</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+            <span class="n">axes_flat</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+            <span class="n">axes_flat</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Hide unused subplots</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">axes_flat</span><span class="p">)):</span>
+        <span class="n">axes_flat</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">load_haar_cascade</span><span class="p">(</span><span class="n">cascade_type</span><span class="o">=</span><span class="s1">&#39;face&#39;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Load a Haar cascade classifier.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        cascade_type (str): Type of cascade to load (&#39;face&#39;, &#39;eyes&#39;, &#39;smile&#39;, etc.)</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        cv2.CascadeClassifier: Loaded cascade classifier</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># TODO: Implement loading different Haar cascade files</span>
+    <span class="c1"># Use cv2.data.haarcascades directory to locate the XML files</span>
+
+    <span class="k">return</span> <span class="n">cascade_classifier</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">detect_faces_haar</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">scale_factor</span><span class="o">=</span><span class="mf">1.1</span><span class="p">,</span> <span class="n">min_neighbors</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">min_size</span><span class="o">=</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="mi">30</span><span class="p">)):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Detect faces using Haar cascade classifier.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        image (np.ndarray): Input image (grayscale or BGR)</span>
+<span class="sd">        scale_factor (float): Scale factor for the detection algorithm</span>
+<span class="sd">        min_neighbors (int): Minimum neighbors for detection</span>
+<span class="sd">        min_size (tuple): Minimum size of detected faces</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        tuple: (image with detections drawn, list of face rectangles)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># TODO: Implement face detection using Haar cascades</span>
+    <span class="c1"># 1. Convert to grayscale if needed</span>
+    <span class="c1"># 2. Apply face detection</span>
+    <span class="c1"># 3. Draw rectangles around detected faces</span>
+
+    <span class="k">return</span> <span class="n">image_with_faces</span><span class="p">,</span> <span class="n">faces</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">detect_faces_dnn</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">confidence_threshold</span><span class="o">=</span><span class="mf">0.5</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Detect faces using a pre-trained deep neural network.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        image (np.ndarray): Input image in BGR format</span>
+<span class="sd">        confidence_threshold (float): Minimum confidence for detections</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        tuple: (image with detections drawn, list of face rectangles with confidences)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># TODO: Implement face detection using OpenCV&#39;s DNN module</span>
+    <span class="c1"># 1. Load the pre-trained model</span>
+    <span class="c1"># 2. Prepare the image (create blob)</span>
+    <span class="c1"># 3. Run inference</span>
+    <span class="c1"># 4. Process detections</span>
+
+    <span class="k">return</span> <span class="n">image_with_faces</span><span class="p">,</span> <span class="n">faces</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">compare_detection_methods</span><span class="p">(</span><span class="n">image</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Compare different face detection methods side by side.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        image (np.ndarray): Input image in BGR format</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># TODO: Apply different face detection methods and display results</span>
+
+    <span class="k">pass</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">detect_facial_features</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">face_rect</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Detect facial features (eyes, nose, mouth) within a detected face.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        image (np.ndarray): Input image</span>
+<span class="sd">        face_rect (tuple): Face rectangle (x, y, w, h)</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        dict: Dictionary of detected facial features</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># TODO: Implement facial feature detection</span>
+    <span class="c1"># Use appropriate Haar cascades for eyes, nose, mouth</span>
+
+    <span class="k">return</span> <span class="n">facial_features</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">analyze_faces</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">faces</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Analyze detected faces for additional information.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        image (np.ndarray): Input image</span>
+<span class="sd">        faces (list): List of face rectangles</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        list: List of face analyses (position, size, etc.)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># TODO: Implement basic face analysis</span>
+    <span class="c1"># Calculate position, size, relative position to image</span>
+
+    <span class="k">return</span> <span class="n">face_analyses</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">draw_detections</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">detections</span><span class="p">,</span> <span class="n">detection_type</span><span class="o">=</span><span class="s1">&#39;face&#39;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Draw detection results on an image.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        image (np.ndarray): Input image</span>
+<span class="sd">        detections (list): List of detections (rectangles, landmarks, etc.)</span>
+<span class="sd">        detection_type (str): Type of detection (&#39;face&#39;, &#39;features&#39;, etc.)</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        np.ndarray: Image with detections drawn</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># TODO: Implement visualization for different detection types</span>
+
+    <span class="k">return</span> <span class="n">annotated_image</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">get_model_files</span><span class="p">(</span><span class="n">model_type</span><span class="o">=</span><span class="s1">&#39;dnn_face&#39;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get the model files for the specified model type.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        model_type (str): Type of model (&#39;dnn_face&#39;, &#39;dlib_landmarks&#39;, etc.)</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        dict: Dictionary with model file paths</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Define model directories and filenames</span>
+    <span class="n">models_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;models&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Ensure models directory exists</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">models_dir</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># Define model paths for different model types</span>
+    <span class="n">model_paths</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;dnn_face&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;proto&#39;</span><span class="p">:</span> <span class="n">models_dir</span> <span class="o">/</span> <span class="s2">&quot;deploy.prototxt&quot;</span><span class="p">,</span>
+            <span class="s1">&#39;model&#39;</span><span class="p">:</span> <span class="n">models_dir</span> <span class="o">/</span> <span class="s2">&quot;res10_300x300_ssd_iter_140000.caffemodel&quot;</span><span class="p">,</span>
+            <span class="s1">&#39;urls&#39;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s1">&#39;proto&#39;</span><span class="p">:</span> <span class="s2">&quot;https://raw.githubusercontent.com/opencv/opencv/master/samples/dnn/face_detector/deploy.prototxt&quot;</span><span class="p">,</span>
+                <span class="s1">&#39;model&#39;</span><span class="p">:</span> <span class="s2">&quot;https://raw.githubusercontent.com/opencv/opencv_3rdparty/dnn_samples_face_detector_20170830/res10_300x300_ssd_iter_140000.caffemodel&quot;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="c1"># Check if model files exist, if not, provide instructions to download</span>
+    <span class="n">model_info</span> <span class="o">=</span> <span class="n">model_paths</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">model_type</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">model_info</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">model_info</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">key</span> <span class="o">!=</span> <span class="s1">&#39;urls&#39;</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Missing </span><span class="si">{</span><span class="n">model_type</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2"> file at </span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Download from: </span><span class="si">{</span><span class="n">model_info</span><span class="p">[</span><span class="s1">&#39;urls&#39;</span><span class="p">][</span><span class="n">key</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Or use: curl -o </span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">model_info</span><span class="p">[</span><span class="s1">&#39;urls&#39;</span><span class="p">][</span><span class="n">key</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">model_info</span>
+
+<span class="c1"># Main execution</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="c1"># Sample image path - replace with your own</span>
+    <span class="n">image_path</span> <span class="o">=</span> <span class="s2">&quot;sample_faces.jpg&quot;</span>
+
+    <span class="c1"># Load image</span>
+    <span class="n">img_bgr</span><span class="p">,</span> <span class="n">img_rgb</span> <span class="o">=</span> <span class="n">load_image</span><span class="p">(</span><span class="n">image_path</span><span class="p">)</span>
+
+    <span class="c1"># Display original image</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img_rgb</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Original Image&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+    <span class="c1"># Check model files</span>
+    <span class="n">get_model_files</span><span class="p">()</span>
+
+    <span class="c1"># TODO: Demonstrate face detection methods</span>
+</code></pre></div>
+<hr />
+<h2 id="group-implementation-tasks">Group Implementation Tasks</h2>
+<h3 id="task-1-complete-the-missing-functions">Task 1: Complete the Missing Functions</h3>
+<p>Working in pairs, complete each TODO section in the starter code:</p>
+<ul>
+<li>Person A: Implement Haar cascade face detection and facial feature detection</li>
+<li>Person B: Implement DNN-based face detection and comparative analysis</li>
+</ul>
+<h3 id="task-2-face-detection-experiments">Task 2: Face Detection Experiments</h3>
+<ol>
+<li>
+<p>Test face detection on a diverse set of images with:</p>
+</li>
+<li>
+<p>Multiple faces at different distances</p>
+</li>
+<li>Various poses (profile, tilted)</li>
+<li>Different lighting conditions</li>
+<li>Occlusions (glasses, masks, partial faces)</li>
+<li>
+<p>Diverse ethnicities and ages</p>
+</li>
+<li>
+<p>Create a performance matrix documenting success rates for each method:</p>
+</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Image Type</th>
+<th style="text-align: left;">Haar Cascade</th>
+<th style="text-align: left;">DNN Model</th>
+<th style="text-align: left;">Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Frontal faces</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">Profile faces</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">Group photo</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">Low light</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">With occlusions</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+</tbody>
+</table>
+<h3 id="task-3-false-positive-analysis">Task 3: False Positive Analysis</h3>
+<ol>
+<li>Run face detection on a set of images containing:</li>
+<li>No faces</li>
+<li>Face-like patterns (e.g., electrical outlets, patterns in nature)</li>
+<li>Cartoon or drawn faces</li>
+<li>Document false positives and tune parameters to reduce them</li>
+<li>Analyze what visual patterns trigger false detections</li>
+</ol>
+<hr />
+<h2 id="peer-review-questions">Peer Review Questions</h2>
+<p>After completing the implementation, review each other's code and discuss:</p>
+<ol>
+<li>
+<p><strong>Detection Method Comparison</strong>:</p>
+</li>
+<li>
+<p>Which method performed best overall?</p>
+</li>
+<li>
+<p>What were the tradeoffs between speed and accuracy?</p>
+</li>
+<li>
+<p><strong>Parameter Sensitivity</strong>:</p>
+</li>
+<li>
+<p>How did changing parameters affect detection results?</p>
+</li>
+<li>
+<p>Which parameters had the largest impact on false positives vs. false negatives?</p>
+</li>
+<li>
+<p><strong>Edge Cases</strong>:</p>
+</li>
+<li>
+<p>What types of faces were most challenging to detect?</p>
+</li>
+<li>
+<p>How well did the methods handle occlusions or unusual poses?</p>
+</li>
+<li>
+<p><strong>Computational Requirements</strong>:</p>
+</li>
+<li>
+<p>How did processing time compare between methods?</p>
+</li>
+<li>
+<p>What are the memory requirements for each approach?</p>
+</li>
+<li>
+<p><strong>Real-World Applications</strong>:</p>
+</li>
+<li>For a real-time application, which method would you choose and why?</li>
+<li>What preprocessing steps might improve detection in challenging conditions?</li>
+</ol>
+<hr />
+<h2 id="troubleshooting-guide">Troubleshooting Guide</h2>
+<h3 id="common-issues">Common Issues</h3>
+<ol>
+<li>
+<p><strong>Missing Model Files</strong></p>
+</li>
+<li>
+<p>Some deep learning models need to be downloaded separately</p>
+</li>
+<li>Follow the instructions provided by <code>get_model_files()</code> function</li>
+<li>
+<p>Check file paths and permissions</p>
+</li>
+<li>
+<p><strong>Poor Detection Results</strong></p>
+</li>
+<li>
+<p>Adjust parameters (scale_factor, min_neighbors for Haar, confidence threshold for DNN)</p>
+</li>
+<li>Try image preprocessing (histogram equalization, normalization)</li>
+<li>
+<p>Consider image resolution (too small or too large can affect results)</p>
+</li>
+<li>
+<p><strong>False Positives</strong></p>
+</li>
+<li>
+<p>Increase confidence thresholds or min_neighbors</p>
+</li>
+<li>Apply additional validation (e.g., check for facial features within detected faces)</li>
+<li>
+<p>Use multiple detection passes with different parameters and take intersections</p>
+</li>
+<li>
+<p><strong>Performance Issues</strong></p>
+</li>
+<li>Resize images before processing for faster detection</li>
+<li>Use hardware acceleration if available (GPU, OpenCL)</li>
+<li>Consider lighter models for real-time applications</li>
+</ol>
+<h3 id="debugging-tools">Debugging Tools</h3>
+<p>Create functions that:</p>
+<ol>
+<li>Visualize detection confidence scores</li>
+<li>Show step-by-step processing for DNN detection</li>
+<li>Compare detection time and accuracy across methods</li>
+</ol>
+<hr />
+<h2 id="mini-project-face-detection-application">Mini-Project: Face Detection Application</h2>
+<p>Create an application that:</p>
+<ol>
+<li>Processes images from multiple sources (files, camera, or video)</li>
+<li>Detects faces using the best method for each scenario</li>
+<li>Tracks detection statistics (confidence, size, position)</li>
+<li>Implements simple face recognition (optional, using face embeddings)</li>
+<li>Saves annotated results and provides analysis</li>
+</ol>
+<h3 id="extension-ideas">Extension Ideas</h3>
+<ul>
+<li>Add age and gender estimation</li>
+<li>Implement emotion detection from facial expressions</li>
+<li>Create a privacy tool that automatically blurs faces</li>
+<li>Build a face counting system for crowd analysis</li>
+<li>Develop a face-based UI control system (e.g., scrolling based on head position)</li>
+</ul>
+<hr />
+<h2 id="reflection-questions">Reflection Questions</h2>
+<ol>
+<li>What ethical considerations arise when implementing face detection systems?</li>
+<li>How might biases in training data affect face detection accuracy across different demographics?</li>
+<li>What advancements in deep learning have improved face detection in recent years?</li>
+<li>How do face detection systems handle challenging cases like identical twins or face-altering makeup?</li>
+<li>What privacy controls should be implemented in systems using face detection?</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "search.highlight", "search.suggest"], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.c8b220af.min.js"></script>
+      
+    
+  </body>
+</html>

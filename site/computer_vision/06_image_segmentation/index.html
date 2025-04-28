@@ -1,0 +1,2984 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://John-Jepsen.github.io/labs/computer_vision/06_image_segmentation/">
+      
+      
+        <link rel="prev" href="../05_face_detection/">
+      
+      
+        <link rel="next" href="../computer_vision_labs_2024-07-06/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.12">
+    
+    
+      
+        <title>Image Segmentation Lab - Collaborative Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.2afb09e1.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#image-segmentation-lab" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Collaborative Documentation" class="md-header__button md-logo" aria-label="Collaborative Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Collaborative Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Image Segmentation Lab
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../agentic/01_reactive_agent/" class="md-tabs__link">
+          
+  
+  
+  Agentic
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../01_image_loading_and_manipulation/" class="md-tabs__link">
+          
+  
+  
+  Computer vision
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../ds_algo/algos/01_breadth_first_search/" class="md-tabs__link">
+          
+  
+  
+  Ds algo
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../prompt_emgineering/advanced_prompt_engineering_guide/" class="md-tabs__link">
+          
+  
+  
+  Prompt emgineering
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../quantum/part0_orientation/" class="md-tabs__link">
+          
+  
+  
+  Quantum
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Collaborative Documentation" class="md-nav__button md-logo" aria-label="Collaborative Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Collaborative Documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Agentic
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            Agentic
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agentic/01_reactive_agent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Reactive Agent: Learning Through Implementation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agentic/02_planning_agent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Planning Agent: Goal-Directed Problem Solving
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agentic/03_tool_using_agent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Tool-Using Agent: Extending Agent Capabilities
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agentic/04_memory_augmented_agent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Memory-Augmented Agent: Persistent Context Across Interactions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agentic/05_multi_agent_collaboration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Multi-Agent Collaboration: Coordinated Problem Solving
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agentic/06_self_reflective_agent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Self-Reflective Agent: Learning From Experience
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Computer vision
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Computer vision
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_image_loading_and_manipulation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Image Loading and Manipulation Lab
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_filtering_and_convolution/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Filtering and Convolution Lab
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_edge_detection/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Edge Detection Lab
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_contour_detection_and_shapes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Contour Detection and Shape Analysis Lab
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05_face_detection/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Face Detection Lab
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Image Segmentation Lab
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Image Segmentation Lab
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#objective" class="md-nav__link">
+    <span class="md-ellipsis">
+      Objective
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#environment-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      Environment Setup
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Environment Setup">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#installation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Installation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#verification" class="md-nav__link">
+    <span class="md-ellipsis">
+      Verification
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#key-concepts" class="md-nav__link">
+    <span class="md-ellipsis">
+      Key Concepts
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Key Concepts">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-is-image-segmentation" class="md-nav__link">
+    <span class="md-ellipsis">
+      What is Image Segmentation?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#main-approaches" class="md-nav__link">
+    <span class="md-ellipsis">
+      Main Approaches
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#applications" class="md-nav__link">
+    <span class="md-ellipsis">
+      Applications
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#starter-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      Starter Code
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#group-implementation-tasks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Group Implementation Tasks
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Group Implementation Tasks">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#task-1-complete-the-missing-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Task 1: Complete the Missing Functions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#task-2-segmentation-comparison" class="md-nav__link">
+    <span class="md-ellipsis">
+      Task 2: Segmentation Comparison
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#task-3-parameter-experimentation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Task 3: Parameter Experimentation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#peer-review-questions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Peer Review Questions
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting-guide" class="md-nav__link">
+    <span class="md-ellipsis">
+      Troubleshooting Guide
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Troubleshooting Guide">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#common-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      Common Issues
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#debugging-tools" class="md-nav__link">
+    <span class="md-ellipsis">
+      Debugging Tools
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mini-project-interactive-segmentation-tool" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mini-Project: Interactive Segmentation Tool
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Mini-Project: Interactive Segmentation Tool">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#extension-ideas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Extension Ideas
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reflection-questions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reflection Questions
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../computer_vision_labs_2024-07-06/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Computer Vision Labs - Chat Session
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Ds algo
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Ds algo
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Algos
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            Algos
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ds_algo/algos/01_breadth_first_search/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Breadth-First Search (BFS) Algorithm
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ds_algo/algos/02_depth_first_search/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Depth-First Search (DFS) Algorithm
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ds_algo/algos/03_binary_search/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Binary Search Algorithm
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ds_algo/algos/04_uniform_cost_search/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Uniform Cost Search (UCS) Algorithm
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ds_algo/algos/05_a_star_search/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    A* Search Algorithm
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ds_algo/algos/06_iterative_deepening_dfs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Iterative Deepening Depth-First Search (IDDFS) Algorithm
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ds_algo/algos/ds_algo_prompt/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Documentation Request Template
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Data structures
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            Data structures
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ds_algo/data_structures/01_arrays_and_lists/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Arrays and Lists: Fundamental Sequential Data Structures
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ds_algo/data_structures/02_stacks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Stacks: Last-In-First-Out (LIFO) Data Structures
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ds_algo/data_structures/03_queues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Queues: First-In-First-Out (FIFO) Data Structures
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ds_algo/data_structures/04_linked_lists/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Linked Lists: Node-Based Sequential Data Structures
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ds_algo/data_structures/05_hash_tables/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Hash Tables: Efficient Key-Value Data Structures
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ds_algo/data_structures/06_trees/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Trees: Hierarchical Data Structures
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Prompt emgineering
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Prompt emgineering
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../prompt_emgineering/advanced_prompt_engineering_guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Advanced Prompt Engineering Guide
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../prompt_emgineering/documentation_request/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Documentation Request Template
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../prompt_emgineering/guide_prompt_chaining/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Prompt Engineering Guide: Prompt Chaining
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../prompt_emgineering/guide_role_persona_prompting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Prompt Engineering Guide: Role and Persona Control
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../prompt_emgineering/guide_structured_prompting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Prompt Engineering Guide: Structured Prompting
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../prompt_emgineering/intermediate_prompt_engineering_guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Intermediate Prompt Engineering Guide
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../prompt_emgineering/prompt_engineering_guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Prompt Engineering Guide for AI Models
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../prompt_emgineering/prompt_engineering_guide_easy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Prompt Engineering Guide for AI Models
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../prompt_emgineering/prompt_engineering_prompt_chaining/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Prompt Engineering: Chained and Multi-Prompt Setup
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../prompt_emgineering/prompt_engineering_role_persona/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Prompt Engineering: Role and Persona Control
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../prompt_emgineering/prompt_engineering_structured_prompting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Prompt Engineering: Structured Prompting
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Quantum
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Quantum
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../quantum/part0_orientation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Part 0: Orientation — Road-map &amp; Dev Setup
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../quantum/part1_bits_vs_qubits/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Part 1: Bits vs Qubits — Booleans on Steroids
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../quantum/part2_linear_algebra/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Part 2: Linear Algebra Survival Kit
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../quantum/part3_single_qubit_operations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Part 3: Single-Qubit Operations
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../quantum/part4_measurement_probability/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Part 4: Measurement &amp; Probability
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../quantum/part5_multi_qubit_magic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Part 5: Multi-Qubit Magic
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../quantum/part6_algorithms_primer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Part 6: Algorithms Primer
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../quantum/part7_noise_error_reality/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Part 7: Noise, Error &amp; Reality Checks
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../quantum/part8_toolchain_ecosystem/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Part 8: Toolchain &amp; Ecosystem
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../quantum/part9_ship_something/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Part 9: Ship Something
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#objective" class="md-nav__link">
+    <span class="md-ellipsis">
+      Objective
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#environment-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      Environment Setup
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Environment Setup">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#installation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Installation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#verification" class="md-nav__link">
+    <span class="md-ellipsis">
+      Verification
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#key-concepts" class="md-nav__link">
+    <span class="md-ellipsis">
+      Key Concepts
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Key Concepts">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-is-image-segmentation" class="md-nav__link">
+    <span class="md-ellipsis">
+      What is Image Segmentation?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#main-approaches" class="md-nav__link">
+    <span class="md-ellipsis">
+      Main Approaches
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#applications" class="md-nav__link">
+    <span class="md-ellipsis">
+      Applications
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#starter-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      Starter Code
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#group-implementation-tasks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Group Implementation Tasks
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Group Implementation Tasks">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#task-1-complete-the-missing-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Task 1: Complete the Missing Functions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#task-2-segmentation-comparison" class="md-nav__link">
+    <span class="md-ellipsis">
+      Task 2: Segmentation Comparison
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#task-3-parameter-experimentation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Task 3: Parameter Experimentation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#peer-review-questions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Peer Review Questions
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting-guide" class="md-nav__link">
+    <span class="md-ellipsis">
+      Troubleshooting Guide
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Troubleshooting Guide">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#common-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      Common Issues
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#debugging-tools" class="md-nav__link">
+    <span class="md-ellipsis">
+      Debugging Tools
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mini-project-interactive-segmentation-tool" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mini-Project: Interactive Segmentation Tool
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Mini-Project: Interactive Segmentation Tool">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#extension-ideas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Extension Ideas
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reflection-questions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reflection Questions
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="image-segmentation-lab">Image Segmentation Lab</h1>
+<h2 id="objective">Objective</h2>
+<p>Learn to segment images by dividing them into meaningful regions or objects. This lab covers basic segmentation techniques that form the foundation for more advanced computer vision applications like object detection, scene understanding, and image editing.</p>
+<hr />
+<h2 id="environment-setup">Environment Setup</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Dependency</th>
+<th style="text-align: left;">Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Python 3.10+</td>
+<td style="text-align: left;">Programming language</td>
+</tr>
+<tr>
+<td style="text-align: left;">OpenCV</td>
+<td style="text-align: left;">Image processing library</td>
+</tr>
+<tr>
+<td style="text-align: left;">NumPy</td>
+<td style="text-align: left;">Numerical operations for arrays</td>
+</tr>
+<tr>
+<td style="text-align: left;">Matplotlib</td>
+<td style="text-align: left;">Visualization of images</td>
+</tr>
+<tr>
+<td style="text-align: left;">scikit-image</td>
+<td style="text-align: left;">Additional segmentation algorithms</td>
+</tr>
+</tbody>
+</table>
+<h3 id="installation">Installation</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Create virtual environment (optional)</span>
+python<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>cv_env
+<span class="nb">source</span><span class="w"> </span>cv_env/bin/activate<span class="w">  </span><span class="c1"># On Windows: cv_env\Scripts\activate</span>
+
+<span class="c1"># Install required packages</span>
+pip<span class="w"> </span>install<span class="w"> </span>opencv-python<span class="w"> </span>numpy<span class="w"> </span>matplotlib<span class="w"> </span>scikit-image
+</code></pre></div>
+<h3 id="verification">Verification</h3>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">cv2</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">skimage</span><span class="w"> </span><span class="kn">import</span> <span class="n">segmentation</span>
+
+<span class="c1"># Verify versions</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;OpenCV version: </span><span class="si">{</span><span class="n">cv2</span><span class="o">.</span><span class="n">__version__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;NumPy version: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">__version__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;scikit-image version: </span><span class="si">{</span><span class="n">segmentation</span><span class="o">.</span><span class="n">__version__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div>
+<hr />
+<h2 id="key-concepts">Key Concepts</h2>
+<h3 id="what-is-image-segmentation">What is Image Segmentation?</h3>
+<p>Image segmentation is the process of partitioning an image into multiple segments or regions, each with similar attributes. Unlike edge detection or contour finding, segmentation aims to create a complete division of the image.</p>
+<p><img alt="Segmentation Example" src="https://example.com/placeholder" /></p>
+<h3 id="main-approaches">Main Approaches</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Method</th>
+<th style="text-align: left;">Description</th>
+<th style="text-align: left;">Best Used For</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Thresholding</td>
+<td style="text-align: left;">Segment based on pixel intensity</td>
+<td style="text-align: left;">Simple backgrounds, high contrast</td>
+</tr>
+<tr>
+<td style="text-align: left;">Color-based</td>
+<td style="text-align: left;">Group similar colors (e.g., K-means)</td>
+<td style="text-align: left;">Objects with distinct colors</td>
+</tr>
+<tr>
+<td style="text-align: left;">Region-growing</td>
+<td style="text-align: left;">Expand from seed points</td>
+<td style="text-align: left;">Cohesive regions with gradual transitions</td>
+</tr>
+<tr>
+<td style="text-align: left;">Watershed</td>
+<td style="text-align: left;">Treat gradient magnitudes as topographic surface</td>
+<td style="text-align: left;">Touching objects, cell segmentation</td>
+</tr>
+<tr>
+<td style="text-align: left;">GrabCut</td>
+<td style="text-align: left;">Interactive segmentation with minimal user input</td>
+<td style="text-align: left;">Foreground extraction, detailed objects</td>
+</tr>
+</tbody>
+</table>
+<h3 id="applications">Applications</h3>
+<ul>
+<li>Medical image analysis (tumor detection, organ segmentation)</li>
+<li>Object extraction and background removal</li>
+<li>Autonomous driving (road/obstacle detection)</li>
+<li>Video surveillance (foreground/background separation)</li>
+<li>Image editing and composition</li>
+</ul>
+<hr />
+<h2 id="starter-code">Starter Code</h2>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">cv2</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">skimage</span><span class="w"> </span><span class="kn">import</span> <span class="n">segmentation</span><span class="p">,</span> <span class="n">color</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">load_image</span><span class="p">(</span><span class="n">image_path</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Load an image and convert to RGB for display.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        image_path (str): Path to the image file</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        tuple: (bgr_image, rgb_image)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Load the image</span>
+    <span class="n">img</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">image_path</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">img</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Could not load image from </span><span class="si">{</span><span class="n">image_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Convert to RGB for matplotlib display</span>
+    <span class="n">img_rgb</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_BGR2RGB</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">img</span><span class="p">,</span> <span class="n">img_rgb</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">display_images</span><span class="p">(</span><span class="n">images</span><span class="p">,</span> <span class="n">titles</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="n">rows</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Display multiple images in a grid.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        images (list): List of images to display</span>
+<span class="sd">        titles (list): List of titles for each image</span>
+<span class="sd">        figsize (tuple): Figure size</span>
+<span class="sd">        rows (int): Number of rows in the grid</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">images</span><span class="p">)</span>
+    <span class="n">cols</span> <span class="o">=</span> <span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="n">rows</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">//</span> <span class="n">rows</span>  <span class="c1"># Ceiling division</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">rows</span><span class="p">,</span> <span class="n">cols</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="n">figsize</span><span class="p">)</span>
+
+    <span class="c1"># Make axes a 2D array if it isn&#39;t already</span>
+    <span class="k">if</span> <span class="n">rows</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">cols</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">axes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">axes</span><span class="p">]])</span>
+    <span class="k">elif</span> <span class="n">rows</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">axes</span> <span class="o">=</span> <span class="n">axes</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">cols</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">axes</span> <span class="o">=</span> <span class="n">axes</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="c1"># Flatten both arrays for easy iteration</span>
+    <span class="n">axes_flat</span> <span class="o">=</span> <span class="n">axes</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">title</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">images</span><span class="p">,</span> <span class="n">titles</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">axes_flat</span><span class="p">):</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>  <span class="c1"># Grayscale</span>
+                <span class="n">axes_flat</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>  <span class="c1"># Color image</span>
+                <span class="n">axes_flat</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+            <span class="n">axes_flat</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+            <span class="n">axes_flat</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Hide unused subplots</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">axes_flat</span><span class="p">)):</span>
+        <span class="n">axes_flat</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">apply_binary_thresholding</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mi">127</span><span class="p">,</span> <span class="n">max_value</span><span class="o">=</span><span class="mi">255</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Apply binary thresholding to segment an image.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        image (np.ndarray): Grayscale input image</span>
+<span class="sd">        threshold (int): Threshold value</span>
+<span class="sd">        max_value (int): Maximum value to use</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        np.ndarray: Binary segmented image</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># TODO: Implement binary thresholding using cv2.threshold</span>
+
+    <span class="k">return</span> <span class="n">thresholded_image</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">apply_otsu_thresholding</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">max_value</span><span class="o">=</span><span class="mi">255</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Apply Otsu&#39;s thresholding to automatically determine the optimal threshold.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        image (np.ndarray): Grayscale input image</span>
+<span class="sd">        max_value (int): Maximum value to use</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        tuple: (segmented image, optimal threshold)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># TODO: Implement Otsu&#39;s thresholding using cv2.threshold with THRESH_OTSU flag</span>
+
+    <span class="k">return</span> <span class="n">thresholded_image</span><span class="p">,</span> <span class="n">optimal_threshold</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">apply_adaptive_thresholding</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">block_size</span><span class="o">=</span><span class="mi">11</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">max_value</span><span class="o">=</span><span class="mi">255</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Apply adaptive thresholding to handle images with varying illumination.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        image (np.ndarray): Grayscale input image</span>
+<span class="sd">        block_size (int): Size of pixel neighborhood for threshold calculation</span>
+<span class="sd">        c (int): Constant subtracted from mean or weighted sum</span>
+<span class="sd">        max_value (int): Maximum value to use</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        np.ndarray: Segmented image</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># TODO: Implement adaptive thresholding using cv2.adaptiveThreshold</span>
+
+    <span class="k">return</span> <span class="n">thresholded_image</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">apply_color_based_segmentation</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">n_clusters</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">attempts</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Apply color-based segmentation using K-means clustering.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        image (np.ndarray): BGR input image</span>
+<span class="sd">        n_clusters (int): Number of clusters/segments</span>
+<span class="sd">        attempts (int): Number of attempts for K-means</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        np.ndarray: Segmented image with each pixel replaced by the cluster center</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># TODO: Implement color-based segmentation using K-means</span>
+    <span class="c1"># 1. Reshape the image to a 2D array of pixels</span>
+    <span class="c1"># 2. Convert to float32</span>
+    <span class="c1"># 3. Apply K-means</span>
+    <span class="c1"># 4. Replace each pixel with its cluster center</span>
+    <span class="c1"># 5. Reshape back to original image dimensions</span>
+
+    <span class="k">return</span> <span class="n">segmented_image</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">apply_watershed_segmentation</span><span class="p">(</span><span class="n">image</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Apply watershed segmentation to separate touching objects.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        image (np.ndarray): BGR input image</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        np.ndarray: Segmented image with watershed regions</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># TODO: Implement watershed segmentation</span>
+    <span class="c1"># 1. Convert to grayscale</span>
+    <span class="c1"># 2. Apply binary thresholding or other preprocessing</span>
+    <span class="c1"># 3. Compute distance transform</span>
+    <span class="c1"># 4. Find markers (local maxima of distance transform)</span>
+    <span class="c1"># 5. Apply watershed</span>
+
+    <span class="k">return</span> <span class="n">segmented_image</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">apply_grabcut_segmentation</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">rect</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Apply GrabCut algorithm for foreground extraction.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        image (np.ndarray): BGR input image</span>
+<span class="sd">        rect (tuple): Rectangle containing foreground (x, y, width, height)</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        np.ndarray: Foreground mask and segmented image</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># TODO: Implement GrabCut segmentation</span>
+    <span class="c1"># 1. Define rectangle for foreground</span>
+    <span class="c1"># 2. Create initial mask</span>
+    <span class="c1"># 3. Create temporary arrays for algorithm</span>
+    <span class="c1"># 4. Run GrabCut algorithm</span>
+    <span class="c1"># 5. Create output mask and apply to image</span>
+
+    <span class="k">if</span> <span class="n">rect</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="c1"># If no rectangle provided, use a default centered one</span>
+        <span class="n">height</span><span class="p">,</span> <span class="n">width</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span>
+        <span class="n">margin</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">)</span> <span class="o">//</span> <span class="mi">4</span>
+        <span class="n">rect</span> <span class="o">=</span> <span class="p">(</span><span class="n">margin</span><span class="p">,</span> <span class="n">margin</span><span class="p">,</span> <span class="n">width</span> <span class="o">-</span> <span class="mi">2</span><span class="o">*</span><span class="n">margin</span><span class="p">,</span> <span class="n">height</span> <span class="o">-</span> <span class="mi">2</span><span class="o">*</span><span class="n">margin</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">mask</span><span class="p">,</span> <span class="n">segmented_image</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">apply_region_growing_segmentation</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">seeds</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Apply region growing segmentation from seed points.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        image (np.ndarray): Grayscale input image</span>
+<span class="sd">        seeds (list): List of seed points [(x1, y1), (x2, y2), ...]</span>
+<span class="sd">        threshold (int): Intensity threshold for region growing</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        np.ndarray: Segmented image with regions</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># TODO: Implement simple region growing algorithm</span>
+    <span class="c1"># 1. Initialize mask for output</span>
+    <span class="c1"># 2. For each seed, grow region by considering neighbors</span>
+    <span class="c1"># 3. Add neighbors to region if within threshold of region mean</span>
+
+    <span class="k">if</span> <span class="n">seeds</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="c1"># If no seeds provided, use a default grid</span>
+        <span class="n">height</span><span class="p">,</span> <span class="n">width</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span>
+        <span class="n">seeds</span> <span class="o">=</span> <span class="p">[(</span><span class="n">width</span><span class="o">//</span><span class="mi">4</span><span class="p">,</span> <span class="n">height</span><span class="o">//</span><span class="mi">4</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="n">width</span><span class="o">//</span><span class="mi">4</span><span class="p">,</span> <span class="n">height</span><span class="o">//</span><span class="mi">4</span><span class="p">),</span>
+                 <span class="p">(</span><span class="n">width</span><span class="o">//</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="o">*</span><span class="n">height</span><span class="o">//</span><span class="mi">4</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="n">width</span><span class="o">//</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="o">*</span><span class="n">height</span><span class="o">//</span><span class="mi">4</span><span class="p">)]</span>
+
+    <span class="k">return</span> <span class="n">segmented_image</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">apply_felzenszwalb_segmentation</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">min_size</span><span class="o">=</span><span class="mi">50</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Apply Felzenszwalb&#39;s segmentation algorithm.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        image (np.ndarray): RGB input image</span>
+<span class="sd">        scale (float): Free parameter. Higher means larger clusters.</span>
+<span class="sd">        sigma (float): Gaussian kernel width for pre-smoothing</span>
+<span class="sd">        min_size (int): Minimum component size</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        np.ndarray: Segmented image with colored regions</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># TODO: Implement Felzenszwalb&#39;s algorithm using skimage</span>
+
+    <span class="k">return</span> <span class="n">segmented_image</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">apply_slic_superpixels</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">n_segments</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">compactness</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Apply SLIC superpixel segmentation.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        image (np.ndarray): RGB input image</span>
+<span class="sd">        n_segments (int): Approximate number of segments</span>
+<span class="sd">        compactness (float): Balances color and space proximity</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        np.ndarray: Segmented image with superpixel boundaries</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># TODO: Implement SLIC superpixel segmentation using skimage</span>
+
+    <span class="k">return</span> <span class="n">segmented_image</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">create_segmentation_comparison</span><span class="p">(</span><span class="n">image</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Compare different segmentation methods side by side.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        image (np.ndarray): BGR input image</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        list: List of (segmented_image, method_name) tuples</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># TODO: Apply different segmentation methods and collect results</span>
+
+    <span class="k">return</span> <span class="p">[]</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">evaluate_segmentation</span><span class="p">(</span><span class="n">segmented_image</span><span class="p">,</span> <span class="n">ground_truth</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Evaluate segmentation quality using metrics.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        segmented_image (np.ndarray): Segmented image</span>
+<span class="sd">        ground_truth (np.ndarray, optional): Ground truth segmentation</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        dict: Dictionary of evaluation metrics</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># TODO: Implement segmentation evaluation</span>
+    <span class="c1"># If ground truth available, compute overlap metrics</span>
+    <span class="c1"># Otherwise, calculate internal evaluation metrics (e.g., segment homogeneity)</span>
+
+    <span class="n">metrics</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;num_segments&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s1">&#39;avg_segment_size&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s1">&#39;segment_size_std&#39;</span><span class="p">:</span> <span class="mi">0</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">metrics</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">visualize_segments</span><span class="p">(</span><span class="n">segmented_image</span><span class="p">,</span> <span class="n">original_image</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">random_colors</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Visualize segmentation results with colored regions.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        segmented_image (np.ndarray): Segmented image with integer labels</span>
+<span class="sd">        original_image (np.ndarray, optional): Original image for overlay</span>
+<span class="sd">        random_colors (bool): Whether to use random colors or a colormap</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        np.ndarray: Visualization image</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># TODO: Implement segmentation visualization</span>
+    <span class="c1"># 1. Create a color map for segments</span>
+    <span class="c1"># 2. Map each segment to a color</span>
+    <span class="c1"># 3. Optionally overlay on original image</span>
+
+    <span class="k">return</span> <span class="n">visualization</span>
+
+<span class="c1"># Main execution</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="c1"># Sample image path - replace with your own</span>
+    <span class="n">image_path</span> <span class="o">=</span> <span class="s2">&quot;sample_image.jpg&quot;</span>
+
+    <span class="c1"># Load image</span>
+    <span class="n">img_bgr</span><span class="p">,</span> <span class="n">img_rgb</span> <span class="o">=</span> <span class="n">load_image</span><span class="p">(</span><span class="n">image_path</span><span class="p">)</span>
+
+    <span class="c1"># Convert to grayscale for methods that require it</span>
+    <span class="n">img_gray</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">img_bgr</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_BGR2GRAY</span><span class="p">)</span>
+
+    <span class="c1"># Display original image</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img_rgb</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Original Image&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+    <span class="c1"># TODO: Demonstrate segmentation methods</span>
+</code></pre></div>
+<hr />
+<h2 id="group-implementation-tasks">Group Implementation Tasks</h2>
+<h3 id="task-1-complete-the-missing-functions">Task 1: Complete the Missing Functions</h3>
+<p>Working in pairs, complete each TODO section in the starter code:</p>
+<ul>
+<li>Person A: Implement thresholding methods and color-based segmentation</li>
+<li>Person B: Implement watershed, region growing, and advanced segmentation methods</li>
+</ul>
+<h3 id="task-2-segmentation-comparison">Task 2: Segmentation Comparison</h3>
+<ol>
+<li>
+<p>Apply at least 5 different segmentation methods to a set of diverse images:</p>
+</li>
+<li>
+<p>A simple object with clear boundaries</p>
+</li>
+<li>A complex scene with multiple objects</li>
+<li>A natural scene (e.g., landscape)</li>
+<li>A texture-rich image (e.g., fabric, foliage)</li>
+<li>
+<p>A medical image (if available)</p>
+</li>
+<li>
+<p>Create a visual comparison matrix and document which methods work best for each image type:</p>
+</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Image Type</th>
+<th style="text-align: left;">Best Method</th>
+<th style="text-align: left;">Worst Method</th>
+<th style="text-align: left;">Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Simple object</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">Complex scene</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">Natural scene</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">Texture-rich</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">Medical</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+</tbody>
+</table>
+<h3 id="task-3-parameter-experimentation">Task 3: Parameter Experimentation</h3>
+<ol>
+<li>Choose one segmentation method (e.g., K-means or watershed)</li>
+<li>Vary key parameters and document their effect on segmentation quality</li>
+<li>Create a visual grid showing parameter impact</li>
+</ol>
+<p>Example experiment:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Parameter</th>
+<th style="text-align: left;">Value 1</th>
+<th style="text-align: left;">Value 2</th>
+<th style="text-align: left;">Value 3</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">K-means clusters (k)</td>
+<td style="text-align: left;">k=3</td>
+<td style="text-align: left;">k=5</td>
+<td style="text-align: left;">k=10</td>
+</tr>
+<tr>
+<td style="text-align: left;">[Visual Result]</td>
+<td style="text-align: left;">[Image]</td>
+<td style="text-align: left;">[Image]</td>
+<td style="text-align: left;">[Image]</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="peer-review-questions">Peer Review Questions</h2>
+<p>After completing the implementation, review each other's code and discuss:</p>
+<ol>
+<li>
+<p><strong>Method Selection</strong>:</p>
+</li>
+<li>
+<p>Which segmentation method would you choose for medical image analysis?</p>
+</li>
+<li>
+<p>When would you prefer thresholding over clustering-based methods?</p>
+</li>
+<li>
+<p><strong>Parameter Sensitivity</strong>:</p>
+</li>
+<li>
+<p>How sensitive is each method to parameter changes?</p>
+</li>
+<li>
+<p>Which parameters had the largest impact on results?</p>
+</li>
+<li>
+<p><strong>Performance Analysis</strong>:</p>
+</li>
+<li>
+<p>Which methods are computationally more efficient?</p>
+</li>
+<li>
+<p>How does image size affect processing time for different methods?</p>
+</li>
+<li>
+<p><strong>Result Quality</strong>:</p>
+</li>
+<li>
+<p>How would you measure segmentation quality without ground truth?</p>
+</li>
+<li>
+<p>What visual artifacts or common problems did you observe?</p>
+</li>
+<li>
+<p><strong>Practical Applications</strong>:</p>
+</li>
+<li>How might you combine multiple segmentation techniques for better results?</li>
+<li>What preprocessing steps improved segmentation quality?</li>
+</ol>
+<hr />
+<h2 id="troubleshooting-guide">Troubleshooting Guide</h2>
+<h3 id="common-issues">Common Issues</h3>
+<ol>
+<li>
+<p><strong>Over-segmentation</strong></p>
+</li>
+<li>
+<p>Too many small regions created</p>
+</li>
+<li>Increase clustering parameters (k for K-means)</li>
+<li>Apply smoothing before segmentation</li>
+<li>
+<p>Use region merging as post-processing</p>
+</li>
+<li>
+<p><strong>Under-segmentation</strong></p>
+</li>
+<li>
+<p>Important objects merged together</p>
+</li>
+<li>Decrease threshold values</li>
+<li>Increase number of clusters/segments</li>
+<li>
+<p>Apply edge-preserving smoothing</p>
+</li>
+<li>
+<p><strong>Noisy Results</strong></p>
+</li>
+<li>
+<p>Segments are fragmented and inconsistent</p>
+</li>
+<li>Apply noise reduction preprocessing</li>
+<li>Use morphological operations to clean results</li>
+<li>
+<p>Consider marker-based watershed</p>
+</li>
+<li>
+<p><strong>Boundary Inaccuracy</strong></p>
+</li>
+<li>Segment boundaries don't align with object edges</li>
+<li>Combine with edge detection</li>
+<li>Use gradient information in segmentation</li>
+<li>Try GrabCut or graph-based methods</li>
+</ol>
+<h3 id="debugging-tools">Debugging Tools</h3>
+<p>Create functions that:</p>
+<ol>
+<li>Highlight segmentation boundaries on the original image</li>
+<li>Show region properties (size, average color, texture)</li>
+<li>Compare multiple segmentation results side by side</li>
+</ol>
+<hr />
+<h2 id="mini-project-interactive-segmentation-tool">Mini-Project: Interactive Segmentation Tool</h2>
+<p>Create an application that:</p>
+<ol>
+<li>Loads images from files</li>
+<li>Provides a user interface to select and configure segmentation methods</li>
+<li>Allows parameter adjustment with real-time preview</li>
+<li>Lets users refine segmentation results manually</li>
+<li>Extracts segment properties and statistics</li>
+<li>Exports segmentation results as masks or separate images</li>
+</ol>
+<h3 id="extension-ideas">Extension Ideas</h3>
+<ul>
+<li>Implement segment tracking across multiple frames of video</li>
+<li>Add automatic object labeling based on segment properties</li>
+<li>Create a tool that combines multiple segmentation results</li>
+<li>Develop a segmentation-based image editing tool (e.g., selective color adjustment)</li>
+<li>Build a medical image analysis tool for specific applications</li>
+</ul>
+<hr />
+<h2 id="reflection-questions">Reflection Questions</h2>
+<ol>
+<li>How do higher-level semantic understanding and lower-level segmentation relate?</li>
+<li>What challenges remain in image segmentation that deep learning approaches address?</li>
+<li>How might contextual information improve segmentation results?</li>
+<li>What are the trade-offs between interactive and fully automatic segmentation?</li>
+<li>How has image segmentation evolved to handle increasingly complex scenes?</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "search.highlight", "search.suggest"], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.c8b220af.min.js"></script>
+      
+    
+  </body>
+</html>
