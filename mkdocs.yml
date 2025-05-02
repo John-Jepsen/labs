@@ -64,7 +64,7 @@ nav:
       - Python Fullstack Interview Prep: job_prep/python_fullstack_interview_prep.md
   - Maintainer Guide: maintainer_guide.md
   - Model Evaluation:
-      - Model_Evaluation: model_evaluation/index.md
+      - Overview: model_evaluation/index.md
       - 01 Model Evaluation Study Guide: model_evaluation/01-model-evaluation-study-guide.md
       - 02 Model Evaluation Cheat Sheets: model_evaluation/02-model-evaluation-cheat-sheets.md
       - 03 Model Evaluation Practice Problems: model_evaluation/03-model-evaluation-practice-problems.md
