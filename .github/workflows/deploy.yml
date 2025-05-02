@@ -6,19 +6,35 @@ on:
       - main
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
       - uses: actions/setup-python@v4
         with:
           python-version: 3.x
-      - run: pip install mkdocs-material
-      - run: pip install mkdocs-minify-plugin
-      - run: mkdocs build
+
+      - name: Install dependencies
+        run: |
+          pip install mkdocs-material
+          pip install mkdocs-minify-plugin
+
+      - name: Build
+        run: mkdocs build
+
+      - name: Create 404 page
+        run: cp ./site/index.html ./site/404.html
+
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./site
+          force_orphan: true
