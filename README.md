@@ -81,3 +81,9 @@ You can customize the interactive elements by:
 ## License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
+
+# Labs
+
+This repository contains the labs for the course.
+
+Build triggered: $(date +%s)
