@@ -26,3 +26,28 @@ theme:
     accent: indigo
     primary: indigo
     scheme: default
+nav:
+  - Home: index.md
+  - HS Tutor Agent:
+      - Overview: hs_tutor_agent/index.md
+      - Beginner Setup:
+          - Overview: hs_tutor_agent/beginner_setup/index.md
+          - Installing VS Code: hs_tutor_agent/beginner_setup/install_vscode.md
+          - Creating First Python Program: hs_tutor_agent/beginner_setup/first_python.md
+      - Platform Setup:
+          - Overview: hs_tutor_agent/platform_setup/index.md
+          - Backend Setup: hs_tutor_agent/platform_setup/backend_setup.md
+      - AI Agent Integration:
+          - Overview: hs_tutor_agent/ai_agent_integration/index.md
+          - Prompt Engineering: hs_tutor_agent/ai_agent_integration/prompt_engineering.md
+      - Lesson Structure:
+          - Overview: hs_tutor_agent/lesson_structure/index.md
+          - Creating Projects: hs_tutor_agent/lesson_structure/creating_projects.md
+      - Chat Tutor Features:
+          - Overview: hs_tutor_agent/chat_tutor_features/index.md
+          - Getting Hints: hs_tutor_agent/chat_tutor_features/getting_hints.md
+      - Troubleshooting:
+          - Overview: hs_tutor_agent/troubleshooting/index.md
+          - Beginner Setup Issues: hs_tutor_agent/troubleshooting/beginner_setup.md
+      - Code Examples:
+          - Hello World: hs_tutor_agent/code_examples/hello_world/hello_world.md

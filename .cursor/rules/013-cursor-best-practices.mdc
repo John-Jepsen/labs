@@ -1,0 +1,79 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Cursor Best Practices
+
+This rule provides guidance on effectively using Cursor AI to maximize productivity and reduce complexity.
+
+## Planning Process
+
+- Before using Cursor, ask Claude to create a clear and detailed plan in markdown:
+  - Ask it to ask clarifying questions first
+  - Request that it critique its own plan
+  - Then ask it to regenerate the plan based on feedback
+  - Add the final plan to instructions.md for frequent reference
+
+- Consider using ChatGPT as an intermediary planner:
+  - Tell ChatGPT what you want to create
+  - Ask it to provide instructions for another AI which will do the coding
+  - Paste the resulting instructions into Cursor composer agent
+  - This extra layer of planning significantly reduces problems
+
+## Using Cursor Rules
+
+- Use `.cursorrules` (they are always in AI context) to set broad guidelines
+- See https://cursor.directory/ for community rules
+- Example rule: "Write tests first, then the code, then run the tests and update the code until tests pass"
+
+## Incremental Development Process
+
+- Get agent to write code incrementally in small Edit-Test loops:
+  1. Define a small task or feature increment
+  2. Write (or have the AI write) a test case that fails for this increment
+  3. Instruct the AI (typically in Agent mode) to write the code to make the test pass
+  4. Instruct the AI to run the test
+  5. If the test fails, the AI analyzes the failure and attempts to fix the code, looping back to step 4
+  6. Once the test passes, review the changes
+
+## Prompt Engineering
+
+- Encourage chain of thought in your prompts
+- When encountering problems, ask Cursor to:
+  - Write a report listing all files and their purposes
+  - Document problems encountered
+  - Then ask Claude/ChatGPT how to fix the problems
+
+## External Tools Integration
+
+- Use gitlingest.com to get all scripts, configs, and relevant files in a single page ingestible by ChatGPT
+- Use context7.com (MCP) for referring to latest documentation
+
+## Version Control
+
+- Use git to version control frequently
+- Avoid having too many uncommitted changes
+
+## Managing Context
+
+- Keep context short by explicitly adding files via @
+- Longer context often leads to AI getting derailed
+- Start new chats when context gets longer
+- Resync/index code frequently
+- Use `.cursorignore` to exclude irrelevant files
+- Use/reference open editors to quickly add them to context
+- Use Notepads for frequently used prompts
+
+## Optional Settings
+
+- Enable YOLO mode so it writes tests
+  - This allows errors like vitest, npm test, nr test, etc.
+  - Basic build steps are often skipped (vite, ts, etc.)
+  - Creating files and directories (touch, mkdir, etc.) is skipped
+
+- Support removal in "Rules for AI" in Cursor settings:
+  - Keep assistant minimal
+  - Avoid system agent interruptions
+  - Skip/Alert when evaluating drafts
+  - Prioritize technical corrections over code aesthetics
