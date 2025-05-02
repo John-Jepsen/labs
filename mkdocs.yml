@@ -62,7 +62,6 @@ nav:
   - Job Prep:
       - Java Fullstack Interview Prep: job_prep/java_fullstack_interview_prep.md
       - Python Fullstack Interview Prep: job_prep/python_fullstack_interview_prep.md
-  - Maintainer Guide: maintainer_guide.md
   - Model Evaluation:
       - Overview: model_evaluation/index.md
       - 01 Model Evaluation Study Guide: model_evaluation/01-model-evaluation-study-guide.md

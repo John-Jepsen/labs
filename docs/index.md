@@ -18,4 +18,4 @@ Browse the topics in the navigation menu to get started with your learning journ
 
 ## For Contributors
 
-Check out the [Maintainer Guide](maintainer_guide.md) for information on how to contribute to this documentation.
+This is a collaborative documentation project. Feel free to contribute by improving the content or adding new topics.
