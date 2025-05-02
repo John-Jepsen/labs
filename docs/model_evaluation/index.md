@@ -1,18 +1,10 @@
-# New Section
+# Model Evaluation
 
-This is a new section of documentation.
+This section covers techniques and methods for evaluating machine learning models.
 
-## Features
+## Contents
 
-- Feature 1
-- Feature 2
-- Feature 3
-
-## Getting Started
-
-Here's how to get started with this section:
-
-```python
-# Example code
-print("Hello from the new section!")
-```
+- [Study Guide](01-model-evaluation-study-guide.md)
+- [Cheat Sheets](02-model-evaluation-cheat-sheets.md)
+- [Practice Problems](03-model-evaluation-practice-problems.md)
+- [Visual Guide](04-model-evaluation-visual-guide.md)

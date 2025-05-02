@@ -27,6 +27,7 @@ theme:
     primary: indigo
     scheme: default
 nav:
+  - Home: index.md
   - Agentic:
       - 01 Reactive Agent: agentic/01_reactive_agent.md
       - 02 Planning Agent: agentic/02_planning_agent.md
