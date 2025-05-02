@@ -1,191 +1,263 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
+         <loc>https://John-Jepsen.github.io/labs/maintainer_guide/</loc>
+         <lastmod>2025-05-02</lastmod>
+    </url>
+    <url>
          <loc>https://John-Jepsen.github.io/labs/agentic/01_reactive_agent/</loc>
-         <lastmod>2025-04-28</lastmod>
+         <lastmod>2025-05-02</lastmod>
     </url>
     <url>
          <loc>https://John-Jepsen.github.io/labs/agentic/02_planning_agent/</loc>
-         <lastmod>2025-04-28</lastmod>
+         <lastmod>2025-05-02</lastmod>
     </url>
     <url>
          <loc>https://John-Jepsen.github.io/labs/agentic/03_tool_using_agent/</loc>
-         <lastmod>2025-04-28</lastmod>
+         <lastmod>2025-05-02</lastmod>
     </url>
     <url>
          <loc>https://John-Jepsen.github.io/labs/agentic/04_memory_augmented_agent/</loc>
-         <lastmod>2025-04-28</lastmod>
+         <lastmod>2025-05-02</lastmod>
     </url>
     <url>
          <loc>https://John-Jepsen.github.io/labs/agentic/05_multi_agent_collaboration/</loc>
-         <lastmod>2025-04-28</lastmod>
+         <lastmod>2025-05-02</lastmod>
     </url>
     <url>
          <loc>https://John-Jepsen.github.io/labs/agentic/06_self_reflective_agent/</loc>
-         <lastmod>2025-04-28</lastmod>
+         <lastmod>2025-05-02</lastmod>
     </url>
     <url>
          <loc>https://John-Jepsen.github.io/labs/computer_vision/01_image_loading_and_manipulation/</loc>
-         <lastmod>2025-04-28</lastmod>
+         <lastmod>2025-05-02</lastmod>
     </url>
     <url>
          <loc>https://John-Jepsen.github.io/labs/computer_vision/02_filtering_and_convolution/</loc>
-         <lastmod>2025-04-28</lastmod>
+         <lastmod>2025-05-02</lastmod>
     </url>
     <url>
          <loc>https://John-Jepsen.github.io/labs/computer_vision/03_edge_detection/</loc>
-         <lastmod>2025-04-28</lastmod>
+         <lastmod>2025-05-02</lastmod>
     </url>
     <url>
          <loc>https://John-Jepsen.github.io/labs/computer_vision/04_contour_detection_and_shapes/</loc>
-         <lastmod>2025-04-28</lastmod>
+         <lastmod>2025-05-02</lastmod>
     </url>
     <url>
          <loc>https://John-Jepsen.github.io/labs/computer_vision/05_face_detection/</loc>
-         <lastmod>2025-04-28</lastmod>
+         <lastmod>2025-05-02</lastmod>
     </url>
     <url>
          <loc>https://John-Jepsen.github.io/labs/computer_vision/06_image_segmentation/</loc>
-         <lastmod>2025-04-28</lastmod>
+         <lastmod>2025-05-02</lastmod>
     </url>
     <url>
          <loc>https://John-Jepsen.github.io/labs/computer_vision/computer_vision_labs_2024-07-06/</loc>
-         <lastmod>2025-04-28</lastmod>
+         <lastmod>2025-05-02</lastmod>
     </url>
     <url>
          <loc>https://John-Jepsen.github.io/labs/ds_algo/algos/01_breadth_first_search/</loc>
-         <lastmod>2025-04-28</lastmod>
+         <lastmod>2025-05-02</lastmod>
     </url>
     <url>
          <loc>https://John-Jepsen.github.io/labs/ds_algo/algos/02_depth_first_search/</loc>
-         <lastmod>2025-04-28</lastmod>
+         <lastmod>2025-05-02</lastmod>
     </url>
     <url>
          <loc>https://John-Jepsen.github.io/labs/ds_algo/algos/03_binary_search/</loc>
-         <lastmod>2025-04-28</lastmod>
+         <lastmod>2025-05-02</lastmod>
     </url>
     <url>
          <loc>https://John-Jepsen.github.io/labs/ds_algo/algos/04_uniform_cost_search/</loc>
-         <lastmod>2025-04-28</lastmod>
+         <lastmod>2025-05-02</lastmod>
     </url>
     <url>
          <loc>https://John-Jepsen.github.io/labs/ds_algo/algos/05_a_star_search/</loc>
-         <lastmod>2025-04-28</lastmod>
+         <lastmod>2025-05-02</lastmod>
     </url>
     <url>
          <loc>https://John-Jepsen.github.io/labs/ds_algo/algos/06_iterative_deepening_dfs/</loc>
-         <lastmod>2025-04-28</lastmod>
+         <lastmod>2025-05-02</lastmod>
     </url>
     <url>
          <loc>https://John-Jepsen.github.io/labs/ds_algo/algos/ds_algo_prompt/</loc>
-         <lastmod>2025-04-28</lastmod>
+         <lastmod>2025-05-02</lastmod>
     </url>
     <url>
          <loc>https://John-Jepsen.github.io/labs/ds_algo/data_structures/01_arrays_and_lists/</loc>
-         <lastmod>2025-04-28</lastmod>
+         <lastmod>2025-05-02</lastmod>
     </url>
     <url>
          <loc>https://John-Jepsen.github.io/labs/ds_algo/data_structures/02_stacks/</loc>
-         <lastmod>2025-04-28</lastmod>
+         <lastmod>2025-05-02</lastmod>
     </url>
     <url>
          <loc>https://John-Jepsen.github.io/labs/ds_algo/data_structures/03_queues/</loc>
-         <lastmod>2025-04-28</lastmod>
+         <lastmod>2025-05-02</lastmod>
     </url>
     <url>
          <loc>https://John-Jepsen.github.io/labs/ds_algo/data_structures/04_linked_lists/</loc>
-         <lastmod>2025-04-28</lastmod>
+         <lastmod>2025-05-02</lastmod>
     </url>
     <url>
          <loc>https://John-Jepsen.github.io/labs/ds_algo/data_structures/05_hash_tables/</loc>
-         <lastmod>2025-04-28</lastmod>
+         <lastmod>2025-05-02</lastmod>
     </url>
     <url>
          <loc>https://John-Jepsen.github.io/labs/ds_algo/data_structures/06_trees/</loc>
-         <lastmod>2025-04-28</lastmod>
+         <lastmod>2025-05-02</lastmod>
+    </url>
+    <url>
+         <loc>https://John-Jepsen.github.io/labs/job_prep/java_fullstack_interview_prep/</loc>
+         <lastmod>2025-05-02</lastmod>
+    </url>
+    <url>
+         <loc>https://John-Jepsen.github.io/labs/job_prep/python_fullstack_interview_prep/</loc>
+         <lastmod>2025-05-02</lastmod>
+    </url>
+    <url>
+         <loc>https://John-Jepsen.github.io/labs/model_evaluation/</loc>
+         <lastmod>2025-05-02</lastmod>
+    </url>
+    <url>
+         <loc>https://John-Jepsen.github.io/labs/model_evaluation/01-model-evaluation-study-guide/</loc>
+         <lastmod>2025-05-02</lastmod>
+    </url>
+    <url>
+         <loc>https://John-Jepsen.github.io/labs/model_evaluation/02-model-evaluation-cheat-sheets/</loc>
+         <lastmod>2025-05-02</lastmod>
+    </url>
+    <url>
+         <loc>https://John-Jepsen.github.io/labs/model_evaluation/03-model-evaluation-practice-problems/</loc>
+         <lastmod>2025-05-02</lastmod>
+    </url>
+    <url>
+         <loc>https://John-Jepsen.github.io/labs/model_evaluation/04-model-evaluation-visual-guide/</loc>
+         <lastmod>2025-05-02</lastmod>
     </url>
     <url>
          <loc>https://John-Jepsen.github.io/labs/prompt_emgineering/advanced_prompt_engineering_guide/</loc>
-         <lastmod>2025-04-28</lastmod>
+         <lastmod>2025-05-02</lastmod>
     </url>
     <url>
          <loc>https://John-Jepsen.github.io/labs/prompt_emgineering/documentation_request/</loc>
-         <lastmod>2025-04-28</lastmod>
+         <lastmod>2025-05-02</lastmod>
     </url>
     <url>
          <loc>https://John-Jepsen.github.io/labs/prompt_emgineering/guide_prompt_chaining/</loc>
-         <lastmod>2025-04-28</lastmod>
+         <lastmod>2025-05-02</lastmod>
     </url>
     <url>
          <loc>https://John-Jepsen.github.io/labs/prompt_emgineering/guide_role_persona_prompting/</loc>
-         <lastmod>2025-04-28</lastmod>
+         <lastmod>2025-05-02</lastmod>
     </url>
     <url>
          <loc>https://John-Jepsen.github.io/labs/prompt_emgineering/guide_structured_prompting/</loc>
-         <lastmod>2025-04-28</lastmod>
+         <lastmod>2025-05-02</lastmod>
     </url>
     <url>
          <loc>https://John-Jepsen.github.io/labs/prompt_emgineering/intermediate_prompt_engineering_guide/</loc>
-         <lastmod>2025-04-28</lastmod>
+         <lastmod>2025-05-02</lastmod>
     </url>
     <url>
          <loc>https://John-Jepsen.github.io/labs/prompt_emgineering/prompt_engineering_guide/</loc>
-         <lastmod>2025-04-28</lastmod>
+         <lastmod>2025-05-02</lastmod>
     </url>
     <url>
          <loc>https://John-Jepsen.github.io/labs/prompt_emgineering/prompt_engineering_guide_easy/</loc>
-         <lastmod>2025-04-28</lastmod>
+         <lastmod>2025-05-02</lastmod>
     </url>
     <url>
          <loc>https://John-Jepsen.github.io/labs/prompt_emgineering/prompt_engineering_prompt_chaining/</loc>
-         <lastmod>2025-04-28</lastmod>
+         <lastmod>2025-05-02</lastmod>
     </url>
     <url>
          <loc>https://John-Jepsen.github.io/labs/prompt_emgineering/prompt_engineering_role_persona/</loc>
-         <lastmod>2025-04-28</lastmod>
+         <lastmod>2025-05-02</lastmod>
     </url>
     <url>
          <loc>https://John-Jepsen.github.io/labs/prompt_emgineering/prompt_engineering_structured_prompting/</loc>
-         <lastmod>2025-04-28</lastmod>
+         <lastmod>2025-05-02</lastmod>
     </url>
     <url>
          <loc>https://John-Jepsen.github.io/labs/quantum/part0_orientation/</loc>
-         <lastmod>2025-04-28</lastmod>
+         <lastmod>2025-05-02</lastmod>
     </url>
     <url>
          <loc>https://John-Jepsen.github.io/labs/quantum/part1_bits_vs_qubits/</loc>
-         <lastmod>2025-04-28</lastmod>
+         <lastmod>2025-05-02</lastmod>
     </url>
     <url>
          <loc>https://John-Jepsen.github.io/labs/quantum/part2_linear_algebra/</loc>
-         <lastmod>2025-04-28</lastmod>
+         <lastmod>2025-05-02</lastmod>
     </url>
     <url>
          <loc>https://John-Jepsen.github.io/labs/quantum/part3_single_qubit_operations/</loc>
-         <lastmod>2025-04-28</lastmod>
+         <lastmod>2025-05-02</lastmod>
     </url>
     <url>
          <loc>https://John-Jepsen.github.io/labs/quantum/part4_measurement_probability/</loc>
-         <lastmod>2025-04-28</lastmod>
+         <lastmod>2025-05-02</lastmod>
     </url>
     <url>
          <loc>https://John-Jepsen.github.io/labs/quantum/part5_multi_qubit_magic/</loc>
-         <lastmod>2025-04-28</lastmod>
+         <lastmod>2025-05-02</lastmod>
     </url>
     <url>
          <loc>https://John-Jepsen.github.io/labs/quantum/part6_algorithms_primer/</loc>
-         <lastmod>2025-04-28</lastmod>
+         <lastmod>2025-05-02</lastmod>
     </url>
     <url>
          <loc>https://John-Jepsen.github.io/labs/quantum/part7_noise_error_reality/</loc>
-         <lastmod>2025-04-28</lastmod>
+         <lastmod>2025-05-02</lastmod>
     </url>
     <url>
          <loc>https://John-Jepsen.github.io/labs/quantum/part8_toolchain_ecosystem/</loc>
-         <lastmod>2025-04-28</lastmod>
+         <lastmod>2025-05-02</lastmod>
     </url>
     <url>
          <loc>https://John-Jepsen.github.io/labs/quantum/part9_ship_something/</loc>
-         <lastmod>2025-04-28</lastmod>
+         <lastmod>2025-05-02</lastmod>
+    </url>
+    <url>
+         <loc>https://John-Jepsen.github.io/labs/react/</loc>
+         <lastmod>2025-05-02</lastmod>
+    </url>
+    <url>
+         <loc>https://John-Jepsen.github.io/labs/react/01-getting-started/</loc>
+         <lastmod>2025-05-02</lastmod>
+    </url>
+    <url>
+         <loc>https://John-Jepsen.github.io/labs/react/02-modern-react-fundamentals/</loc>
+         <lastmod>2025-05-02</lastmod>
+    </url>
+    <url>
+         <loc>https://John-Jepsen.github.io/labs/react/03-edge-computing-streaming/</loc>
+         <lastmod>2025-05-02</lastmod>
+    </url>
+    <url>
+         <loc>https://John-Jepsen.github.io/labs/react/04-type-safe-development/</loc>
+         <lastmod>2025-05-02</lastmod>
+    </url>
+    <url>
+         <loc>https://John-Jepsen.github.io/labs/react/05-styling/</loc>
+         <lastmod>2025-05-02</lastmod>
+    </url>
+    <url>
+         <loc>https://John-Jepsen.github.io/labs/react/06-ai-integration/</loc>
+         <lastmod>2025-05-02</lastmod>
+    </url>
+    <url>
+         <loc>https://John-Jepsen.github.io/labs/react/07-backend-integration/</loc>
+         <lastmod>2025-05-02</lastmod>
+    </url>
+    <url>
+         <loc>https://John-Jepsen.github.io/labs/react/08-deployment/</loc>
+         <lastmod>2025-05-02</lastmod>
+    </url>
+    <url>
+         <loc>https://John-Jepsen.github.io/labs/react/09-troubleshooting/</loc>
+         <lastmod>2025-05-02</lastmod>
     </url>
 </urlset>

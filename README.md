@@ -26,10 +26,31 @@ python setup_markdown.py
 3. Start the development server:
 
 ```bash
-mkdocs serve
+./serve_docs.sh
 ```
 
 4. Open your browser to `http://127.0.0.1:8000`
+
+## Updating the Documentation
+
+When you add new content to the `docs/` directory, you can automatically update the MkDocs site:
+
+```bash
+./update_docs_site.sh
+```
+
+This script will:
+
+- Scan the `docs/` directory for all markdown files
+- Update the `mkdocs.yml` navigation structure
+- Build the site with the new content
+- Report what files were added or removed
+
+You can also run the Python script directly:
+
+```bash
+python update_mkdocs.py
+```
 
 ## Features
 
