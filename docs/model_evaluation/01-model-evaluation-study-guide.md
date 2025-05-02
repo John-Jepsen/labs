@@ -3,7 +3,7 @@
 ## Table of Contents
 
 1. [Problem Interpretation](#problem-interpretation)
-2. [Input/Output Analysis](#input-output-analysis)
+2. [Input/Output Analysis](#inputoutput-analysis)
 3. [Examples and Patterns](#examples-and-patterns)
 4. [Decomposition](#decomposition)
 5. [Choosing the Right Tools](#choosing-the-right-tools)
