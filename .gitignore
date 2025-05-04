@@ -74,18 +74,5 @@ site/
 logs/
 *.log
 
-# Script and template files
-interactive_docs/create_image_finder_rule.sh
-interactive_docs/create_rule.sh
-interactive_docs/manage_github_pages.sh
-
-# Temporary/development directories
-interactive_docs/.cursor/
-interactive_docs/collab/
-interactive_docs/docs/
-interactive_docs/interactive_docs/
-interactive_docs/ml_maths/
-interactive_docs/prompt_templates/
-
 # Git submodules with untracked content
 labs/
