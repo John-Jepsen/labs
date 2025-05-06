@@ -68,6 +68,31 @@ nav:
       - 02 Model Evaluation Cheat Sheets: model_evaluation/02-model-evaluation-cheat-sheets.md
       - 03 Model Evaluation Practice Problems: model_evaluation/03-model-evaluation-practice-problems.md
       - 04 Model Evaluation Visual Guide: model_evaluation/04-model-evaluation-visual-guide.md
+  - Practice Arena:
+      - Binary Search: practice_arena/binary_search.md
+      - BFS Search: practice_arena/bfs_search.md
+      - BFS Shortest Path: practice_arena/bfs_shortest_path.md
+      - Bellman Ford: practice_arena/bellman_ford.md
+      - Bucket Sort: practice_arena/bucket_sort.md
+      - Counting Sort: practice_arena/counting_sort.md
+      - DFS Search: practice_arena/dfs_search.md
+      - Dijkstras: practice_arena/dijkstras.md
+      - Floyd Warshall: practice_arena/floyd_warshall.md
+      - Heapsort: practice_arena/heapsort.md
+      - Knapsack: practice_arena/knapsack.md
+      - KMP Pattern Matching: practice_arena/kmp_pattern_matching.md
+      - Kruskals: practice_arena/kruskals.md
+      - Longest Common Subsequence: practice_arena/longest_common_subsequence.md
+      - Longest Increasing Subsequence: practice_arena/longest_increasing_subsequence.md
+      - Merge Intervals: practice_arena/merge_intervals.md
+      - Merge Sort: practice_arena/merge_sort.md
+      - Prims: practice_arena/prims.md
+      - Quick Select: practice_arena/quick_select.md
+      - Quick Sort: practice_arena/quick_sort.md
+      - Radix Sort: practice_arena/radix_sort.md
+      - Subset Sum: practice_arena/subset_sum.md
+      - Topological Sort: practice_arena/topological_sort.md
+      - Two Pointers: practice_arena/two_pointers.md
   - Prompt Emgineering:
       - Advanced Prompt Engineering Guide: prompt_emgineering/advanced_prompt_engineering_guide.md
       - Documentation Request: prompt_emgineering/documentation_request.md
