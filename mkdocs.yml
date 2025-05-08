@@ -127,3 +127,20 @@ nav:
       - 08 Deployment: react/08-deployment.md
       - 09 Troubleshooting: react/09-troubleshooting.md
       - Readme: react/README.md
+  - Power BI:
+      - Overview: power_bi/index.md
+      - 01 Environment Setup: power_bi/01-environment-setup.md
+      - 02 Data Sources: power_bi/02-data-sources.md
+      - 03 Data Modeling: power_bi/03-data-modeling.md
+      - 04 Visualizations: power_bi/04-visualizations.md
+      - 05 Publishing: power_bi/05-publishing.md
+      - 06 Advanced Topics: power_bi/06-advanced-topics.md
+      - 07 Troubleshooting: power_bi/07-troubleshooting.md
+  - COBOL:
+      - Overview: cobol/index.md
+      - 01 Local Setup: cobol/01-local-setup.md
+      - 02 COBOL Fundamentals: cobol/02-cobol-fundamentals.md
+      - 03 File Operations: cobol/03-file-operations.md
+      - 04 Mainframe Concepts: cobol/04-mainframe-concepts.md
+      - 05 Advanced Topics: cobol/05-advanced-topics.md
+      - 06 Practical Applications: cobol/06-practical-applications.md
