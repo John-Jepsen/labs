@@ -27,6 +27,7 @@ theme:
     accent: indigo
     primary: indigo
     scheme: default
+  custom_dir: docs/overrides
 nav:
   - Home: index.md
   - Agentic:

@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+{{ super() }}
+
+<!-- Was this helpful button -->
+<script>
+let helpfulCount = 0;
+
+function incrementHelpfulCount() {
+  helpfulCount++;
+  document.getElementById('helpfulCount').textContent = helpfulCount;
+  localStorage.setItem('helpfulCount_' + window.location.pathname, helpfulCount);
+}
+
+// Load saved count on page load
+window.onload = function() {
+  const savedCount = localStorage.getItem('helpfulCount_' + window.location.pathname);
+  if (savedCount) {
+    helpfulCount = parseInt(savedCount);
+    document.getElementById('helpfulCount').textContent = helpfulCount;
+  }
+}
+</script>
+
+<div style="margin-top: 2rem; padding-top: 1rem; border-top: 1px solid #e0e0e0;">
+  <button id="helpfulBtn" onclick="incrementHelpfulCount()" style="padding: 8px 16px; background-color: #4051b5; color: white; border: none; border-radius: 4px; cursor: pointer;">
+    Yes, this helped! (<span id="helpfulCount">0</span>)
+  </button>
+</div>
+{% endblock %} 
