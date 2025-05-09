@@ -17,51 +17,53 @@
 
 ## 1. Forward Pass
 
-- Formula:  
-  \[
+- Formula:
+  $$
   \hat{y} = x \times w
-  \]
+  $$
 - Purpose:
   - Happens during both training and inference.
-  - Calculates the predicted output (\(\hat{y}\)) using input \(x\) and weight \(w\).
+  - Calculates the predicted output ($\hat{y}$) using input $x$ and weight $w$.
   - Often uses Euclidean distance for error calculation.
 
 ---
 
 ## 2. Loss Calculation
 
-- Loss Function (Mean Squared Error - MSE):  
-  \[
-  \text{MSE} = \frac{1}{n} \sum\_{i=1}^{n} (y_i - \hat{y}\_i)^2
-  \]
+- Loss Function (Mean Squared Error - MSE):
+  $$
+  \text{MSE} = \frac{1}{n} \sum_{i=1}^{n} (y_i - \hat{y}_i)^2
+  $$
 - Purpose:
-  - Measures the average squared difference between the true output \(y\) and predicted output \(\hat{y}\).
+  - Measures the average squared difference between the true output $y$ and predicted output $\hat{y}$.
 
 ---
 
 ## 3. Backward Pass (Gradient Calculation)
 
-- Objective: Calculate \(\frac{\partial L}{\partial w}\) to update weights.
+- Objective: Calculate $\frac{\partial L}{\partial w}$ to update weights.
 
 ### Step-by-Step:
 
-1. Compute derivative of loss with respect to prediction:  
-   \[
+1. Compute derivative of loss with respect to prediction:
+
+   $$
    \frac{\partial L}{\partial \hat{y}} = -2(y - \hat{y})
-   \]
+   $$
 
-2. Compute derivative of prediction with respect to weight:  
-   \[
+2. Compute derivative of prediction with respect to weight:
+
+   $$
    \frac{\partial \hat{y}}{\partial w} = x
-   \]
+   $$
 
-3. Chain Rule Application:  
-   \[
+3. Chain Rule Application:
+   $$
    \frac{\partial L}{\partial w} = \frac{\partial L}{\partial \hat{y}} \times \frac{\partial \hat{y}}{\partial w} = -2(y - \hat{y}) \cdot x
-   \]
+   $$
 
 - Interpretation:
-  - \(\frac{\partial L}{\partial w}\) tells us how to adjust \(w\) to minimize the loss.
+  - $\frac{\partial L}{\partial w}$ tells us how to adjust $w$ to minimize the loss.
   - This is used in gradient descent updates.
 
 ---
@@ -69,7 +71,7 @@
 ## 4. Optimization Insight
 
 - **Learning Rate** affects how fast weights change.
-- **Early Stopping** is applied when answers are “good enough” to avoid overfitting.
+- **Early Stopping** is applied when answers are "good enough" to avoid overfitting.
 - Steep vs. Flat Gradients:
   - Sharp gradients lead to fast convergence but risk instability.
   - Flat gradients slow learning but improve stability.
@@ -82,77 +84,93 @@
 
 ### Initial Parameters
 
-- Input (\(x\)): 2
-- Weight (\(w\)): 3
-- True Output (\(y\)): 10
-- Learning Rate (\(\eta\)): 0.1
+- Input ($x$): 2
+- Weight ($w$): 3
+- True Output ($y$): 10
+- Learning Rate ($\eta$): 0.1
 
 ---
 
 ## First Iteration
 
-1. **Forward Pass**  
-   \[
-   \hat{y} = x \times w = 2 \times 3 = 6
-   \]  
-   Predicted Output: \(\hat{y} = 6\)
+1. **Forward Pass**
 
-2. **Loss Calculation**  
-   \[
+   $$
+   \hat{y} = x \times w = 2 \times 3 = 6
+   $$
+
+   Predicted Output: $\hat{y} = 6$
+
+2. **Loss Calculation**
+
+   $$
    \text{MSE} = (y - \hat{y})^2 = (10 - 6)^2 = 16
-   \]  
+   $$
+
    Loss: **16**
 
-3. **Backward Pass**  
-   \[
-   \frac{\partial L}{\partial \hat{y}} = -2(10 - 6) = -8  
-   \]  
-   \[
-   \frac{\partial \hat{y}}{\partial w} = 2  
-   \]  
-   \[
-   \frac{\partial L}{\partial w} = -8 \times 2 = -16  
-   \]  
+3. **Backward Pass**
+
+   $$
+   \frac{\partial L}{\partial \hat{y}} = -2(10 - 6) = -8
+   $$
+
+   $$
+   \frac{\partial \hat{y}}{\partial w} = 2
+   $$
+
+   $$
+   \frac{\partial L}{\partial w} = -8 \times 2 = -16
+   $$
+
    Gradient: **-16**
 
-4. **Weight Update**  
-   \[
-   w\_{\text{new}} = 3 - 0.1 \times (-16) = 3 + 1.6 = 4.6
-   \]  
+4. **Weight Update**
+   $$
+   w_{\text{new}} = 3 - 0.1 \times (-16) = 3 + 1.6 = 4.6
+   $$
    New Weight: **4.6**
 
 ---
 
 ## Second Iteration
 
-1. **Forward Pass**  
-   \[
-   \hat{y} = 2 \times 4.6 = 9.2
-   \]  
-   Predicted Output: \(\hat{y} = 9.2\)
+1. **Forward Pass**
 
-2. **Loss Calculation**  
-   \[
+   $$
+   \hat{y} = 2 \times 4.6 = 9.2
+   $$
+
+   Predicted Output: $\hat{y} = 9.2$
+
+2. **Loss Calculation**
+
+   $$
    \text{MSE} = (10 - 9.2)^2 = 0.8^2 = 0.64
-   \]  
+   $$
+
    New Loss: **0.64**
 
-3. **Backward Pass**  
-   \[
-   \frac{\partial L}{\partial \hat{y}} = -2(10 - 9.2) = -1.6  
-   \]  
-   \[
-   \frac{\partial \hat{y}}{\partial w} = 2  
-   \]  
-   \[
-   \frac{\partial L}{\partial w} = -1.6 \times 2 = -3.2  
-   \]  
+3. **Backward Pass**
+
+   $$
+   \frac{\partial L}{\partial \hat{y}} = -2(10 - 9.2) = -1.6
+   $$
+
+   $$
+   \frac{\partial \hat{y}}{\partial w} = 2
+   $$
+
+   $$
+   \frac{\partial L}{\partial w} = -1.6 \times 2 = -3.2
+   $$
+
    Gradient: **-3.2**
 
-4. **Weight Update**  
-   \[
-   w\_{\text{new}} = 4.6 - 0.1 \times (-3.2) = 4.6 + 0.32 = 4.92
-   \]  
+4. **Weight Update**
+   $$
+   w_{\text{new}} = 4.6 - 0.1 \times (-3.2) = 4.6 + 0.32 = 4.92
+   $$
    New Weight: **4.92**
 
 ---

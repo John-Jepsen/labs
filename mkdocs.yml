@@ -4,7 +4,8 @@ markdown_extensions:
   - footnotes
   - meta
   - toc
-  - pymdownx.arithmatex
+  - pymdownx.arithmatex:
+      generic: true
   - pymdownx.superfences
   - pymdownx.tabbed
   - pymdownx.tasklist
@@ -146,3 +147,5 @@ nav:
       - 06 Practical Applications: cobol/06-practical-applications.md
   - Neural Networks:
       - 01 Forward Pass Loss And Backpropagation: neural_networks/01-forward_pass_loss_and_backpropagation.md
+extra_javascript:
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js

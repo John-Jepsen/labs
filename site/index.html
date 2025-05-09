@@ -540,6 +540,15 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#was-this-helpful" class="md-nav__link">
+    <span class="md-ellipsis">
+      Was this helpful?
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -3648,6 +3657,15 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#was-this-helpful" class="md-nav__link">
+    <span class="md-ellipsis">
+      Was this helpful?
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -3672,14 +3690,41 @@
 <li><strong>Computer Vision</strong>: Learn about image manipulation, filtering, edge detection, contour detection, face detection, and image segmentation</li>
 <li><strong>Data Structures &amp; Algorithms</strong>: Study fundamental data structures and algorithms like BFS, DFS, binary search, and more</li>
 <li><strong>Job Preparation</strong>: Get ready for fullstack interviews with Java and Python preparation guides</li>
+<li><strong>Model Evaluation</strong>: Learn about model evaluation techniques, metrics, and best practices</li>
+<li><strong>Practice Arena</strong>: Practice various algorithms and data structures with hands-on exercises</li>
+<li><strong>Prompt Engineering</strong>: Master the art of prompt engineering with comprehensive guides</li>
 <li><strong>Quantum Computing</strong>: Dive into quantum computing from basic concepts to practical applications</li>
 <li><strong>React</strong>: Master modern React development from fundamentals to deployment</li>
-<li><strong>Prompt Engineering</strong>: Learn techniques for effective prompt engineering</li>
+<li><strong>Power BI</strong>: Learn data visualization and business intelligence with Power BI</li>
+<li><strong>COBOL</strong>: Explore mainframe programming and COBOL development</li>
 </ul>
 <h2 id="getting-started">Getting Started</h2>
-<p>Browse the topics in the navigation menu to get started with your learning journey!</p>
+<p>Browse the topics in the navigation menu to get started with your learning journey! Each section contains detailed guides, examples, and practical exercises to help you master the concepts.</p>
 <h2 id="for-contributors">For Contributors</h2>
-<p>This is a collaborative documentation project. Feel free to contribute by improving the content or adding new topics.</p>
+<p>This is a collaborative documentation project. Feel free to contribute by improving the content or adding new topics. Your contributions help make this resource better for everyone.</p>
+<h2 id="was-this-helpful">Was this helpful?</h2>
+<script>
+let helpfulCount = 0;
+
+function incrementHelpfulCount() {
+  helpfulCount++;
+  document.getElementById('helpfulCount').textContent = helpfulCount;
+  localStorage.setItem('helpfulCount', helpfulCount);
+}
+
+// Load saved count on page load
+window.onload = function() {
+  const savedCount = localStorage.getItem('helpfulCount');
+  if (savedCount) {
+    helpfulCount = parseInt(savedCount);
+    document.getElementById('helpfulCount').textContent = helpfulCount;
+  }
+}
+</script>
+
+<p><button id="helpfulBtn" onclick="incrementHelpfulCount()" style="padding: 8px 16px; background-color: #4051b5; color: white; border: none; border-radius: 4px; cursor: pointer;">
+  Yes, this helped! (<span id="helpfulCount">0</span>)
+</button></p>
 
 
 
