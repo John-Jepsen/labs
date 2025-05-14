@@ -15,6 +15,7 @@ Welcome to the Collaborative Documentation site! This site contains a collection
 - **React**: Master modern React development from fundamentals to deployment
 - **Power BI**: Learn data visualization and business intelligence with Power BI
 - **COBOL**: Explore mainframe programming and COBOL development
+- **Neural Networks**: Understand the fundamentals of neural networks, including forward pass, loss, and backpropagation
 
 ## Getting Started
 
