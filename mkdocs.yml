@@ -118,6 +118,14 @@ nav:
       - Part7 Noise Error Reality: quantum/part7_noise_error_reality.md
       - Part8 Toolchain Ecosystem: quantum/part8_toolchain_ecosystem.md
       - Part9 Ship Something: quantum/part9_ship_something.md
+      - ML Maths:
+          - 01 Numbers Sets Logic: quantum/ml_maths/01_numbers_sets_logic.md
+          - 02 Functions And Graphs: quantum/ml_maths/02_functions_and_graphs.md
+          - 03 Sequences And Series: quantum/ml_maths/03_sequences_and_series.md
+          - 04 Limits And Continuity: quantum/ml_maths/04_limits_and_continuity.md
+          - 05 Differential Calculus: quantum/ml_maths/05_differential_calculus.md
+          - 06 Multivariate Calculus: quantum/ml_maths/06_multivariate_calculus.md
+          - 07 Integral Calculus: quantum/ml_maths/07_integral_calculus.md
   - React:
       - 01 Getting Started: react/01-getting-started.md
       - 02 Modern React Fundamentals: react/02-modern-react-fundamentals.md
@@ -129,6 +137,21 @@ nav:
       - 08 Deployment: react/08-deployment.md
       - 09 Troubleshooting: react/09-troubleshooting.md
       - Readme: react/README.md
+  - System Design:
+      - Introduction:
+          - 01 What Is A System: system_design/introduction/01_what_is_a_system.md
+          - 02 Modeling Simple Data Structures: system_design/introduction/02_modeling_simple_data_structures.md
+          - 03 Basic API Design Concepts: system_design/introduction/03_basic_api_design_concepts.md
+          - 04 Data Flow In Simple Applications: system_design/introduction/04_data_flow_in_simple_applications.md
+          - 05 Visualizing User Interactions: system_design/introduction/05_visualizing_user_interactions.md
+          - 06 Introduction To State Management: system_design/introduction/06_introduction_to_state_management.md
+      - Advanced:
+          - 01 Monolith Design Fundamentals: system_design/advanced/01_monolith_design_fundamentals.md
+          - 02 Scaling With Load Balancers Caching: system_design/advanced/02_scaling_with_load_balancers_caching.md
+          - 03 Queue Based Architectures: system_design/advanced/03_queue_based_architectures.md
+          - 04 Data Partitioning Sharding: system_design/advanced/04_data_partitioning_sharding.md
+          - 05 Real Time Systems: system_design/advanced/05_real_time_systems.md
+          - 06 Distributed Recommendation Engine: system_design/advanced/06_distributed_recommendation_engine.md
   - Power BI:
       - Overview: power_bi/index.md
       - 01 Environment Setup: power_bi/01-environment-setup.md
