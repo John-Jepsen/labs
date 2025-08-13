@@ -1,22 +1,30 @@
 # Model Evaluation
 
-This section provides comprehensive resources for evaluating machine learning models. Understanding how to properly evaluate models is essential for developing effective machine learning solutions.
+Evaluate the right thing, the right way. This section gives you practical, production-grade guidance to choose metrics, validate models correctly, compare models rigorously, and avoid common traps like data leakage and misleading metrics.
 
-## Overview
+## Quick start: choose the right metric
 
-Model evaluation is the process of assessing how well your machine learning models perform. This involves using various metrics and techniques to measure prediction accuracy, generalization capability, and other performance aspects.
+- Binary classification (balanced): ROC-AUC for ranking; F1 if you care about both precision/recall; Accuracy only if classes and costs are balanced.
+- Binary classification (imbalanced): PR-AUC, Recall@k, Precision@k, F-beta for recall-heavy applications, Matthews Correlation Coefficient (MCC) for balanced summary.
+- Multi-class: Macro-averaged F1 for class balance, Weighted F1 for class imbalance, Top-k accuracy for retrieval-like tasks.
+- Regression: MAE when outliers matter less; RMSE when large errors must be penalized; MAPE/sMAPE when relative error matters; R^2 is descriptive, not a business metric.
+- Ranking/recommendation: MAP, NDCG@k, HitRate@k, coverage/diversity.
+- Probabilistic forecasts: Log loss (cross-entropy), Brier score, calibration curves, sharpness vs calibration trade-off.
+- Time series: MAE/RMSE on rolling-origin splits; MASE and sMAPE for scale-free comparisons.
 
-## Key Topics
+## Avoid the top pitfalls
 
-- **Classification Metrics**: Accuracy, precision, recall, F1 score, ROC curves, and AUC
-- **Regression Metrics**: MAE, MSE, RMSE, R-squared, and adjusted R-squared
-- **Validation Techniques**: Train-test splits, cross-validation, and stratified sampling
-- **Overfitting Detection**: Learning curves, validation curves, and regularization
-- **Model Comparison**: Statistical tests and confidence intervals
+- Train/test contamination: leakage via target, time, or group identity. Use time-aware or group-aware splits.
+- Overfitting on the test set: keep a holdout; use nested CV for fair model selection.
+- Misleading accuracy on imbalanced data: prefer PR-AUC or cost-sensitive metrics.
+- Threshold choice ignored: optimize threshold on validation with business costs; report sensitivity to threshold.
+- No uncertainty: add confidence intervals via bootstrap or analytical tests (e.g., DeLong for AUC).
 
-## Available Resources
+## What you’ll find here
 
-- [Study Guide](01-model-evaluation-study-guide.md): Comprehensive overview of evaluation concepts
-- [Cheat Sheets](02-model-evaluation-cheat-sheets.md): Quick reference for formulas and code snippets
-- [Practice Problems](03-model-evaluation-practice-problems.md): Test your understanding with hands-on exercises
-- [Visual Guide](04-model-evaluation-visual-guide.md): Visual explanations of key concepts
+- [Study Guide](01-model-evaluation-study-guide.md): Deep dive with formulas, code, and best practices
+- [Cheat Sheets](02-model-evaluation-cheat-sheets.md): One-page references for metrics and scikit-learn scorers
+- [Practice Problems](03-model-evaluation-practice-problems.md): Hands-on exercises with solutions
+- [Visual Guide](04-model-evaluation-visual-guide.md): Intuitive diagrams and plot interpretations
+
+Tip: All pages support math (MathJax), admonitions, and tabs. Copy/paste the provided code to reproduce results.

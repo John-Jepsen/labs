@@ -1,50 +1,79 @@
 # Model Evaluation Cheat Sheets
 
-Quick reference guides for model evaluation techniques and metrics.
+Quick reference for formulas, when-to-use, and scikit-learn scorers.
 
-## Classification Metrics Cheat Sheet
+## Classification metrics
 
-| Metric    | Formula                                         | Use Case                        |
-| --------- | ----------------------------------------------- | ------------------------------- |
-| Accuracy  | (TP + TN) / (TP + TN + FP + FN)                 | Balanced datasets               |
-| Precision | TP / (TP + FP)                                  | When false positives are costly |
-| Recall    | TP / (TP + FN)                                  | When false negatives are costly |
-| F1 Score  | 2 _ (Precision _ Recall) / (Precision + Recall) | Balancing precision and recall  |
-| AUC       | Area under ROC curve                            | Model comparison                |
+| Metric | Formula | Notes |
+| --- | --- | --- |
+| Accuracy | (TP+TN)/(TP+TN+FP+FN) | Only for balanced classes/costs |
+| Precision | TP/(TP+FP) | How pure positive predictions are |
+| Recall (TPR) | TP/(TP+FN) | How complete positive retrieval is |
+| Specificity (TNR) | TN/(TN+FP) | True negative rate |
+| F1 | 2·PR/(P+R) | Harmonic mean of P and R |
+| Fβ | (1+β²)·P·R/(β²·P+R) | β>1 emphasizes recall |
+| ROC-AUC | ∫ TPR dFPR | Threshold-free ranking quality |
+| PR-AUC | ∫ Precision dRecall | Prefer under imbalance |
+| MCC | (TP·TN−FP·FN)/√((TP+FP)(TP+FN)(TN+FP)(TN+FN)) | Balanced single summary |
 
-## Regression Metrics Cheat Sheet
+Common sklearn scorers:
 
-| Metric | Formula                   | Use Case                |
-| ------ | ------------------------- | ----------------------- |
-| MAE    | (1/n) \* Σ\|y_i - ŷ_i\|   | Linear error importance |
-| MSE    | (1/n) \* Σ(y_i - ŷ_i)²    | Penalize large errors   |
-| RMSE   | √((1/n) \* Σ(y_i - ŷ_i)²) | Same units as target    |
-| R²     | 1 - (SS_res / SS_tot)     | Explanatory power       |
+- binary/multiclass: 'accuracy', 'precision', 'recall', 'f1', 'f1_macro', 'f1_weighted', 'roc_auc', 'roc_auc_ovr', 'average_precision'
 
-## Common Python Code Snippets
+## Regression metrics
+
+| Metric | Formula | Notes |
+| --- | --- | --- |
+| MAE | mean(|y−ŷ|) | Robust to outliers |
+| MSE | mean((y−ŷ)²) | Penalizes large errors |
+| RMSE | √MSE | Same units as y |
+| R² | 1 − SS_res/SS_tot | Descriptive fit |
+| MAPE | mean(|(y−ŷ)/y|) | Beware y≈0 |
+| sMAPE | mean(2·|y−ŷ|/(|y|+|ŷ|)) | Scale-free |
+| MASE | mean(|y−ŷ|) / mean(|y_t − y_{t−1}|) | Baseline-relative |
+
+Sklearn scorers:
+
+- 'neg_mean_absolute_error', 'neg_mean_squared_error', 'neg_root_mean_squared_error', 'r2'
+
+## Splitting and CV
 
 ```python
-# Classification metrics
-from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, roc_auc_score
+from sklearn.model_selection import (
+    train_test_split, KFold, StratifiedKFold, GroupKFold, TimeSeriesSplit,
+    cross_val_score
+)
+```
 
-accuracy = accuracy_score(y_true, y_pred)
-precision = precision_score(y_true, y_pred)
-recall = recall_score(y_true, y_pred)
-f1 = f1_score(y_true, y_pred)
-auc = roc_auc_score(y_true, y_pred_proba)
+- Classification: use StratifiedKFold; set shuffle=True, random_state for reproducibility.
+- Time series: use TimeSeriesSplit; never shuffle.
+- Grouped data: use GroupKFold/StratifiedGroupKFold.
 
-# Regression metrics
-from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
+## Threshold selection
+
+Given costs C_FP, C_FN and prevalence π, calibrated probabilities ->
+
+t* = (C_FP · (1−π)) / (C_FN · π + C_FP · (1−π))
+
+Grid search a threshold on validation to maximize expected utility or Fβ.
+
+## Quick code snippets
+
+```python
+# Cross-validated ROC-AUC
+from sklearn.model_selection import StratifiedKFold, cross_val_score
+from sklearn.metrics import make_scorer, roc_auc_score
+cv = StratifiedKFold(n_splits=5, shuffle=True, random_state=42)
+auc = cross_val_score(model, X, y, cv=cv, scoring='roc_auc').mean()
+
+# Precision-Recall curve and AP
+from sklearn.metrics import precision_recall_curve, average_precision_score
+p, r, th = precision_recall_curve(y_true, y_prob)
+ap = average_precision_score(y_true, y_prob)
+
+# Regression CV with RMSE
 import numpy as np
-
-mae = mean_absolute_error(y_true, y_pred)
-mse = mean_squared_error(y_true, y_pred)
-rmse = np.sqrt(mse)
-r2 = r2_score(y_true, y_pred)
-
-# Cross-validation
-from sklearn.model_selection import cross_val_score, KFold
-
+from sklearn.model_selection import KFold
 cv = KFold(n_splits=5, shuffle=True, random_state=42)
-scores = cross_val_score(model, X, y, cv=cv, scoring='accuracy')
+rmse = (-cross_val_score(model, X, y, cv=cv, scoring='neg_root_mean_squared_error')).mean()
 ```

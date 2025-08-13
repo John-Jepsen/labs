@@ -1,175 +1,164 @@
 markdown_extensions:
-  - admonition
-  - codehilite
-  - footnotes
-  - meta
-  - toc
-  - pymdownx.arithmatex:
-      generic: true
-  - pymdownx.superfences
-  - pymdownx.tabbed
-  - pymdownx.tasklist
+    - admonition
+    - codehilite
+    - footnotes
+    - meta
+    - toc
+    - pymdownx.arithmatex:
+          generic: true
+    - pymdownx.superfences
+    - pymdownx.tabbed
+    - pymdownx.tasklist
 plugins:
-  - search
-  - minify
+    - search
+    - minify
 site_name: Collaborative Documentation
 site_url: https://John-Jepsen.github.io/labs/
 theme:
-  features:
-    - navigation.tabs
-    - navigation.sections
-    - navigation.expand
-    - navigation.top
-    - search.highlight
-    - search.suggest
-  name: material
-  palette:
-    accent: indigo
-    primary: indigo
-    scheme: default
-  custom_dir: docs/overrides
+    features:
+        - navigation.tabs
+        - navigation.sections
+        - navigation.expand
+        - navigation.top
+        - search.highlight
+        - search.suggest
+    name: material
+    palette:
+        accent: indigo
+        primary: indigo
+        scheme: default
+    custom_dir: docs/overrides
 nav:
-  - Home: index.md
-  - Agentic:
-      - 01 Reactive Agent: agentic/01_reactive_agent.md
-      - 02 Planning Agent: agentic/02_planning_agent.md
-      - 03 Tool Using Agent: agentic/03_tool_using_agent.md
-      - 04 Memory Augmented Agent: agentic/04_memory_augmented_agent.md
-      - 05 Multi Agent Collaboration: agentic/05_multi_agent_collaboration.md
-      - 06 Self Reflective Agent: agentic/06_self_reflective_agent.md
-  - Computer Vision:
-      - 01 Image Loading And Manipulation: computer_vision/01_image_loading_and_manipulation.md
-      - 02 Filtering And Convolution: computer_vision/02_filtering_and_convolution.md
-      - 03 Edge Detection: computer_vision/03_edge_detection.md
-      - 04 Contour Detection And Shapes: computer_vision/04_contour_detection_and_shapes.md
-      - 05 Face Detection: computer_vision/05_face_detection.md
-      - 06 Image Segmentation: computer_vision/06_image_segmentation.md
-      - Computer Vision Labs 2024 07 06: computer_vision/computer_vision_labs_2024-07-06.md
-  - Ds Algo:
-      - Algos:
-          - 01 Breadth First Search: ds_algo/algos/01_breadth_first_search.md
-          - 02 Depth First Search: ds_algo/algos/02_depth_first_search.md
-          - 03 Binary Search: ds_algo/algos/03_binary_search.md
-          - 04 Uniform Cost Search: ds_algo/algos/04_uniform_cost_search.md
-          - 05 A Star Search: ds_algo/algos/05_a_star_search.md
-          - 06 Iterative Deepening Dfs: ds_algo/algos/06_iterative_deepening_dfs.md
-          - Ds Algo Prompt: ds_algo/algos/ds_algo_prompt.md
-      - Data Structures:
-          - 01 Arrays And Lists: ds_algo/data_structures/01_arrays_and_lists.md
-          - 02 Stacks: ds_algo/data_structures/02_stacks.md
-          - 03 Queues: ds_algo/data_structures/03_queues.md
-          - 04 Linked Lists: ds_algo/data_structures/04_linked_lists.md
-          - 05 Hash Tables: ds_algo/data_structures/05_hash_tables.md
-          - 06 Trees: ds_algo/data_structures/06_trees.md
-  - Job Prep:
-      - Java Fullstack Interview Prep: job_prep/java_fullstack_interview_prep.md
-      - Python Fullstack Interview Prep: job_prep/python_fullstack_interview_prep.md
-  - Model Evaluation:
-      - Overview: model_evaluation/index.md
-      - 01 Model Evaluation Study Guide: model_evaluation/01-model-evaluation-study-guide.md
-      - 02 Model Evaluation Cheat Sheets: model_evaluation/02-model-evaluation-cheat-sheets.md
-      - 03 Model Evaluation Practice Problems: model_evaluation/03-model-evaluation-practice-problems.md
-      - 04 Model Evaluation Visual Guide: model_evaluation/04-model-evaluation-visual-guide.md
-  - Practice Arena:
-      - Binary Search: practice_arena/binary_search.md
-      - BFS Search: practice_arena/bfs_search.md
-      - BFS Shortest Path: practice_arena/bfs_shortest_path.md
-      - Bellman Ford: practice_arena/bellman_ford.md
-      - Bucket Sort: practice_arena/bucket_sort.md
-      - Counting Sort: practice_arena/counting_sort.md
-      - DFS Search: practice_arena/dfs_search.md
-      - Dijkstras: practice_arena/dijkstras.md
-      - Floyd Warshall: practice_arena/floyd_warshall.md
-      - Heapsort: practice_arena/heapsort.md
-      - Knapsack: practice_arena/knapsack.md
-      - KMP Pattern Matching: practice_arena/kmp_pattern_matching.md
-      - Kruskals: practice_arena/kruskals.md
-      - Longest Common Subsequence: practice_arena/longest_common_subsequence.md
-      - Longest Increasing Subsequence: practice_arena/longest_increasing_subsequence.md
-      - Merge Intervals: practice_arena/merge_intervals.md
-      - Merge Sort: practice_arena/merge_sort.md
-      - Prims: practice_arena/prims.md
-      - Quick Select: practice_arena/quick_select.md
-      - Quick Sort: practice_arena/quick_sort.md
-      - Radix Sort: practice_arena/radix_sort.md
-      - Subset Sum: practice_arena/subset_sum.md
-      - Topological Sort: practice_arena/topological_sort.md
-      - Two Pointers: practice_arena/two_pointers.md
-  - Prompt Emgineering:
-      - Advanced Prompt Engineering Guide: prompt_emgineering/advanced_prompt_engineering_guide.md
-      - Documentation Request: prompt_emgineering/documentation_request.md
-      - Guide Prompt Chaining: prompt_emgineering/guide_prompt_chaining.md
-      - Guide Role Persona Prompting: prompt_emgineering/guide_role_persona_prompting.md
-      - Guide Structured Prompting: prompt_emgineering/guide_structured_prompting.md
-      - Intermediate Prompt Engineering Guide: prompt_emgineering/intermediate_prompt_engineering_guide.md
-      - Prompt Engineering Guide: prompt_emgineering/prompt_engineering_guide.md
-      - Prompt Engineering Guide Easy: prompt_emgineering/prompt_engineering_guide_easy.md
-      - Prompt Engineering Prompt Chaining: prompt_emgineering/prompt_engineering_prompt_chaining.md
-      - Prompt Engineering Role Persona: prompt_emgineering/prompt_engineering_role_persona.md
-      - Prompt Engineering Structured Prompting: prompt_emgineering/prompt_engineering_structured_prompting.md
-  - Quantum:
-      - Part0 Orientation: quantum/part0_orientation.md
-      - Part1 Bits Vs Qubits: quantum/part1_bits_vs_qubits.md
-      - Part2 Linear Algebra: quantum/part2_linear_algebra.md
-      - Part3 Single Qubit Operations: quantum/part3_single_qubit_operations.md
-      - Part4 Measurement Probability: quantum/part4_measurement_probability.md
-      - Part5 Multi Qubit Magic: quantum/part5_multi_qubit_magic.md
-      - Part6 Algorithms Primer: quantum/part6_algorithms_primer.md
-      - Part7 Noise Error Reality: quantum/part7_noise_error_reality.md
-      - Part8 Toolchain Ecosystem: quantum/part8_toolchain_ecosystem.md
-      - Part9 Ship Something: quantum/part9_ship_something.md
-      - ML Maths:
-          - 01 Numbers Sets Logic: quantum/ml_maths/01_numbers_sets_logic.md
-          - 02 Functions And Graphs: quantum/ml_maths/02_functions_and_graphs.md
-          - 03 Sequences And Series: quantum/ml_maths/03_sequences_and_series.md
-          - 04 Limits And Continuity: quantum/ml_maths/04_limits_and_continuity.md
-          - 05 Differential Calculus: quantum/ml_maths/05_differential_calculus.md
-          - 06 Multivariate Calculus: quantum/ml_maths/06_multivariate_calculus.md
-          - 07 Integral Calculus: quantum/ml_maths/07_integral_calculus.md
-  - React:
-      - 01 Getting Started: react/01-getting-started.md
-      - 02 Modern React Fundamentals: react/02-modern-react-fundamentals.md
-      - 03 Edge Computing Streaming: react/03-edge-computing-streaming.md
-      - 04 Type Safe Development: react/04-type-safe-development.md
-      - 05 Styling: react/05-styling.md
-      - 06 Ai Integration: react/06-ai-integration.md
-      - 07 Backend Integration: react/07-backend-integration.md
-      - 08 Deployment: react/08-deployment.md
-      - 09 Troubleshooting: react/09-troubleshooting.md
-      - Readme: react/README.md
-  - System Design:
-      - Introduction:
-          - 01 What Is A System: system_design/introduction/01_what_is_a_system.md
-          - 02 Modeling Simple Data Structures: system_design/introduction/02_modeling_simple_data_structures.md
-          - 03 Basic API Design Concepts: system_design/introduction/03_basic_api_design_concepts.md
-          - 04 Data Flow In Simple Applications: system_design/introduction/04_data_flow_in_simple_applications.md
-          - 05 Visualizing User Interactions: system_design/introduction/05_visualizing_user_interactions.md
-          - 06 Introduction To State Management: system_design/introduction/06_introduction_to_state_management.md
-      - Advanced:
-          - 01 Monolith Design Fundamentals: system_design/advanced/01_monolith_design_fundamentals.md
-          - 02 Scaling With Load Balancers Caching: system_design/advanced/02_scaling_with_load_balancers_caching.md
-          - 03 Queue Based Architectures: system_design/advanced/03_queue_based_architectures.md
-          - 04 Data Partitioning Sharding: system_design/advanced/04_data_partitioning_sharding.md
-          - 05 Real Time Systems: system_design/advanced/05_real_time_systems.md
-          - 06 Distributed Recommendation Engine: system_design/advanced/06_distributed_recommendation_engine.md
-  - Power BI:
-      - Overview: power_bi/index.md
-      - 01 Environment Setup: power_bi/01-environment-setup.md
-      - 02 Data Sources: power_bi/02-data-sources.md
-      - 03 Data Modeling: power_bi/03-data-modeling.md
-      - 04 Visualizations: power_bi/04-visualizations.md
-      - 05 Publishing: power_bi/05-publishing.md
-      - 06 Advanced Topics: power_bi/06-advanced-topics.md
-      - 07 Troubleshooting: power_bi/07-troubleshooting.md
-  - COBOL:
-      - Overview: cobol/index.md
-      - 01 Local Setup: cobol/01-local-setup.md
-      - 02 COBOL Fundamentals: cobol/02-cobol-fundamentals.md
-      - 03 File Operations: cobol/03-file-operations.md
-      - 04 Mainframe Concepts: cobol/04-mainframe-concepts.md
-      - 05 Advanced Topics: cobol/05-advanced-topics.md
-      - 06 Practical Applications: cobol/06-practical-applications.md
-  - Neural Networks:
-      - 01 Forward Pass Loss And Backpropagation: neural_networks/01-forward_pass_loss_and_backpropagation.md
+    - Home: index.md
+    - Agentic:
+          - 01 Reactive Agent: agentic/01_reactive_agent.md
+          - 02 Planning Agent: agentic/02_planning_agent.md
+          - 03 Tool Using Agent: agentic/03_tool_using_agent.md
+          - 04 Memory Augmented Agent: agentic/04_memory_augmented_agent.md
+          - 05 Multi Agent Collaboration: agentic/05_multi_agent_collaboration.md
+          - 06 Self Reflective Agent: agentic/06_self_reflective_agent.md
+    - Computer Vision:
+          - 01 Image Loading And Manipulation: computer_vision/01_image_loading_and_manipulation.md
+          - 02 Filtering And Convolution: computer_vision/02_filtering_and_convolution.md
+          - 03 Edge Detection: computer_vision/03_edge_detection.md
+          - 04 Contour Detection And Shapes: computer_vision/04_contour_detection_and_shapes.md
+          - 05 Face Detection: computer_vision/05_face_detection.md
+          - 06 Image Segmentation: computer_vision/06_image_segmentation.md
+          - Computer Vision Labs 2024 07 06: computer_vision/computer_vision_labs_2024-07-06.md
+    - Ds Algo:
+          - Algos:
+                - 01 Breadth First Search: ds_algo/algos/01_breadth_first_search.md
+                - 02 Depth First Search: ds_algo/algos/02_depth_first_search.md
+                - 03 Binary Search: ds_algo/algos/03_binary_search.md
+                - 04 Uniform Cost Search: ds_algo/algos/04_uniform_cost_search.md
+                - 05 A Star Search: ds_algo/algos/05_a_star_search.md
+                - 06 Iterative Deepening Dfs: ds_algo/algos/06_iterative_deepening_dfs.md
+                - Ds Algo Prompt: ds_algo/algos/ds_algo_prompt.md
+          - Data Structures:
+                - 01 Arrays And Lists: ds_algo/data_structures/01_arrays_and_lists.md
+                - 02 Stacks: ds_algo/data_structures/02_stacks.md
+                - 03 Queues: ds_algo/data_structures/03_queues.md
+                - 04 Linked Lists: ds_algo/data_structures/04_linked_lists.md
+                - 05 Hash Tables: ds_algo/data_structures/05_hash_tables.md
+                - 06 Trees: ds_algo/data_structures/06_trees.md
+    - Job Prep:
+          - Java Fullstack Interview Prep: job_prep/java_fullstack_interview_prep.md
+          - Python Fullstack Interview Prep: job_prep/python_fullstack_interview_prep.md
+    - Model Evaluation:
+          - Overview: model_evaluation/index.md
+          - 01 Model Evaluation Study Guide: model_evaluation/01-model-evaluation-study-guide.md
+          - 02 Model Evaluation Cheat Sheets: model_evaluation/02-model-evaluation-cheat-sheets.md
+          - 03 Model Evaluation Practice Problems: model_evaluation/03-model-evaluation-practice-problems.md
+          - 04 Model Evaluation Visual Guide: model_evaluation/04-model-evaluation-visual-guide.md
+    - Practice Arena:
+          - Binary Search: practice_arena/binary_search.md
+          - BFS Search: practice_arena/bfs_search.md
+          - BFS Shortest Path: practice_arena/bfs_shortest_path.md
+          - Bellman Ford: practice_arena/bellman_ford.md
+          - Bucket Sort: practice_arena/bucket_sort.md
+          - Counting Sort: practice_arena/counting_sort.md
+          - DFS Search: practice_arena/dfs_search.md
+          - Dijkstras: practice_arena/dijkstras.md
+          - Floyd Warshall: practice_arena/floyd_warshall.md
+          - Heapsort: practice_arena/heapsort.md
+          - Knapsack: practice_arena/knapsack.md
+          - KMP Pattern Matching: practice_arena/kmp_pattern_matching.md
+          - Kruskals: practice_arena/kruskals.md
+          - Longest Common Subsequence: practice_arena/longest_common_subsequence.md
+          - Longest Increasing Subsequence: practice_arena/longest_increasing_subsequence.md
+          - Merge Intervals: practice_arena/merge_intervals.md
+          - Merge Sort: practice_arena/merge_sort.md
+          - Prims: practice_arena/prims.md
+          - Quick Select: practice_arena/quick_select.md
+          - Quick Sort: practice_arena/quick_sort.md
+          - Radix Sort: practice_arena/radix_sort.md
+          - Subset Sum: practice_arena/subset_sum.md
+          - Topological Sort: practice_arena/topological_sort.md
+          - Two Pointers: practice_arena/two_pointers.md
+    - Prompt Emgineering:
+          - Advanced Prompt Engineering Guide: prompt_emgineering/advanced_prompt_engineering_guide.md
+          - Documentation Request: prompt_emgineering/documentation_request.md
+          - Guide Prompt Chaining: prompt_emgineering/guide_prompt_chaining.md
+          - Guide Role Persona Prompting: prompt_emgineering/guide_role_persona_prompting.md
+          - Guide Structured Prompting: prompt_emgineering/guide_structured_prompting.md
+          - Intermediate Prompt Engineering Guide: prompt_emgineering/intermediate_prompt_engineering_guide.md
+          - Prompt Engineering Guide: prompt_emgineering/prompt_engineering_guide.md
+          - Prompt Engineering Guide Easy: prompt_emgineering/prompt_engineering_guide_easy.md
+          - Prompt Engineering Prompt Chaining: prompt_emgineering/prompt_engineering_prompt_chaining.md
+          - Prompt Engineering Role Persona: prompt_emgineering/prompt_engineering_role_persona.md
+          - Prompt Engineering Structured Prompting: prompt_emgineering/prompt_engineering_structured_prompting.md
+    - Quantum:
+          - Part0 Orientation: quantum/part0_orientation.md
+          - Part1 Bits Vs Qubits: quantum/part1_bits_vs_qubits.md
+          - Part2 Linear Algebra: quantum/part2_linear_algebra.md
+          - Part3 Single Qubit Operations: quantum/part3_single_qubit_operations.md
+          - Part4 Measurement Probability: quantum/part4_measurement_probability.md
+          - Part5 Multi Qubit Magic: quantum/part5_multi_qubit_magic.md
+          - Part6 Algorithms Primer: quantum/part6_algorithms_primer.md
+          - Part7 Noise Error Reality: quantum/part7_noise_error_reality.md
+          - Part8 Toolchain Ecosystem: quantum/part8_toolchain_ecosystem.md
+          - Part9 Ship Something: quantum/part9_ship_something.md
+          - ML Maths:
+                - 01 Numbers Sets Logic: quantum/ml_maths/01_numbers_sets_logic.md
+                - 02 Functions And Graphs: quantum/ml_maths/02_functions_and_graphs.md
+                - 03 Sequences And Series: quantum/ml_maths/03_sequences_and_series.md
+                - 04 Limits And Continuity: quantum/ml_maths/04_limits_and_continuity.md
+                - 05 Differential Calculus: quantum/ml_maths/05_differential_calculus.md
+                - 06 Multivariate Calculus: quantum/ml_maths/06_multivariate_calculus.md
+                - 07 Integral Calculus: quantum/ml_maths/07_integral_calculus.md
+    - System Design:
+          - Introduction:
+                - 01 What Is A System: system_design/introduction/01_what_is_a_system.md
+                - 02 Modeling Simple Data Structures: system_design/introduction/02_modeling_simple_data_structures.md
+                - 03 Basic API Design Concepts: system_design/introduction/03_basic_api_design_concepts.md
+                - 04 Data Flow In Simple Applications: system_design/introduction/04_data_flow_in_simple_applications.md
+                - 05 Visualizing User Interactions: system_design/introduction/05_visualizing_user_interactions.md
+                - 06 Introduction To State Management: system_design/introduction/06_introduction_to_state_management.md
+          - Advanced:
+                - 01 Monolith Design Fundamentals: system_design/advanced/01_monolith_design_fundamentals.md
+                - 02 Scaling With Load Balancers Caching: system_design/advanced/02_scaling_with_load_balancers_caching.md
+                - 03 Queue Based Architectures: system_design/advanced/03_queue_based_architectures.md
+                - 04 Data Partitioning Sharding: system_design/advanced/04_data_partitioning_sharding.md
+                - 05 Real Time Systems: system_design/advanced/05_real_time_systems.md
+                - 06 Distributed Recommendation Engine: system_design/advanced/06_distributed_recommendation_engine.md
+    - Power BI:
+          - Overview: power_bi/index.md
+          - 01 Environment Setup: power_bi/01-environment-setup.md
+          - 02 Data Sources: power_bi/02-data-sources.md
+          - 03 Data Modeling: power_bi/03-data-modeling.md
+          - 04 Visualizations: power_bi/04-visualizations.md
+          - 05 Publishing: power_bi/05-publishing.md
+          - 06 Advanced Topics: power_bi/06-advanced-topics.md
+          - 07 Troubleshooting: power_bi/07-troubleshooting.md
+    - COBOL:
+          - Overview: cobol/index.md
+          - 01 Local Setup: cobol/01-local-setup.md
+          - 02 COBOL Fundamentals: cobol/02-cobol-fundamentals.md
+          - 03 File Operations: cobol/03-file-operations.md
+          - 04 Mainframe Concepts: cobol/04-mainframe-concepts.md
+          - 05 Advanced Topics: cobol/05-advanced-topics.md
+          - 06 Practical Applications: cobol/06-practical-applications.md
+    - Neural Networks:
+          - 01 Forward Pass Loss And Backpropagation: neural_networks/01-forward_pass_loss_and_backpropagation.md
 extra_javascript:
-  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+    - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
