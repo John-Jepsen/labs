@@ -6,6 +6,10 @@ markdown_extensions:
     - toc
     - pymdownx.arithmatex:
           generic: true
+          preview: true
+          tex_inline_wrap: ['$', '$']
+          tex_block_wrap: ['$$', '$$']
+          smart_dollar: true
     - pymdownx.superfences
     - pymdownx.tabbed
     - pymdownx.tasklist
@@ -30,6 +34,8 @@ theme:
     custom_dir: docs/overrides
 nav:
     - Home: index.md
+    - Mathematical Notation Guide: mathematical-notation-guide.md
+    - Math Examples: math-examples.md
     - Agentic:
           - 01 Reactive Agent: agentic/01_reactive_agent.md
           - 02 Planning Agent: agentic/02_planning_agent.md
@@ -161,4 +167,7 @@ nav:
     - Neural Networks:
           - 01 Forward Pass Loss And Backpropagation: neural_networks/01-forward_pass_loss_and_backpropagation.md
 extra_javascript:
-    - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+    - assets/js/mathjax-config.js
+    - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg-full.js
+extra_css:
+    - assets/css/math-styling.css
