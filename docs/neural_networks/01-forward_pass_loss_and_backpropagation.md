@@ -32,7 +32,7 @@
 
 - Loss Function (Mean Squared Error - MSE):
   $$
-  \text{MSE} = \frac{1}{n} \sum_{i=1}^{n} (y_i - \hat{y}_i)^2
+  \loss_{\text{MSE}} = \frac{1}{n} \sum_{i=1}^{n} (y_i - \hat{y}_i)^2 \label{eq:mse}
   $$
 - Purpose:
   - Measures the average squared difference between the true output $y$ and predicted output $\hat{y}$.
@@ -41,29 +41,29 @@
 
 ## 3. Backward Pass (Gradient Calculation)
 
-- Objective: Calculate $\frac{\partial L}{\partial w}$ to update weights.
+- Objective: Calculate $\pdv{\loss}{w}$ to update weights.
 
 ### Step-by-Step:
 
 1. Compute derivative of loss with respect to prediction:
 
    $$
-   \frac{\partial L}{\partial \hat{y}} = -2(y - \hat{y})
+   \pdv{\loss}{\hat{y}} = -2(y - \hat{y}) \label{eq:loss-grad}
    $$
 
 2. Compute derivative of prediction with respect to weight:
 
    $$
-   \frac{\partial \hat{y}}{\partial w} = x
+   \pdv{\hat{y}}{w} = x \label{eq:pred-grad}
    $$
 
 3. Chain Rule Application:
    $$
-   \frac{\partial L}{\partial w} = \frac{\partial L}{\partial \hat{y}} \times \frac{\partial \hat{y}}{\partial w} = -2(y - \hat{y}) \cdot x
+   \pdv{\loss}{w} = \pdv{\loss}{\hat{y}} \times \pdv{\hat{y}}{w} = -2(y - \hat{y}) \cdot x \label{eq:chain-rule}
    $$
 
 - Interpretation:
-  - $\frac{\partial L}{\partial w}$ tells us how to adjust $w$ to minimize the loss.
+  - $\pdv{\loss}{w}$ tells us how to adjust $w$ to minimize the loss.
   - This is used in gradient descent updates.
 
 ---

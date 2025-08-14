@@ -1,0 +1,375 @@
+/* Advanced Mathematical Typography and Styling */
+/* Optimized for MathJax 3.x with Material Design integration */
+
+/* ==========================================
+   Mathematical Container Styling
+   ========================================== */
+
+/* Display equations styling */
+mjx-container[display="true"] {
+  margin: 1.5rem 0 !important;
+  padding: 1rem 0;
+  text-align: center;
+  position: relative;
+  background: linear-gradient(135deg, rgba(64, 81, 181, 0.03), rgba(64, 81, 181, 0.01));
+  border-radius: 8px;
+  border-left: 4px solid rgba(64, 81, 181, 0.2);
+  transition: all 0.2s ease-in-out;
+}
+
+mjx-container[display="true"]:hover {
+  background: linear-gradient(135deg, rgba(64, 81, 181, 0.05), rgba(64, 81, 181, 0.02));
+  border-left-color: rgba(64, 81, 181, 0.4);
+  transform: translateX(2px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Inline equations styling */
+mjx-container[display="false"] {
+  margin: 0 0.2em;
+  vertical-align: baseline;
+  display: inline-block;
+  line-height: 1;
+  padding: 0.1em 0.2em;
+  border-radius: 3px;
+  background: rgba(64, 81, 181, 0.05);
+  transition: background-color 0.15s ease;
+}
+
+mjx-container[display="false"]:hover {
+  background: rgba(64, 81, 181, 0.1);
+}
+
+/* ==========================================
+   Mathematical Typography Enhancement
+   ========================================== */
+
+/* Improve mathematical font rendering */
+mjx-container svg {
+  font-family: 'STIX Two Math', 'Latin Modern Math', 'Times', serif !important;
+  max-width: 100%;
+  height: auto;
+  filter: contrast(1.1) brightness(1.02);
+}
+
+/* High DPI display optimization */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  mjx-container svg {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+  }
+}
+
+/* ==========================================
+   Mathematical Content Spacing
+   ========================================== */
+
+/* Improve spacing around mathematical elements */
+.md-content h1 + mjx-container,
+.md-content h2 + mjx-container,
+.md-content h3 + mjx-container,
+.md-content h4 + mjx-container {
+  margin-top: 1rem;
+}
+
+mjx-container + p,
+mjx-container + .md-typeset p {
+  margin-top: 1rem;
+}
+
+/* Table containing math */
+.md-typeset table mjx-container {
+  margin: 0.5rem 0;
+}
+
+/* Lists containing math */
+.md-typeset li mjx-container[display="true"] {
+  margin: 0.8rem 0;
+}
+
+/* ==========================================
+   Equation Numbering and References
+   ========================================== */
+
+/* Style equation numbers */
+mjx-container .MJX-TEX-NUMBER {
+  color: rgba(64, 81, 181, 0.8);
+  font-weight: 500;
+  font-size: 0.9em;
+  background: rgba(64, 81, 181, 0.1);
+  padding: 0.2em 0.5em;
+  border-radius: 12px;
+  border: 1px solid rgba(64, 81, 181, 0.2);
+}
+
+/* Equation reference links */
+a[href*="#mjx-eqn"] {
+  color: #4051b5;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 0.1em 0.3em;
+  border-radius: 3px;
+  background: rgba(64, 81, 181, 0.1);
+  transition: all 0.2s ease;
+}
+
+a[href*="#mjx-eqn"]:hover {
+  background: rgba(64, 81, 181, 0.2);
+  transform: translateY(-1px);
+}
+
+/* ==========================================
+   Mathematical Environments
+   ========================================== */
+
+/* Theorem-like environments */
+.theorem, .definition, .lemma, .proposition, .corollary {
+  background: linear-gradient(135deg, rgba(76, 175, 80, 0.1), rgba(76, 175, 80, 0.05));
+  border-left: 4px solid #4caf50;
+  padding: 1rem 1.5rem;
+  margin: 1.5rem 0;
+  border-radius: 0 8px 8px 0;
+  position: relative;
+}
+
+.proof {
+  background: linear-gradient(135deg, rgba(255, 193, 7, 0.1), rgba(255, 193, 7, 0.05));
+  border-left: 4px solid #ffc107;
+  padding: 1rem 1.5rem;
+  margin: 1.5rem 0;
+  border-radius: 0 8px 8px 0;
+  position: relative;
+}
+
+.example {
+  background: linear-gradient(135deg, rgba(33, 150, 243, 0.1), rgba(33, 150, 243, 0.05));
+  border-left: 4px solid #2196f3;
+  padding: 1rem 1.5rem;
+  margin: 1.5rem 0;
+  border-radius: 0 8px 8px 0;
+  position: relative;
+}
+
+.note, .remark {
+  background: linear-gradient(135deg, rgba(156, 39, 176, 0.1), rgba(156, 39, 176, 0.05));
+  border-left: 4px solid #9c27b0;
+  padding: 1rem 1.5rem;
+  margin: 1.5rem 0;
+  border-radius: 0 8px 8px 0;
+  position: relative;
+}
+
+/* Add subtle headers to mathematical environments */
+.theorem::before { content: "Theorem"; }
+.definition::before { content: "Definition"; }
+.lemma::before { content: "Lemma"; }
+.proposition::before { content: "Proposition"; }
+.corollary::before { content: "Corollary"; }
+.proof::before { content: "Proof"; }
+.example::before { content: "Example"; }
+.note::before { content: "Note"; }
+.remark::before { content: "Remark"; }
+
+.theorem::before, .definition::before, .lemma::before, 
+.proposition::before, .corollary::before, .proof::before,
+.example::before, .note::before, .remark::before {
+  font-weight: 700;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  position: absolute;
+  top: -0.5rem;
+  left: 1rem;
+  background: inherit;
+  padding: 0 0.5rem;
+  color: inherit;
+  opacity: 0.8;
+}
+
+/* ==========================================
+   Responsive Mathematical Design
+   ========================================== */
+
+/* Mobile optimization */
+@media screen and (max-width: 768px) {
+  mjx-container[display="true"] {
+    margin: 1rem 0;
+    padding: 0.8rem 0.5rem;
+    font-size: 0.9em;
+  }
+  
+  mjx-container svg {
+    max-width: calc(100vw - 2rem);
+  }
+  
+  .theorem, .definition, .lemma, .proposition, 
+  .corollary, .proof, .example, .note, .remark {
+    padding: 0.8rem 1rem;
+    margin: 1rem 0;
+  }
+}
+
+/* Tablet optimization */
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  mjx-container[display="true"] {
+    margin: 1.2rem 0;
+    padding: 0.9rem;
+  }
+}
+
+/* ==========================================
+   Mathematical Context Menu Styling
+   ========================================== */
+
+/* Style the MathJax context menu */
+.MathJax_Menu {
+  border-radius: 8px !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15) !important;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+}
+
+.MathJax_MenuItem {
+  transition: background-color 0.15s ease !important;
+}
+
+/* ==========================================
+   Mathematical Accessibility
+   ========================================== */
+
+/* Screen reader support */
+mjx-container[aria-label] {
+  position: relative;
+}
+
+/* Focus indicators for keyboard navigation */
+mjx-container:focus {
+  outline: 2px solid #4051b5;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ==========================================
+   Print Styling for Mathematical Content
+   ========================================== */
+
+@media print {
+  mjx-container[display="true"] {
+    background: none !important;
+    border: none !important;
+    margin: 1rem 0 !important;
+    page-break-inside: avoid;
+  }
+  
+  mjx-container[display="false"] {
+    background: none !important;
+  }
+  
+  .theorem, .definition, .lemma, .proposition, 
+  .corollary, .proof, .example, .note, .remark {
+    background: none !important;
+    border: 1px solid #ccc !important;
+    page-break-inside: avoid;
+  }
+}
+
+/* ==========================================
+   Dark Mode Support
+   ========================================== */
+
+/* Dark mode mathematical styling */
+[data-md-color-scheme="slate"] mjx-container[display="true"] {
+  background: linear-gradient(135deg, rgba(130, 177, 255, 0.1), rgba(130, 177, 255, 0.05));
+  border-left-color: rgba(130, 177, 255, 0.3);
+}
+
+[data-md-color-scheme="slate"] mjx-container[display="true"]:hover {
+  background: linear-gradient(135deg, rgba(130, 177, 255, 0.15), rgba(130, 177, 255, 0.08));
+  border-left-color: rgba(130, 177, 255, 0.5);
+}
+
+[data-md-color-scheme="slate"] mjx-container[display="false"] {
+  background: rgba(130, 177, 255, 0.1);
+}
+
+[data-md-color-scheme="slate"] mjx-container[display="false"]:hover {
+  background: rgba(130, 177, 255, 0.15);
+}
+
+[data-md-color-scheme="slate"] mjx-container svg {
+  filter: brightness(1.1) contrast(0.9);
+}
+
+/* ==========================================
+   Mathematical Loading States
+   ========================================== */
+
+/* Loading placeholder for math content */
+.math-loading {
+  background: linear-gradient(90deg, rgba(0,0,0,0.1) 25%, rgba(0,0,0,0.05) 50%, rgba(0,0,0,0.1) 75%);
+  background-size: 200% 100%;
+  animation: mathLoading 1.5s infinite;
+  height: 2em;
+  border-radius: 4px;
+  margin: 0.5rem 0;
+}
+
+@keyframes mathLoading {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ==========================================
+   Mathematical Code Integration
+   ========================================== */
+
+/* Math in code blocks */
+.highlight mjx-container {
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+  padding: 0.1em 0.3em;
+}
+
+/* Math in inline code */
+code mjx-container {
+  font-size: 0.9em;
+  vertical-align: middle;
+}
+
+/* ==========================================
+   Performance Optimizations
+   ========================================== */
+
+/* GPU acceleration for smooth animations */
+mjx-container {
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+/* Optimize reflow for mathematical content */
+.math-container {
+  contain: layout style paint;
+}
+
+/* ==========================================
+   Special Mathematical Symbols Enhancement
+   ========================================== */
+
+/* Improve specific mathematical symbols */
+mjx-c.mjx-c27E8, mjx-c.mjx-c27E9 { /* angle brackets */
+  font-weight: 600;
+}
+
+mjx-c.mjx-c2211 { /* summation */
+  font-size: 1.2em;
+}
+
+mjx-c.mjx-c222B { /* integral */
+  font-size: 1.1em;
+}
+
+/* Quantum bra-ket notation styling */
+.mjx-mrow .mjx-mo[data-semantic-annotation*="fence"] {
+  color: rgba(64, 81, 181, 0.8);
+  font-weight: 500;
+}

@@ -28,11 +28,11 @@ Sets are collections of distinct objects. In machine learning, sets are often us
 - A set $A$ is a collection of distinct elements: $A = \{a_1, a_2, \ldots, a_n\}$
 - Empty set: $\emptyset$
 - Set operations:
-  - Union: $A \cup B = \{x | x \in A \text{ or } x \in B\}$
-  - Intersection: $A \cap B = \{x | x \in A \text{ and } x \in B\}$
-  - Difference: $A \setminus B = \{x | x \in A \text{ and } x \notin B\}$
-  - Complement: $A^c = \{x \in U | x \notin A\}$
-  - Cartesian product: $A \times B = \{(a, b) | a \in A, b \in B\}$
+  - Union: $A \cup B = \{x \given x \in A \text{ or } x \in B\}$
+  - Intersection: $A \cap B = \{x \given x \in A \text{ and } x \in B\}$
+  - Difference: $A \setminus B = \{x \given x \in A \text{ and } x \notin B\}$
+  - Complement: $A^c = \{x \in U \given x \notin A\}$
+  - Cartesian product: $A \times B = \{(a, b) \given a \in A, b \in B\}$
 
 **Python Implementation:**
 

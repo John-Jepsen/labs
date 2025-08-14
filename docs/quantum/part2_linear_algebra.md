@@ -12,7 +12,7 @@ Master the essential linear algebra operations that form the mathematical founda
 
 In quantum computing, we represent:
 
-- **Quantum states** as vectors (using ket notation |ψ⟩)
+- **Quantum states** as vectors (using ket notation $\ket{\psi}$)
 - **Quantum operations** as matrices (unitary matrices)
 - **Measurements** as projections of vectors
 
@@ -20,11 +20,11 @@ In quantum computing, we represent:
 
 | Operation                    | Mathematical Form | Quantum Computing Application         |
 | :--------------------------- | :---------------- | :------------------------------------ |
-| Vector addition              | v⃗ + w⃗           | Superposition of states               |
-| Matrix-vector multiplication | Mv⃗               | Applying quantum gates                |
-| Matrix multiplication        | MN                | Combining quantum operations          |
-| Inner product                | ⟨v⃗,w⃗⟩           | Calculating measurement probabilities |
-| Tensor product               | v⃗ ⊗ w⃗           | Combining quantum systems             |
+| Vector addition              | $\vec{v} + \vec{w}$ | Superposition of states               |
+| Matrix-vector multiplication | $\mat{M}\vec{v}$  | Applying quantum gates                |
+| Matrix multiplication        | $\mat{M}\mat{N}$  | Combining quantum operations          |
+| Inner product                | $\inner{\vec{v}}{\vec{w}}$ | Calculating measurement probabilities |
+| Tensor product               | $\vec{v} \otimes \vec{w}$ | Combining quantum systems             |
 
 ## Visual Explanation
 
@@ -110,8 +110,8 @@ def plot_bloch_vector(bloch_coords, title="Bloch Sphere Representation"):
     ax.plot([0, 0], [0, 0], [-1, 1], 'k-', alpha=0.5, lw=1)  # z-axis
 
     # Add basis states
-    ax.text(0, 0, 1.1, r'$|0\rangle$')
-    ax.text(0, 0, -1.1, r'$|1\rangle$')
+    ax.text(0, 0, 1.1, r'$\ket{0}$')
+    ax.text(0, 0, -1.1, r'$\ket{1}$')
 
     # Plot the input Bloch vector
     x, y, z = bloch_coords
